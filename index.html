@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语音转文字</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>语音转文字</h1>
+        <div class="controls">
+            <button id="startBtn" class="btn">
+                <svg class="mic-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                开始录音
+            </button>
+            <button id="copyBtn" class="btn">
+                <svg class="copy-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                </svg>
+                复制文字
+            </button>
+        </div>
+        <div class="status" id="status">准备就绪</div>
+        <div class="text-container">
+            <div id="output" class="output" contenteditable="true"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
