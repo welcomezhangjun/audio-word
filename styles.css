@@ -92,4 +92,23 @@ h1 {
 
 .copy-success {
     background-color: #34c759 !important;
+}
+
+.temp-output {
+    margin-top: 10px;
+    padding: 10px;
+    min-height: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+.mic-icon.recording {
+    fill: #ff4444;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 } 

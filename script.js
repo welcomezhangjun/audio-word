@@ -1,100 +1,136 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const startBtn = document.getElementById('startBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const output = document.getElementById('output');
-    const status = document.getElementById('status');
+let recognition;
+let isRecording = false;
+
+// 初始化语音识别
+function initSpeechRecognition() {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'zh-CN';
+    recognition.continuous = true;  // 持续识别
+    recognition.interimResults = true;  // 实时返回结果
     
-    let recognition = null;
-    let isRecording = false;
-
-    // 检查浏览器支持
-    if ('webkitSpeechRecognition' in window) {
-        recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = 'zh-CN'; // 设置语言为中文
-    } else {
-        status.textContent = '您的浏览器不支持语音识别功能';
-        startBtn.disabled = true;
-        return;
-    }
-
-    // 处理语音识别结果
+    // 当有识别结果时
     recognition.onresult = (event) => {
-        let finalTranscript = '';
+        const output = document.getElementById('output');
         let interimTranscript = '';
+        let finalTranscript = '';
 
+        // 处理所有识别结果
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
-                finalTranscript += transcript;
+                // 对最终结果添加标点符号
+                finalTranscript += addPunctuation(transcript);
             } else {
                 interimTranscript += transcript;
             }
         }
 
+        // 更新显示内容
         if (finalTranscript) {
-            const p = document.createElement('p');
-            p.textContent = finalTranscript;
-            output.appendChild(p);
-            output.scrollTop = output.scrollHeight;
+            if (output.innerText) {
+                output.innerText += ' ' + finalTranscript;
+            } else {
+                output.innerText = finalTranscript;
+            }
+        }
+        
+        // 显示临时结果
+        const tempOutput = document.getElementById('tempOutput');
+        if (tempOutput) {
+            tempOutput.innerText = interimTranscript;
         }
     };
 
     // 错误处理
     recognition.onerror = (event) => {
-        status.textContent = `错误: ${event.error}`;
+        console.error('语音识别错误:', event.error);
+        updateStatus('发生错误: ' + event.error);
     };
+}
 
-    // 开始/停止录音
-    startBtn.addEventListener('click', () => {
-        if (!isRecording) {
-            recognition.start();
-            isRecording = true;
-            startBtn.classList.add('recording');
-            startBtn.innerHTML = `
-                <svg class="mic-icon" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                </svg>
-                停止录音
-            `;
-            status.textContent = '正在录音...';
-        } else {
-            recognition.stop();
-            isRecording = false;
-            startBtn.classList.remove('recording');
-            startBtn.innerHTML = `
-                <svg class="mic-icon" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                </svg>
-                开始录音
-            `;
-            status.textContent = '录音已停止';
-        }
-    });
+// 添加标点符号的函数
+function addPunctuation(text) {
+    // 简单的标点规则
+    let result = text.trim();
+    
+    // 在句子结尾添加句号
+    if (!/[。！？，：；]$/.test(result)) {
+        result += '。';
+    }
+    
+    // 在停顿处添加逗号（这里使用简单的规则，实际应用中可能需要更复杂的算法）
+    result = result.replace(/([，。！？])\s*/g, '$1 ');
+    
+    return result;
+}
 
-    // 复制文字功能
-    copyBtn.addEventListener('click', () => {
-        const text = output.innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            copyBtn.classList.add('copy-success');
-            copyBtn.innerHTML = `
-                <svg class="copy-icon" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
-                </svg>
-                已复制
-            `;
-            setTimeout(() => {
-                copyBtn.classList.remove('copy-success');
-                copyBtn.innerHTML = `
-                    <svg class="copy-icon" viewBox="0 0 24 24" width="24" height="24">
-                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                    </svg>
-                    复制文字
-                `;
-            }, 2000);
-        });
-    });
+// 更新状态显示
+function updateStatus(message) {
+    const status = document.getElementById('status');
+    status.textContent = message;
+}
+
+// 开始/停止录音
+function toggleRecording() {
+    if (!recognition) {
+        initSpeechRecognition();
+    }
+
+    const startBtn = document.getElementById('startBtn');
+    
+    if (!isRecording) {
+        // 开始录音
+        recognition.start();
+        isRecording = true;
+        startBtn.innerHTML = `
+            <svg class="mic-icon recording" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+            停止录音
+        `;
+        updateStatus('正在录音...');
+    } else {
+        // 停止录音
+        recognition.stop();
+        isRecording = false;
+        startBtn.innerHTML = `
+            <svg class="mic-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+            开始录音
+        `;
+        updateStatus('录音已停止');
+    }
+}
+
+// 复制文字
+function copyText() {
+    const output = document.getElementById('output');
+    if (output.innerText) {
+        navigator.clipboard.writeText(output.innerText)
+            .then(() => {
+                updateStatus('文字已复制到剪贴板');
+                setTimeout(() => updateStatus(isRecording ? '正在录音...' : '准备就绪'), 2000);
+            })
+            .catch(err => {
+                console.error('复制失败:', err);
+                updateStatus('复制失败');
+            });
+    }
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    // 添加临时结果显示区域
+    const textContainer = document.querySelector('.text-container');
+    const tempOutput = document.createElement('div');
+    tempOutput.id = 'tempOutput';
+    tempOutput.className = 'temp-output';
+    textContainer.appendChild(tempOutput);
+
+    // 绑定按钮事件
+    document.getElementById('startBtn').addEventListener('click', toggleRecording);
+    document.getElementById('copyBtn').addEventListener('click', copyText);
 }); 
