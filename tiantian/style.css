@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
+    touch-action: manipulation; /* 防止双击缩放 */
 }
 
 body {
@@ -14,6 +15,7 @@ body {
     min-height: 100vh;
     background-image: radial-gradient(#ff9d00 1px, transparent 1px);
     background-size: 20px 20px;
+    padding: 10px;
 }
 
 /* 游戏容器样式 */
@@ -23,6 +25,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 650px;
+    max-width: 100%;
     text-align: center;
     border: 5px solid #e63946;
 }
@@ -64,12 +67,16 @@ body {
     margin: 0 auto;
     width: 550px;
     height: 550px;
+    max-width: 100%;
+    max-height: 100vw; /* 在移动设备上限制高度 */
 }
 
 #game-canvas {
     background-color: #f1faee;
     border: 3px solid #a8dadc;
     border-radius: 5px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* 游戏结束样式 */
@@ -84,6 +91,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     width: 80%;
     text-align: center;
+    z-index: 10;
 }
 
 #game-over h2 {
@@ -118,6 +126,41 @@ body {
     opacity: 0.9;
 }
 
+/* 移动端控制按钮样式 */
+.mobile-controls {
+    display: none; /* 默认隐藏，在移动设备上显示 */
+    margin: 20px auto;
+    width: 240px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    margin: 0 5px;
+    font-size: 24px;
+    background: linear-gradient(to bottom, #e63946, #ff9800);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* 游戏控制说明样式 */
 .game-controls {
     margin-top: 20px;
@@ -148,4 +191,76 @@ body {
 /* 工具类 */
 .hidden {
     display: none;
+}
+
+/* 响应式设计 */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+/* 媒体查询 - 移动设备 */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .game-header h1 {
+        font-size: 2rem;
+    }
+    
+    .game-area-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1; /* 保持正方形 */
+    }
+    
+    .mobile-controls {
+        display: block;
+    }
+    
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    .player-control {
+        max-width: 100%;
+    }
+    
+    .control-instructions p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 媒体查询 - 小屏幕移动设备 */
+@media (max-width: 480px) {
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .player-score {
+        font-size: 1.2rem;
+    }
+    
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+    }
+    
+    #game-over h2 {
+        font-size: 1.5rem;
+    }
+    
+    #game-over p {
+        font-size: 1rem;
+    }
 } 

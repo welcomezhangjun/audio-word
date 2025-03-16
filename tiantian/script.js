@@ -6,6 +6,12 @@ const finalScoreElement = document.getElementById('final-score');
 const gameOverElement = document.getElementById('game-over');
 const restartButton = document.getElementById('restart-button');
 
+// 获取移动端控制按钮
+const btnUp = document.getElementById('btn-up');
+const btnDown = document.getElementById('btn-down');
+const btnLeft = document.getElementById('btn-left');
+const btnRight = document.getElementById('btn-right');
+
 // 游戏配置
 const gridSize = 30; // 网格大小
 const initialSpeed = 700; // 初始速度（毫秒）
@@ -25,6 +31,34 @@ let gameActive = false; // 游戏是否激活
 let wallPassAvailable = false; // 穿墙能力是否可用
 let wallPassUsed = false; // 是否正在使用穿墙能力
 let lastWallPassScore = 0; // 上次获得穿墙能力时的分数
+let isMobileDevice = false; // 是否为移动设备
+
+// 检测是否为移动设备
+function detectMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+}
+
+// 调整画布大小以适应移动设备
+function resizeCanvas() {
+    isMobileDevice = detectMobileDevice();
+    
+    if (isMobileDevice) {
+        // 获取游戏区域容器的宽度
+        const containerWidth = canvas.parentElement.clientWidth;
+        // 设置画布尺寸
+        canvas.width = containerWidth;
+        canvas.height = containerWidth;
+    } else {
+        // 桌面设备使用固定尺寸
+        canvas.width = 550;
+        canvas.height = 550;
+    }
+    
+    // 如果游戏正在进行，重新绘制
+    if (gameActive) {
+        draw();
+    }
+}
 
 // 图像对象
 const snakeHeadImg = new Image(); // 六臂哪吒头像
@@ -42,6 +76,9 @@ const colors = {
 
 // 初始化游戏
 function initGame() {
+    // 调整画布大小
+    resizeCanvas();
+    
     // 计算网格尺寸
     const gridWidth = Math.floor(canvas.width / gridSize);
     const gridHeight = Math.floor(canvas.height / gridSize);
@@ -215,13 +252,16 @@ function draw() {
     // 绘制网格线
     drawGrid();
     
+    // 计算实际的网格像素大小（可能会因为画布大小调整而变化）
+    const actualGridSize = canvas.width / Math.floor(canvas.width / gridSize);
+    
     // 绘制食物
     ctx.drawImage(
         foodImg, 
-        food.x * gridSize, 
-        food.y * gridSize, 
-        gridSize, 
-        gridSize
+        food.x * actualGridSize, 
+        food.y * actualGridSize, 
+        actualGridSize, 
+        actualGridSize
     );
     
     // 绘制蛇身体
@@ -234,10 +274,10 @@ function draw() {
         
         ctx.beginPath();
         ctx.roundRect(
-            segment.x * gridSize + 1, 
-            segment.y * gridSize + 1, 
-            gridSize - 2, 
-            gridSize - 2,
+            segment.x * actualGridSize + 1, 
+            segment.y * actualGridSize + 1, 
+            actualGridSize - 2, 
+            actualGridSize - 2,
             5
         );
         ctx.fill();
@@ -247,10 +287,10 @@ function draw() {
     // 绘制蛇头（六臂哪吒头像）
     ctx.drawImage(
         snakeHeadImg, 
-        snake[0].x * gridSize, 
-        snake[0].y * gridSize, 
-        gridSize, 
-        gridSize
+        snake[0].x * actualGridSize, 
+        snake[0].y * actualGridSize, 
+        actualGridSize, 
+        actualGridSize
     );
     
     // 如果穿墙能力可用，绘制提示
@@ -260,9 +300,9 @@ function draw() {
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(
-            snake[0].x * gridSize + gridSize / 2,
-            snake[0].y * gridSize + gridSize / 2,
-            gridSize / 2 + 5,
+            snake[0].x * actualGridSize + actualGridSize / 2,
+            snake[0].y * actualGridSize + actualGridSize / 2,
+            actualGridSize / 2 + 5,
             0,
             Math.PI * 2
         );
@@ -281,8 +321,11 @@ function drawGrid() {
     ctx.strokeStyle = colors.gridLines;
     ctx.lineWidth = 0.5;
     
+    // 计算实际的网格像素大小
+    const actualGridSize = canvas.width / Math.floor(canvas.width / gridSize);
+    
     // 绘制垂直线
-    for (let x = 0; x <= canvas.width; x += gridSize) {
+    for (let x = 0; x <= canvas.width; x += actualGridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
@@ -290,7 +333,7 @@ function drawGrid() {
     }
     
     // 绘制水平线
-    for (let y = 0; y <= canvas.height; y += gridSize) {
+    for (let y = 0; y <= canvas.height; y += actualGridSize) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
@@ -324,9 +367,79 @@ function handleKeydown(e) {
     }
 }
 
+// 处理移动端按钮点击
+function handleMobileControls() {
+    btnUp.addEventListener('click', function() {
+        if (gameActive && direction !== 'down') {
+            nextDirection = 'up';
+        }
+    });
+    
+    btnDown.addEventListener('click', function() {
+        if (gameActive && direction !== 'up') {
+            nextDirection = 'down';
+        }
+    });
+    
+    btnLeft.addEventListener('click', function() {
+        if (gameActive && direction !== 'right') {
+            nextDirection = 'left';
+        }
+    });
+    
+    btnRight.addEventListener('click', function() {
+        if (gameActive && direction !== 'left') {
+            nextDirection = 'right';
+        }
+    });
+    
+    // 添加触摸事件，防止触摸延迟
+    btnUp.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (gameActive && direction !== 'down') {
+            nextDirection = 'up';
+        }
+    });
+    
+    btnDown.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (gameActive && direction !== 'up') {
+            nextDirection = 'down';
+        }
+    });
+    
+    btnLeft.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (gameActive && direction !== 'right') {
+            nextDirection = 'left';
+        }
+    });
+    
+    btnRight.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (gameActive && direction !== 'left') {
+            nextDirection = 'right';
+        }
+    });
+}
+
+// 处理窗口大小变化
+function handleResize() {
+    resizeCanvas();
+    
+    // 如果游戏正在进行，重新绘制
+    if (gameActive) {
+        draw();
+    }
+}
+
 // 事件监听器
 document.addEventListener('keydown', handleKeydown);
 restartButton.addEventListener('click', initGame);
+window.addEventListener('resize', handleResize);
+
+// 初始化移动端控制
+handleMobileControls();
 
 // 图像加载完成后开始游戏
 let imagesLoaded = 0;
