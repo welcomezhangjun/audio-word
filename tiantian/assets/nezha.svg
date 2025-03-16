@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>哪吒头像</title>
+    <g id="nezha-head" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- 脸部轮廓 -->
+        <circle id="face" fill="#FFD6A5" cx="20" cy="20" r="18"></circle>
+        
+        <!-- 头发 - 新增的头发部分 -->
+        <path d="M8,18 C6,14 6,8 10,5 C14,2 18,2 20,2 C22,2 26,2 30,5 C34,8 34,14 32,18" id="hair-back" fill="#000000"></path>
+        
+        <!-- 两侧的头发 -->
+        <path d="M8,18 C7,20 7,22 8,24" id="hair-left" stroke="#000000" stroke-width="2" fill="#000000"></path>
+        <path d="M32,18 C33,20 33,22 32,24" id="hair-right" stroke="#000000" stroke-width="2" fill="#000000"></path>
+        
+        <!-- 眼睛 -->
+        <ellipse id="left-eye" fill="#000000" cx="13" cy="16" rx="2.5" ry="3"></ellipse>
+        <ellipse id="right-eye" fill="#000000" cx="27" cy="16" rx="2.5" ry="3"></ellipse>
+        
+        <!-- 眉毛 -->
+        <path d="M10,12 C12,10 16,11 16,12" id="left-eyebrow" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
+        <path d="M24,12 C26,10 30,11 30,12" id="right-eyebrow" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
+        
+        <!-- 嘴巴 -->
+        <path d="M16,25 C18,27 22,27 24,25" id="mouth" stroke="#E73A45" stroke-width="1.5" stroke-linecap="round"></path>
+        
+        <!-- 红点 -->
+        <circle id="forehead-dot" fill="#E73A45" cx="20" cy="10" r="2"></circle>
+        
+        <!-- 哪吒特征发髻 - 修改发髻使其更明显 -->
+        <path d="M15,5 C17,0 23,0 25,5" id="hair-bun" stroke="#000000" stroke-width="2" fill="#000000"></path>
+        <path d="M17,3 C19,1 21,1 23,3" id="hair-bun-detail" stroke="#000000" stroke-width="1" fill="#000000"></path>
+        
+        <!-- 发带 - 新增 -->
+        <path d="M14,6 C16,8 24,8 26,6" id="hair-band" stroke="#FF5722" stroke-width="1.5" fill="#FF5722"></path>
+        
+        <!-- 火焰装饰 -->
+        <path d="M18,2 L20,0 L22,2 L20,1 Z" id="flame1" fill="#FF5722"></path>
+        <path d="M16,3 L14,1 L16,0 L15,2 Z" id="flame2" fill="#FF5722"></path>
+        <path d="M24,3 L26,1 L24,0 L25,2 Z" id="flame3" fill="#FF5722"></path>
+        
+        <!-- 额外的火焰 - 新增 -->
+        <path d="M20,0 L21,-2 L22,-1 L21,-1.5 Z" id="flame4" fill="#FF9800"></path>
+    </g>
+</svg> 

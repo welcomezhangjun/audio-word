@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>冰锤</title>
+    <g id="ice-hammer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- 锤柄 -->
+        <rect id="hammer-handle" fill="#0D47A1" x="8" y="10" width="4" height="8" rx="1"></rect>
+        
+        <!-- 锤头 -->
+        <path d="M4,4 L16,4 L16,10 L4,10 Z" id="hammer-head" fill="#81D4FA" stroke="#0D47A1" stroke-width="1"></path>
+        
+        <!-- 冰晶装饰 -->
+        <path d="M6,6 L8,3 L10,6 L8,5 Z" id="ice1" fill="#E1F5FE"></path>
+        <path d="M10,6 L12,3 L14,6 L12,5 Z" id="ice2" fill="#E1F5FE"></path>
+        
+        <!-- 冰晶效果 -->
+        <circle id="ice-dot1" fill="#E1F5FE" cx="7" cy="7" r="1"></circle>
+        <circle id="ice-dot2" fill="#E1F5FE" cx="13" cy="7" r="1"></circle>
+        <circle id="ice-dot3" fill="#E1F5FE" cx="10" cy="5" r="0.8"></circle>
+        
+        <!-- 冰锤装饰 -->
+        <rect id="decoration" fill="#29B6F6" x="7" y="9" width="6" height="1" rx="0.5"></rect>
+    </g>
+</svg> 

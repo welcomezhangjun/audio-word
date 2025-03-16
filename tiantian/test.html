@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哪吒贪吃蛇游戏测试</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            color: #e63946;
+            text-align: center;
+        }
+        
+        .test-container {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        button:hover {
+            background-color: #c1121f;
+        }
+        
+        #test-output {
+            background-color: #f1faee;
+            border: 1px solid #a8dadc;
+            border-radius: 5px;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .test-description {
+            margin-bottom: 15px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>哪吒贪吃蛇游戏测试</h1>
+    
+    <div class="test-container">
+        <div class="test-description">
+            <h2>测试用例说明</h2>
+            <p>这个页面用于测试哪吒贪吃蛇游戏的各个功能。点击下面的按钮运行测试，测试结果将显示在下方的输出区域。</p>
+            <ul>
+                <li><strong>测试用例1:</strong> 初始化游戏 - 测试游戏初始状态是否正确</li>
+                <li><strong>测试用例2:</strong> 食物生成 - 测试食物生成位置是否合理</li>
+                <li><strong>测试用例3:</strong> 蛇的移动 - 测试蛇的移动和转向功能</li>
+                <li><strong>测试用例4:</strong> 吃食物 - 测试吃到食物后的状态变化</li>
+                <li><strong>测试用例5:</strong> 游戏结束条件 - 测试撞墙和撞到自己的游戏结束条件</li>
+            </ul>
+        </div>
+        
+        <div class="test-controls">
+            <button id="run-all-tests">运行所有测试</button>
+            <button id="clear-output">清空输出</button>
+            <button id="go-to-game">返回游戏</button>
+        </div>
+        
+        <div id="test-output">测试输出将显示在这里...</div>
+    </div>
+    
+    <!-- 隐藏的游戏元素 -->
+    <div class="hidden">
+        <canvas id="game-canvas" width="400" height="400"></canvas>
+        <div id="score">0</div>
+        <div id="final-score">0</div>
+        <div id="game-over" class="hidden"></div>
+        <button id="restart-button"></button>
+    </div>
+    
+    <!-- 先加载测试脚本 -->
+    <script src="test.js"></script>
+    
+    <script>
+        // 重定向控制台输出到测试输出区域
+        const testOutput = document.getElementById('test-output');
+        const originalConsoleLog = console.log;
+        
+        console.log = function() {
+            // 调用原始的console.log
+            originalConsoleLog.apply(console, arguments);
+            
+            // 将输出添加到测试输出区域
+            const args = Array.from(arguments);
+            const message = args.join(' ');
+            testOutput.textContent += message + '\n';
+            
+            // 自动滚动到底部
+            testOutput.scrollTop = testOutput.scrollHeight;
+        };
+        
+        // 按钮事件处理
+        document.getElementById('run-all-tests').addEventListener('click', function() {
+            testOutput.textContent = ''; // 清空之前的输出
+            runAllTests();
+        });
+        
+        document.getElementById('clear-output').addEventListener('click', function() {
+            testOutput.textContent = '测试输出将显示在这里...\n';
+        });
+        
+        document.getElementById('go-to-game').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html> 

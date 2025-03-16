@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六臂哪吒贪吃蛇游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>六臂哪吒贪吃蛇</h1>
+            <div class="score-container">
+                <div class="player-score">
+                    <span class="player-name">分数: </span>
+                    <span id="score">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area-container">
+            <canvas id="game-canvas" width="550" height="550"></canvas>
+            
+            <div id="game-over" class="hidden">
+                <h2>游戏结束</h2>
+                <p>你的最终得分: <span id="final-score">0</span></p>
+                <button id="restart-button">重新开始</button>
+            </div>
+        </div>
+        
+        <div class="game-controls">
+            <div class="control-instructions">
+                <h3>游戏控制</h3>
+                <div class="player-control">
+                    <p>使用键盘方向键 ↑ ↓ ← → 控制六臂哪吒蛇的移动</p>
+                </div>
+                <p>吃到火尖枪可以增加分数和长度，撞到墙壁或蛇身游戏结束</p>
+                <p>六臂哪吒拥有特殊能力：每得到50分可以穿墙一次！</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
