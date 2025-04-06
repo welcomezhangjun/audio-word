@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+            padding-bottom: 70px;
+        }
+        .status-bar {
+            background-color: #fff;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #000;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        .tab-item.active {
+            color: #ff6b6b;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .calendar-day {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+        .calendar-day.audio {
+            background-color: #4ade80;
+            color: white;
+        }
+        .calendar-day.video {
+            background-color: #60a5fa;
+            color: white;
+        }
+        .btn-record {
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+        .btn-audio {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+        }
+        .btn-video {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        }
+        .avatar-text {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fdba74;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 宇宙星球风格 */
+        .cosmic-container {
+            background: #1e1b4b;
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cosmic-header {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cosmic-title {
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .cosmic-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+            opacity: 0.6;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        .cosmic-cards {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            padding-bottom: 10px;
+        }
+        .cosmic-card {
+            width: 30%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 12px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .cosmic-planet {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .planet-1 {
+            background: radial-gradient(circle at 30% 30%, #fcd34d 0%, #f59e0b 100%);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        }
+        .planet-2 {
+            background: radial-gradient(circle at 30% 30%, #e5e7eb 0%, #9ca3af 100%);
+            box-shadow: 0 0 15px rgba(156, 163, 175, 0.5);
+        }
+        .planet-3 {
+            background: radial-gradient(circle at 30% 30%, #fb923c 0%, #ea580c 100%);
+            box-shadow: 0 0 15px rgba(234, 88, 12, 0.5);
+        }
+        .planet-4 {
+            background: radial-gradient(circle at 30% 30%, #a3e635 0%, #65a30d 100%);
+            box-shadow: 0 0 15px rgba(101, 163, 13, 0.5);
+        }
+        .cosmic-name {
+            color: white;
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .cosmic-points {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .cosmic-rank {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .cosmic-ring {
+            position: absolute;
+            width: 80px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(30deg);
+            pointer-events: none;
+        }
+        .cosmic-list {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+        .cosmic-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .cosmic-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #a3e635;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cosmic-avatar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+        }
+        .cosmic-list-info {
+            flex: 1;
+        }
+        .cosmic-list-name {
+            color: white;
+            font-weight: 500;
+        }
+        .cosmic-list-points {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+        }
+        .cosmic-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="bg-white py-3 px-4 flex justify-between items-center sticky top-0 z-10 shadow-sm">
+        <div class="text-lg font-bold">读书会</div>
+        <div class="flex gap-5">
+            <i class="fas fa-bell text-gray-500"></i>
+            <i class="fas fa-cog text-gray-500"></i>
+        </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="p-4">
+        <!-- 用户信息 -->
+        <div class="flex items-center mb-6">
+            <div class="avatar-text mr-3">小</div>
+            <div>
+                <div class="font-bold text-gray-800">小明同学</div>
+                <div class="text-sm text-gray-500">三年级二班</div>
+            </div>
+            <div class="ml-auto flex items-center">
+                <div class="text-sm text-gray-500 mr-2">积分:</div>
+                <div class="font-bold text-orange-500">1890</div>
+            </div>
+        </div>
+
+        <!-- 打卡按钮 -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <a href="audio-record.html" class="btn-record btn-audio">
+                <i class="fas fa-microphone text-2xl mb-2"></i>
+                语音打卡
+            </a>
+            <a href="video-record.html" class="btn-record btn-video">
+                <i class="fas fa-video text-2xl mb-2"></i>
+                视频打卡
+            </a>
+        </div>
+
+        <!-- 打卡日历 -->
+        <div class="card p-4 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <div class="font-semibold text-gray-800">4月打卡日历</div>
+                <div class="text-sm text-blue-500">查看更多</div>
+            </div>
+            
+            <!-- 星期标题 -->
+            <div class="grid grid-cols-7 text-center mb-2">
+                <div class="text-sm text-gray-500">一</div>
+                <div class="text-sm text-gray-500">二</div>
+                <div class="text-sm text-gray-500">三</div>
+                <div class="text-sm text-gray-500">四</div>
+                <div class="text-sm text-gray-500">五</div>
+                <div class="text-sm text-gray-500">六</div>
+                <div class="text-sm text-gray-500">日</div>
+            </div>
+            
+            <!-- 日期 第一行 -->
+            <div class="grid grid-cols-7 gap-1 mb-2">
+                <div class="calendar-day text-gray-400">28</div>
+                <div class="calendar-day text-gray-400">29</div>
+                <div class="calendar-day text-gray-400">30</div>
+                <div class="calendar-day text-gray-400">31</div>
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day">3</div>
+            </div>
+            
+            <!-- 日期 第二行 -->
+            <div class="grid grid-cols-7 gap-1 mb-2">
+                <div class="calendar-day">4</div>
+                <div class="calendar-day">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day audio">7</div>
+                <div class="calendar-day video">8</div>
+                <div class="calendar-day audio">9</div>
+                <div class="calendar-day audio">10</div>
+            </div>
+            
+            <!-- 日期 第三行 -->
+            <div class="grid grid-cols-7 gap-1 mb-2">
+                <div class="calendar-day video">11</div>
+                <div class="calendar-day">12</div>
+                <div class="calendar-day">13</div>
+                <div class="calendar-day">14</div>
+                <div class="calendar-day">15</div>
+                <div class="calendar-day">16</div>
+                <div class="calendar-day">17</div>
+            </div>
+            
+            <!-- 统计信息 -->
+            <div class="flex justify-between mt-4 text-sm">
+                <div class="flex items-center">
+                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <div>语音打卡: 3次</div>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                    <div>视频打卡: 2次</div>
+                </div>
+                <div class="flex items-center">
+                    <div>连续打卡: <span class="text-orange-500 font-bold">5</span>天</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 宇宙探险风格积分排行榜 -->
+        <div class="card mb-6 overflow-hidden">
+            <div class="cosmic-container">
+                <div class="cosmic-stars">
+                    <!-- 随机生成一些星星 -->
+                    <div class="star" style="top: 10%; left: 15%;"></div>
+                    <div class="star" style="top: 30%; left: 50%;"></div>
+                    <div class="star" style="top: 60%; left: 75%;"></div>
+                    <div class="star" style="top: 20%; left: 85%;"></div>
+                    <div class="star" style="top: 80%; left: 10%;"></div>
+                    <div class="star" style="top: 40%; left: 30%;"></div>
+                    <div class="star" style="top: 15%; left: 65%;"></div>
+                    <div class="star" style="top: 70%; left: 45%;"></div>
+                    <div class="star" style="top: 90%; left: 25%;"></div>
+                    <div class="star" style="top: 50%; left: 90%;"></div>
+                </div>
+                
+                <div class="cosmic-header">
+                    <div class="cosmic-title">
+                        <i class="fas fa-rocket mr-2"></i> 积分排行榜
+                    </div>
+                    <div class="text-sm text-blue-300">查看更多</div>
+                </div>
+                
+                <div class="cosmic-cards">
+                    <!-- 第一名 -->
+                    <div class="cosmic-card">
+                        <div class="cosmic-rank">1</div>
+                        <div class="cosmic-planet planet-1">
+                            <span>王</span>
+                            <div class="cosmic-ring"></div>
+                        </div>
+                        <div class="cosmic-name">王小华</div>
+                        <div class="cosmic-points">2100 积分</div>
+                    </div>
+                    
+                    <!-- 第二名 -->
+                    <div class="cosmic-card">
+                        <div class="cosmic-rank">2</div>
+                        <div class="cosmic-planet planet-2">
+                            <span>李</span>
+                        </div>
+                        <div class="cosmic-name">李小明</div>
+                        <div class="cosmic-points">1890 积分</div>
+                    </div>
+                    
+                    <!-- 第三名 -->
+                    <div class="cosmic-card">
+                        <div class="cosmic-rank">3</div>
+                        <div class="cosmic-planet planet-3">
+                            <span>张</span>
+                        </div>
+                        <div class="cosmic-name">张小芳</div>
+                        <div class="cosmic-points">1750 积分</div>
+                    </div>
+                </div>
+                
+                <!-- 第四名 -->
+                <div class="cosmic-list">
+                    <div class="cosmic-list-item">
+                        <div class="cosmic-badge">4</div>
+                        <div class="cosmic-avatar" style="background-color: #a3e635;">
+                            刘
+                        </div>
+                        <div class="cosmic-list-info">
+                            <div class="cosmic-list-name">刘小强</div>
+                            <div class="cosmic-list-points">1680 积分</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部标签栏 -->
+    <div class="tab-bar">
+        <div class="tab-item active">
+            <i class="fas fa-home tab-icon"></i>
+            <div>首页</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-comment-dots tab-icon"></i>
+            <div>互动</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-book-open tab-icon"></i>
+            <div>课程</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <div>我的</div>
+        </div>
+    </div>
+</body>
+</html>

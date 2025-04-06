@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+            padding-bottom: 70px;
+        }
+        .status-bar {
+            background-color: #fff;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #000;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        .tab-item.active {
+            color: #ff6b6b;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #4CAF50, #4CAF50);
+            border-radius: 12px;
+            color: white;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .menu-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 16px;
+            font-size: 16px;
+            color: white;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ef4444;
+            color: white;
+            font-size: 10px;
+            border-radius: 9999px;
+            padding: 2px 6px;
+            min-width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="bg-white py-3 px-4 flex justify-between items-center sticky top-0 z-10 shadow-sm">
+        <div class="text-lg font-bold">我的</div>
+        <div>
+            <i class="fas fa-cog text-gray-500"></i>
+        </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="p-4">
+        <!-- 个人信息卡片 -->
+        <div class="profile-header p-4 mb-6">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="avatar mr-3">
+                  <circle cx="50" cy="50" r="50" fill="#FFDAB9"></circle>
+                  <circle cx="50" cy="40" r="25" fill="#FFB6C1"></circle>
+                  <circle cx="40" cy="35" r="4" fill="#333"></circle>
+                  <circle cx="60" cy="35" r="4" fill="#333"></circle>
+                  <path d="M40 50 Q50 60 60 50" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"></path>
+                  <path d="M25 30 Q35 15 50 20 Q65 15 75 30" stroke="#333" stroke-width="2" fill="none"></path>
+                </svg>
+                <div>
+                    <div class="font-bold text-xl">小明同学</div>
+                    <div class="text-white text-opacity-80 mt-1">三年级二班</div>
+                    <div class="mt-2 bg-white bg-opacity-20 rounded-full py-1 px-3 text-sm inline-block">
+                        学生账号
+                    </div>
+                </div>
+                <div class="ml-auto">
+                    <button class="bg-white text-red-500 rounded-full py-1 px-3 text-sm font-medium">
+                        编辑资料
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 统计信息 -->
+            <div class="flex justify-between mt-6 pt-4 border-t border-white border-opacity-20">
+                <div class="text-center">
+                    <div class="font-bold text-xl">1890</div>
+                    <div class="text-white text-opacity-80 text-sm">积分</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bold text-xl">32</div>
+                    <div class="text-white text-opacity-80 text-sm">打卡</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bold text-xl">5</div>
+                    <div class="text-white text-opacity-80 text-sm">连续打卡</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bold text-xl">16</div>
+                    <div class="text-white text-opacity-80 text-sm">课时</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能菜单 -->
+        <div class="card mb-6">
+            <!-- 菜单项：打卡档案 -->
+            <div class="menu-item">
+                <div class="menu-icon bg-green-500">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">打卡档案</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <!-- 菜单项：积分中心 -->
+            <a href="points-shop.html" class="menu-item block">
+                <div class="menu-icon bg-orange-500">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">积分中心</div>
+                </div>
+                <div class="flex items-center">
+                    <div class="text-orange-500 mr-2 text-sm font-medium">1890积分</div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </a>
+            
+            <!-- 菜单项：阅读笔记 -->
+            <div class="menu-item">
+                <div class="menu-icon bg-blue-500">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">阅读笔记</div>
+                </div>
+                <div class="flex items-center">
+                    <div class="badge mr-2">2</div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+            
+            <!-- 菜单项：推荐好书 -->
+            <div class="menu-item">
+                <div class="menu-icon bg-purple-500">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">推荐好书</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <!-- 菜单项：家长绑定 -->
+            <div class="menu-item">
+                <div class="menu-icon bg-cyan-500">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">家长绑定</div>
+                </div>
+                <div class="flex items-center">
+                    <div class="text-sm text-gray-500 mr-2">已绑定</div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 记录卡片 -->
+        <div class="card mb-6">
+            <div class="p-4 border-b border-gray-100">
+                <div class="font-semibold text-gray-800">最近打卡</div>
+            </div>
+            
+            <!-- 打卡记录1 -->
+            <div class="p-4 border-b border-gray-100">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="font-medium">《爱丽丝漫游奇境》朗读</div>
+                        <div class="flex items-center mt-1">
+                            <span class="text-xs text-white bg-green-500 rounded-full px-2 py-0.5 mr-2">语音打卡</span>
+                            <span class="text-xs text-gray-500">今天 08:32</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-orange-500 mr-1">+10</span>
+                        <i class="fas fa-play-circle text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 打卡记录2 -->
+            <div class="p-4">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="font-medium">《夏洛的网》阅读分享</div>
+                        <div class="flex items-center mt-1">
+                            <span class="text-xs text-white bg-blue-500 rounded-full px-2 py-0.5 mr-2">视频打卡</span>
+                            <span class="text-xs text-gray-500">昨天 17:15</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-orange-500 mr-1">+15</span>
+                        <i class="fas fa-play-circle text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-3 text-center text-sm text-blue-500">
+                查看更多
+            </div>
+        </div>
+
+        <!-- 其他功能 -->
+        <div class="card">
+            <div class="menu-item">
+                <div class="menu-icon bg-gray-200 text-gray-600">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">帮助中心</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon bg-gray-200 text-gray-600">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">隐私设置</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon bg-gray-200 text-gray-600">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800">系统设置</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部标签栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <div>首页</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-comment-dots tab-icon"></i>
+            <div>互动</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-book-open tab-icon"></i>
+            <div>课程</div>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-user tab-icon"></i>
+            <div>我的</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>积分商城 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+            padding-bottom: 70px;
+        }
+        .status-bar {
+            background-color: #fff;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #000;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        .tab-item.active {
+            color: #ff6b6b;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+        }
+        .points-card {
+            background: linear-gradient(135deg, #4CAF50, #4CAF50);
+            border-radius: 12px;
+            color: white;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        .product-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+        .category-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            opacity: 0.7;
+        }
+        .category-tab.active {
+            opacity: 1;
+            color: #ff6347;
+            border-bottom: 2px solid #ff6347;
+        }
+        .category-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        .exchange-btn {
+            background: linear-gradient(135deg, #4CAF50, #4CAF50);
+            color: white;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .star-icon {
+            color: #ffcc00;
+            margin-right: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="bg-white py-3 px-4 flex items-center sticky top-0 z-10 shadow-sm">
+        <a href="profile.html" class="text-gray-700 mr-4">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="text-lg font-bold">积分商城</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="p-4">
+        <!-- 积分信息卡片 -->
+        <div class="points-card p-4 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-sm text-white text-opacity-80">当前积分</div>
+                    <div class="font-bold text-3xl mt-1">1,890</div>
+                </div>
+                <button class="bg-white bg-opacity-20 rounded-full py-1 px-4 text-sm">
+                    <i class="fas fa-exchange-alt mr-1"></i> 兑换记录
+                </button>
+            </div>
+            <div class="flex justify-between mt-4 pt-4 border-t border-white border-opacity-20">
+                <div class="text-center">
+                    <div class="font-bold">398</div>
+                    <div class="text-white text-opacity-80 text-xs mt-1">本周新增</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bold">1,200</div>
+                    <div class="text-white text-opacity-80 text-xs mt-1">本月新增</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-bold">3</div>
+                    <div class="text-white text-opacity-80 text-xs mt-1">已兑换商品</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 热门兑换 -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <div class="font-semibold text-gray-800">热门兑换</div>
+                <div class="text-gray-500 text-sm">更多 <i class="fas fa-chevron-right text-xs"></i></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 商品1 -->
+                <div class="product-card">
+                    <svg width="100%" height="140" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="300" height="200" fill="#f8f9fa"/>
+                        
+                        <!-- 书本封面 -->
+                        <rect x="70" y="40" width="160" height="120" fill="#E95420" rx="5" ry="5"/>
+                        <rect x="72" y="42" width="156" height="116" fill="#fff" rx="3" ry="3"/>
+                        
+                        <!-- 书本标题 -->
+                        <text x="150" y="80" font-family="Arial" font-size="16" fill="#333" text-anchor="middle" font-weight="bold">夏洛的网</text>
+                        
+                        <!-- 书本插图 - 蜘蛛网 -->
+                        <circle cx="150" cy="120" r="30" fill="none" stroke="#666" stroke-width="1"/>
+                        <line x1="150" y1="90" x2="150" y2="150" stroke="#666" stroke-width="1"/>
+                        <line x1="120" y1="120" x2="180" y2="120" stroke="#666" stroke-width="1"/>
+                        <line x1="128" y1="98" x2="172" y2="142" stroke="#666" stroke-width="1"/>
+                        <line x1="128" y1="142" x2="172" y2="98" stroke="#666" stroke-width="1"/>
+                        
+                        <!-- 小蜘蛛 -->
+                        <circle cx="150" cy="120" r="5" fill="#333"/>
+                        <line x1="150" y1="115" x2="145" y2="110" stroke="#333" stroke-width="1"/>
+                        <line x1="150" y1="115" x2="155" y2="110" stroke="#333" stroke-width="1"/>
+                        <line x1="145" y1="120" x2="140" y2="118" stroke="#333" stroke-width="1"/>
+                        <line x1="145" y1="120" x2="140" y2="124" stroke="#333" stroke-width="1"/>
+                        <line x1="155" y1="120" x2="160" y2="118" stroke="#333" stroke-width="1"/>
+                        <line x1="155" y1="120" x2="160" y2="124" stroke="#333" stroke-width="1"/>
+                    </svg>
+                    <div class="p-3">
+                        <div class="font-medium text-gray-800 text-sm mb-1">《夏洛的网》精装版</div>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star-half-alt star-icon text-xs"></i>
+                            <span class="text-xs text-gray-500 ml-1">4.8</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-orange-500 font-bold">650积分</div>
+                            <button class="exchange-btn">兑换</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 商品2 -->
+                <div class="product-card">
+                    <svg width="100%" height="140" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="300" height="200" fill="#f0f0f0"/>
+                        
+                        <!-- 哈利波特书籍堆叠 -->
+                        <rect x="65" y="60" width="170" height="25" fill="#880E4F" rx="2" ry="2"/>
+                        <rect x="70" y="55" width="170" height="25" fill="#0D47A1" rx="2" ry="2"/>
+                        <rect x="75" y="50" width="170" height="25" fill="#1B5E20" rx="2" ry="2"/>
+                        <rect x="80" y="45" width="170" height="25" fill="#E65100" rx="2" ry="2"/>
+                        <rect x="85" y="40" width="170" height="25" fill="#311B92" rx="2" ry="2"/>
+                        <rect x="90" y="35" width="170" height="25" fill="#BF360C" rx="2" ry="2"/>
+                        <rect x="95" y="30" width="170" height="25" fill="#01579B" rx="2" ry="2"/>
+                        
+                        <!-- 魔法杖 -->
+                        <line x1="120" y1="120" x2="180" y2="120" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
+                        
+                        <!-- 闪电标志 -->
+                        <path d="M150,90 L145,105 L155,100 L150,115 L155,100 L145,105 Z" fill="#FFD700"/>
+                        
+                        <!-- 标题 -->
+                        <text x="150" y="145" font-family="Arial" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">哈利波特全集</text>
+                        <text x="150" y="165" font-family="Arial" font-size="10" fill="#666" text-anchor="middle">7册精装典藏版</text>
+                    </svg>
+                    <div class="p-3">
+                        <div class="font-medium text-gray-800 text-sm mb-1">《哈利波特》全集</div>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <span class="text-xs text-gray-500 ml-1">5.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-orange-500 font-bold">1500积分</div>
+                            <button class="exchange-btn">兑换</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新品上架 -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <div class="font-semibold text-gray-800">新品上架</div>
+                <div class="text-gray-500 text-sm">更多 <i class="fas fa-chevron-right text-xs"></i></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 商品1 -->
+                <div class="product-card">
+         
+                    <svg width="100%" height="140" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="300" height="200" fill="#f5f5f5"/>
+                        
+                        <!-- 笔记本 -->
+                        <rect x="75" y="50" width="150" height="100" fill="#4FC3F7" rx="3" ry="3"/>
+                        <rect x="80" y="55" width="140" height="90" fill="#fff" rx="2" ry="2"/>
+                        
+                        <!-- 笔记本内页线条 -->
+                        <line x1="90" y1="75" x2="210" y2="75" stroke="#ddd" stroke-width="1"/>
+                        <line x1="90" y1="90" x2="210" y2="90" stroke="#ddd" stroke-width="1"/>
+                        <line x1="90" y1="105" x2="210" y2="105" stroke="#ddd" stroke-width="1"/>
+                        <line x1="90" y1="120" x2="210" y2="120" stroke="#ddd" stroke-width="1"/>
+                        
+                        <!-- 笔 -->
+                        <rect x="100" y="30" width="5" height="140" fill="#FF5722" rx="2" ry="2" transform="rotate(-15, 100, 100)"/>
+                        <path d="M95,35 L105,32 L107,40 L97,43 Z" fill="#795548" transform="rotate(-15, 100, 38)"/>
+                        
+                        <!-- 橡皮擦 -->
+                        <rect x="180" y="125" width="30" height="15" fill="#E91E63" rx="2" ry="2"/>
+                        
+                        <!-- 套装标签 -->
+                        <text x="150" y="170" font-family="Arial" font-size="12" fill="#333" text-anchor="middle">精美笔记本套装</text>
+                    </svg>
+                    <div class="p-3">
+                        <div class="font-medium text-gray-800 text-sm mb-1">精美笔记本套装</div>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="far fa-star star-icon text-xs"></i>
+                            <span class="text-xs text-gray-500 ml-1">4.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-orange-500 font-bold">350积分</div>
+                            <button class="exchange-btn">兑换</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 商品2 -->
+                <div class="product-card">
+   
+                    <svg width="100%" height="140" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="300" height="200" fill="#f8f8f8"/>
+                        
+                        <!-- 文具盒 -->
+                        <rect x="70" y="60" width="160" height="80" fill="#9C27B0" rx="5" ry="5"/>
+                        <rect x="73" y="63" width="154" height="74" fill="#E1BEE7" rx="3" ry="3"/>
+                        
+                        <!-- 文具盒分隔 -->
+                        <line x1="150" y1="63" x2="150" y2="137" stroke="#9C27B0" stroke-width="2"/>
+                        
+                        <!-- 铅笔 -->
+                        <rect x="90" y="75" width="50" height="4" fill="#FFC107"/>
+                        <path d="M140,75 L145,77 L140,79 Z" fill="#795548"/>
+                        
+                        <!-- 钢笔 -->
+                        <rect x="90" y="85" width="50" height="3" fill="#2196F3"/>
+                        <path d="M140,85 L143,86.5 L140,88 Z" fill="#333"/>
+                        
+                        <!-- 尺子 -->
+                        <rect x="170" y="75" width="40" height="8" fill="#4CAF50"/>
+                        <line x1="175" y1="75" x2="175" y2="83" stroke="#fff" stroke-width="1"/>
+                        <line x1="185" y1="75" x2="185" y2="83" stroke="#fff" stroke-width="1"/>
+                        <line x1="195" y1="75" x2="195" y2="83" stroke="#fff" stroke-width="1"/>
+                        <line x1="205" y1="75" x2="205" y2="83" stroke="#fff" stroke-width="1"/>
+                        
+                        <!-- 橡皮 -->
+                        <rect x="170" y="95" width="20" height="15" fill="#F48FB1" rx="2" ry="2"/>
+                        
+                        <!-- 便利贴 -->
+                        <rect x="195" y="95" width="15" height="15" fill="#FFEB3B"/>
+                        <rect x="193" y="97" width="15" height="15" fill="#FFF59D"/>
+                        <rect x="191" y="99" width="15" height="15" fill="#FFF9C4"/>
+                        
+                        <!-- 文具盒标签 -->
+                        <text x="150" y="155" font-family="Arial" font-size="12" fill="#333" text-anchor="middle">创意文具盒</text>
+                    </svg>
+                    <div class="p-3">
+                        <div class="font-medium text-gray-800 text-sm mb-1">创意文具盒</div>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star-half-alt star-icon text-xs"></i>
+                            <span class="text-xs text-gray-500 ml-1">4.5</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-orange-500 font-bold">280积分</div>
+                            <button class="exchange-btn">兑换</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 积分好礼 -->
+        <div>
+            <div class="flex justify-between items-center mb-4">
+                <div class="font-semibold text-gray-800">积分好礼</div>
+                <div class="text-gray-500 text-sm">更多 <i class="fas fa-chevron-right text-xs"></i></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 商品1 -->
+                <div class="product-card">
+                    <svg width="100%" height="140" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="300" height="200" fill="#f0f8ff"/>
+                        
+                        <!-- 优惠券形状 -->
+                        <path d="M60,50 L240,50 C245,50 250,55 250,60 L250,70 C240,70 240,80 250,80 L250,120 C240,120 240,130 250,130 L250,140 C250,145 245,150 240,150 L60,150 C55,150 50,145 50,140 L50,130 C60,130 60,120 50,120 L50,80 C60,80 60,70 50,70 L50,60 C50,55 55,50 60,50 Z" fill="#E91E63"/>
+                        
+                        <!-- 优惠券内部 -->
+                        <path d="M65,55 L235,55 C238,55 240,58 240,60 L240,65 C230,65 230,85 240,85 L240,115 C230,115 230,135 240,135 L240,140 C240,143 238,145 235,145 L65,145 C62,145 60,143 60,140 L60,135 C70,135 70,115 60,115 L60,85 C70,85 70,65 60,65 L60,60 C60,58 62,55 65,55 Z" fill="#FCE4EC"/>
+                        
+                        <!-- 课程标题 -->
+                        <text x="150" y="85" font-family="Arial" font-size="16" fill="#E91E63" text-anchor="middle" font-weight="bold">思辩课程优惠券</text>
+                        
+                        <!-- 课程描述 -->
+                        <text x="150" y="110" font-family="Arial" font-size="12" fill="#880E4F" text-anchor="middle">限时优惠 50%</text>
+                        <text x="150" y="125" font-family="Arial" font-size="10" fill="#880E4F" text-anchor="middle">有效期: 2025年5月31日</text>
+                    </svg>
+                    <div class="p-3">
+                        <div class="font-medium text-gray-800 text-sm mb-1">思辩课程优惠券</div>
+                        <div class="flex items-center mb-2">
+                            <span class="text-xs text-gray-500">剩余: 10张</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-orange-500 font-bold">500积分</div>
+                            <button class="exchange-btn">兑换</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 商品2 -->
+                <div class="product-card">
+                    <svg width="100%" height="140" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="300" height="200" fill="#f5f5f5"/>
+                        
+                        <!-- 阅读灯底座 -->
+                        <rect x="130" y="130" width="40" height="10" fill="#455A64" rx="2" ry="2"/>
+                        <rect x="140" y="90" width="20" height="40" fill="#607D8B"/>
+                        
+                        <!-- 灯头 -->
+                        <path d="M130,90 L170,90 L160,60 L140,60 Z" fill="#90A4AE"/>
+                        
+                        <!-- 灯光效果 -->
+                        <ellipse cx="150" cy="40" rx="30" ry="10" fill="#FFECB3" opacity="0.7"/>
+                        <ellipse cx="150" cy="40" rx="20" ry="5" fill="#FFE082" opacity="0.5"/>
+                        
+                        <!-- 开关 -->
+                        <circle cx="150" cy="75" r="5" fill="#CFD8DC"/>
+                        
+                        <!-- 灯泡 -->
+                        <circle cx="150" cy="60" r="8" fill="#FFEB3B"/>
+                        <circle cx="150" cy="60" r="4" fill="#FFFFFF"/>
+                        
+                        <!-- 阅读的书 -->
+                        <rect x="120" y="150" width="60" height="8" fill="#1565C0"/>
+                        <rect x="125" y="142" width="50" height="8" fill="#BBDEFB"/>
+                        
+                        <!-- 产品名称 -->
+                        <text x="150" y="175" font-family="Arial" font-size="12" fill="#333" text-anchor="middle">LED护眼阅读灯</text>
+                    </svg>
+                    <div class="p-3">
+                        <div class="font-medium text-gray-800 text-sm mb-1">阅读灯</div>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <i class="fas fa-star star-icon text-xs"></i>
+                            <span class="text-xs text-gray-500 ml-1">5.0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-orange-500 font-bold">600积分</div>
+                            <button class="exchange-btn">兑换</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部标签栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <div>首页</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-comment-dots tab-icon"></i>
+            <div>互动</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-book-open tab-icon"></i>
+            <div>课程</div>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-user tab-icon"></i>
+            <div>我的</div>
+        </div>
+    </div>
+</body>
+</html>

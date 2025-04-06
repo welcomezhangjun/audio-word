@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频打卡 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #000;
+            padding-bottom: 70px;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .status-bar {
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+        .camera-view {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .camera-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .control-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        .record-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        .record-btn::after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            background-color: #ef4444;
+        }
+        .recording .record-btn::after {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .back-btn {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            z-index: 10;
+            color: white;
+            font-size: 20px;
+        }
+        .timer {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            z-index: 10;
+            color: white;
+            font-size: 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        .recording-indicator {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: white;
+            font-size: 16px;
+            background-color: rgba(239, 68, 68, 0.7);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .blink {
+            width: 10px;
+            height: 10px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="recording">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 返回按钮 -->
+    <a href="home.html" class="back-btn">
+        <i class="fas fa-times"></i>
+    </a>
+
+    <!-- 录制计时器 -->
+    <div class="timer">
+        00:27
+    </div>
+
+    <!-- 录制指示器 -->
+    <div class="recording-indicator">
+        <div class="blink"></div>
+        录制中
+    </div>
+
+    <!-- 相机预览 -->
+    <img src="/api/placeholder/375/812" alt="相机预览" class="camera-view">
+
+    <!-- 相机控制 -->
+    <div class="camera-controls">
+        <div class="control-row">
+            <div class="control-btn text-white">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="record-btn"></div>
+            <div class="control-btn text-white">
+                <i class="fas fa-sync"></i>
+            </div>
+        </div>
+        
+        <div class="control-row">
+            <button class="px-6 py-2 bg-white bg-opacity-20 text-white rounded-full">
+                暂停
+            </button>
+            <button class="px-6 py-2 bg-white text-red-500 rounded-full font-semibold">
+                完成
+            </button>
+        </div>
+    </div>
+</body>
+</html>

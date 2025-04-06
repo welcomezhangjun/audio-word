@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打卡记录 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+            padding-bottom: 70px;
+        }
+        .status-bar {
+            background-color: #fff;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #000;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        .tab-item.active {
+            color: #ff6b6b;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .avatar-text {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fdba74;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        /* 打卡记录样式 */
+        .record-item {
+            background-color: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        .record-header {
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .record-date {
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .record-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .badge-audio {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+        .badge-video {
+            background-color: #dbeafe;
+            color: #3b82f6;
+        }
+        .record-content {
+            padding: 16px;
+        }
+        .book-info {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        .book-cover {
+            width: 60px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 12px;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 24px;
+        }
+        .book-details {
+            flex: 1;
+        }
+        .book-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+        .book-author {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .book-progress {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #e5e7eb;
+            flex: 1;
+            margin-right: 8px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .audio-fill {
+            background-color: #10b981;
+        }
+        .video-fill {
+            background-color: #3b82f6;
+        }
+        .audio-player {
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .play-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 12px;
+        }
+        .audio-wave {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 24px;
+        }
+        .wave-bar {
+            width: 2px;
+            background-color: #10b981;
+            border-radius: 1px;
+        }
+        .audio-time {
+            margin-left: 12px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+        .video-player {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 8px;
+            width: 100%;
+            height: 180px;
+            background-color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        .video-play {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        .record-footer {
+            padding: 12px 16px;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer-item {
+            display: flex;
+            align-items: center;
+            color: #6b7280;
+            font-size: 13px;
+        }
+        .footer-icon {
+            margin-right: 4px;
+        }
+        .month-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .month-title {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 18px;
+        }
+        .month-nav {
+            display: flex;
+            align-items: center;
+        }
+        .month-button {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            margin: 0 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="bg-white py-3 px-4 flex items-center sticky top-0 z-10 shadow-sm">
+        <a href="index.html" class="text-gray-700 mr-4">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="text-lg font-bold">打卡记录</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="p-4">
+        <!-- 月份选择器 -->
+        <div class="month-selector">
+            <div class="month-title">2025年4月</div>
+            <div class="month-nav">
+                <div class="month-button">
+                    <i class="fas fa-chevron-left text-xs"></i>
+                </div>
+                <div class="month-button">
+                    <i class="fas fa-chevron-right text-xs"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 打卡记录列表 -->
+        <!-- 记录1：语音打卡 -->
+        <div class="record-item">
+            <div class="record-header">
+                <div class="record-date">4月11日 08:32</div>
+                <div class="record-badge badge-audio">
+                    <i class="fas fa-microphone mr-1"></i>
+                    语音打卡
+                </div>
+            </div>
+            <div class="record-content">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="book-details">
+                        <div class="book-title">《爱丽丝漫游奇境》</div>
+                        <div class="book-author">作者: 刘易斯·卡罗尔</div>
+                        <div class="text-sm text-gray-600">今天读完了第三章，描写爱丽丝在奇妙的兔子洞里的冒险非常有意思！</div>
+                        <div class="book-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill audio-fill" style="width: 25%;"></div>
+                            </div>
+                            <div class="text-xs text-gray-500">25%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="audio-player">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="audio-wave">
+                        <div class="wave-bar" style="height: 10px;"></div>
+                        <div class="wave-bar" style="height: 14px;"></div>
+                        <div class="wave-bar" style="height: 8px;"></div>
+                        <div class="wave-bar" style="height: 16px;"></div>
+                        <div class="wave-bar" style="height: 12px;"></div>
+                        <div class="wave-bar" style="height: 18px;"></div>
+                        <div class="wave-bar" style="height: 9px;"></div>
+                        <div class="wave-bar" style="height: 14px;"></div>
+                        <div class="wave-bar" style="height: 7px;"></div>
+                        <div class="wave-bar" style="height: 15px;"></div>
+                        <div class="wave-bar" style="height: 10px;"></div>
+                        <div class="wave-bar" style="height: 17px;"></div>
+                        <div class="wave-bar" style="height: 13px;"></div>
+                        <div class="wave-bar" style="height: 9px;"></div>
+                        <div class="wave-bar" style="height: 16px;"></div>
+                        <div class="wave-bar" style="height: 14px;"></div>
+                        <div class="wave-bar" style="height: 12px;"></div>
+                        <div class="wave-bar" style="height: 8px;"></div>
+                        <div class="wave-bar" style="height: 15px;"></div>
+                        <div class="wave-bar" style="height: 11px;"></div>
+                    </div>
+                    <div class="audio-time">01:25</div>
+                </div>
+            </div>
+            <div class="record-footer">
+                <div class="footer-item">
+                    <i class="far fa-heart footer-icon"></i>
+                    <span>12</span>
+                </div>
+                <div class="footer-item">
+                    <i class="far fa-comment footer-icon"></i>
+                    <span>5</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-share footer-icon"></i>
+                    <span>分享</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-star footer-icon"></i>
+                    <span>收藏</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 记录2：视频打卡 -->
+        <div class="record-item">
+            <div class="record-header">
+                <div class="record-date">4月10日 17:15</div>
+                <div class="record-badge badge-video">
+                    <i class="fas fa-video mr-1"></i>
+                    视频打卡
+                </div>
+            </div>
+            <div class="record-content">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="book-details">
+                        <div class="book-title">《夏洛的网》</div>
+                        <div class="book-author">作者: E.B.怀特</div>
+                        <div class="text-sm text-gray-600">今天读完了这本书最后一章，夏洛和威尔伯的友谊真的很感人！</div>
+                        <div class="book-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill video-fill" style="width: 100%;"></div>
+                            </div>
+                            <div class="text-xs text-gray-500">100%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-player">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 450" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7" />
+                                <stop offset="100%" style="stop-color:#1e40af;stop-opacity:0.7" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="800" height="450" fill="url(#grad1)" />
+                        <!-- Random abstract shapes to simulate video content -->
+                        <circle cx="200" cy="150" r="50" fill="#60a5fa" opacity="0.6" />
+                        <rect x="400" y="100" width="150" height="100" fill="#93c5fd" opacity="0.5" />
+                        <path d="M100,300 Q400,100 700,300" stroke="#bfdbfe" stroke-width="15" fill="none" opacity="0.4" />
+                    </svg>
+                    <div class="video-play">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="record-footer">
+                <div class="footer-item">
+                    <i class="fas fa-heart footer-icon text-red-500"></i>
+                    <span>28</span>
+                </div>
+                <div class="footer-item">
+                    <i class="far fa-comment footer-icon"></i>
+                    <span>12</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-share footer-icon"></i>
+                    <span>分享</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-star footer-icon"></i>
+                    <span>收藏</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 记录3：语音打卡 -->
+        <div class="record-item">
+            <div class="record-header">
+                <div class="record-date">4月9日 07:45</div>
+                <div class="record-badge badge-audio">
+                    <i class="fas fa-microphone mr-1"></i>
+                    语音打卡
+                </div>
+            </div>
+            <div class="record-content">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="book-details">
+                        <div class="book-title">《小王子》</div>
+                        <div class="book-author">作者: 安托万·德·圣埃克苏佩里</div>
+                        <div class="text-sm text-gray-600">今天读完了第五章，小王子与狐狸的对话非常有哲理，我很喜欢！</div>
+                        <div class="book-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill audio-fill" style="width: 55%;"></div>
+                            </div>
+                            <div class="text-xs text-gray-500">55%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="audio-player">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="audio-wave">
+                        <div class="wave-bar" style="height: 12px;"></div>
+                        <div class="wave-bar" style="height: 8px;"></div>
+                        <div class="wave-bar" style="height: 15px;"></div>
+                        <div class="wave-bar" style="height: 10px;"></div>
+                        <div class="wave-bar" style="height: 18px;"></div>
+                        <div class="wave-bar" style="height: 7px;"></div>
+                        <div class="wave-bar" style="height: 13px;"></div>
+                        <div class="wave-bar" style="height: 16px;"></div>
+                        <div class="wave-bar" style="height: 9px;"></div>
+                        <div class="wave-bar" style="height: 14px;"></div>
+                        <div class="wave-bar" style="height: 11px;"></div>
+                        <div class="wave-bar" style="height: 17px;"></div>
+                        <div class="wave-bar" style="height: 8px;"></div>
+                        <div class="wave-bar" style="height: 12px;"></div>
+                        <div class="wave-bar" style="height: 15px;"></div>
+                        <div class="wave-bar" style="height: 10px;"></div>
+                        <div class="wave-bar" style="height: 13px;"></div>
+                        <div class="wave-bar" style="height: 9px;"></div>
+                        <div class="wave-bar" style="height: 16px;"></div>
+                        <div class="wave-bar" style="height: 11px;"></div>
+                    </div>
+                    <div class="audio-time">01:42</div>
+                </div>
+            </div>
+            <div class="record-footer">
+                <div class="footer-item">
+                    <i class="far fa-heart footer-icon"></i>
+                    <span>15</span>
+                </div>
+                <div class="footer-item">
+                    <i class="far fa-comment footer-icon"></i>
+                    <span>8</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-share footer-icon"></i>
+                    <span>分享</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-star footer-icon"></i>
+                    <span>收藏</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 记录4：语音打卡 -->
+        <div class="record-item">
+            <div class="record-header">
+                <div class="record-date">4月7日 16:20</div>
+                <div class="record-badge badge-audio">
+                    <i class="fas fa-microphone mr-1"></i>
+                    语音打卡
+                </div>
+            </div>
+            <div class="record-content">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="book-details">
+                        <div class="book-title">《西游记》</div>
+                        <div class="book-author">作者: 吴承恩</div>
+                        <div class="text-sm text-gray-600">今天读完了第十回，孙悟空大闹天宫的故事太有趣了！</div>
+                        <div class="book-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill audio-fill" style="width: 15%;"></div>
+                            </div>
+                            <div class="text-xs text-gray-500">15%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="audio-player">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="audio-wave">
+                        <div class="wave-bar" style="height: 15px;"></div>
+                        <div class="wave-bar" style="height: 9px;"></div>
+                        <div class="wave-bar" style="height: 17px;"></div>
+                        <div class="wave-bar" style="height: 11px;"></div>
+                        <div class="wave-bar" style="height: 14px;"></div>
+                        <div class="wave-bar" style="height: 8px;"></div>
+                        <div class="wave-bar" style="height: 18px;"></div>
+                        <div class="wave-bar" style="height: 10px;"></div>
+                        <div class="wave-bar" style="height: 16px;"></div>
+                        <div class="wave-bar" style="height: 12px;"></div>
+                        <div class="wave-bar" style="height: 7px;"></div>
+                        <div class="wave-bar" style="height: 14px;"></div>
+                        <div class="wave-bar" style="height: 9px;"></div>
+                        <div class="wave-bar" style="height: 13px;"></div>
+                        <div class="wave-bar" style="height: 17px;"></div>
+                        <div class="wave-bar" style="height: 11px;"></div>
+                        <div class="wave-bar" style="height: 15px;"></div>
+                        <div class="wave-bar" style="height: 8px;"></div>
+                        <div class="wave-bar" style="height: 12px;"></div>
+                        <div class="wave-bar" style="height: 16px;"></div>
+                    </div>
+                    <div class="audio-time">01:38</div>
+                </div>
+            </div>
+            <div class="record-footer">
+                <div class="footer-item">
+                    <i class="far fa-heart footer-icon"></i>
+                    <span>20</span>
+                </div>
+                <div class="footer-item">
+                    <i class="far fa-comment footer-icon"></i>
+                    <span>9</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-share footer-icon"></i>
+                    <span>分享</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-star footer-icon"></i>
+                    <span>收藏</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部标签栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <div>首页</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-comment-dots tab-icon"></i>
+            <div>互动</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-book-open tab-icon"></i>
+            <div>课程</div>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-user tab-icon"></i>
+            <div>我的</div>
+        </div>
+    </div>
+</body>
+</html>

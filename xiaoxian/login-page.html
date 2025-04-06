@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+            min-height: 100vh;
+        }
+        .status-bar {
+            background-color: #fff;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #000;
+        }
+        .login-container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .login-card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .login-tabs {
+            display: flex;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .login-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .login-tab.active {
+            color: #4CAF50;
+        }
+        .login-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background-color: #4CAF50;
+            border-radius: 3px 3px 0 0;
+        }
+        .login-form {
+            padding: 25px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #9ca3af;
+        }
+        .form-input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4CAF50, #4CAF50);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .login-button:hover {
+            background: linear-gradient(135deg, #43a047, #2e7d32);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .forgot-password a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .or-divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        .or-divider::before, .or-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #e5e7eb;
+        }
+        .or-divider::before {
+            margin-right: 15px;
+        }
+        .or-divider::after {
+            margin-left: 15px;
+        }
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .social-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            background-color: #f3f4f6;
+            color: #4b5563;
+            transition: all 0.3s ease;
+        }
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .register-prompt {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .register-prompt a {
+            color: #4CAF50;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .form-toggle {
+            display: none;
+        }
+        .form-toggle:checked + .login-tab {
+            color: #4CAF50;
+        }
+        .parent-form, .student-form {
+            display: none;
+        }
+        .form-toggle:checked + .login-tab + .parent-form,
+        .form-toggle:checked + .login-tab + .parent-form + .login-tab + .student-form {
+            display: block;
+        }
+        #parentToggle:checked ~ .parent-form {
+            display: block;
+        }
+        #parentToggle:checked ~ .student-form {
+            display: none;
+        }
+        #studentToggle:checked ~ .student-form {
+            display: block;
+        }
+        #studentToggle:checked ~ .parent-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <div class="login-container pt-8">
+        <!-- 应用标志和标题 -->
+        <div class="flex flex-col items-center mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" class="w-32 h-32 mb-4">
+                <!-- 圆形背景 -->
+                <circle cx="200" cy="150" r="120" fill="#FF6B6B"/>
+                <circle cx="200" cy="150" r="110" fill="#FFF"/>
+                
+                <!-- 书本 -->
+                <g transform="translate(120, 90)">
+                    <!-- 左侧书本 -->
+                    <path d="M0,0 L80,0 L80,120 L0,120 C20,100 20,20 0,0 Z" fill="#4FC3F7"/>
+                    <!-- 书页 -->
+                    <path d="M80,0 L85,5 L85,125 L80,120 Z" fill="#E1F5FE"/>
+                    <!-- 书本线条 -->
+                    <line x1="10" y1="20" x2="70" y2="20" stroke="#0288D1" stroke-width="2"/>
+                    <line x1="10" y1="40" x2="70" y2="40" stroke="#0288D1" stroke-width="2"/>
+                    <line x1="10" y1="60" x2="70" y2="60" stroke="#0288D1" stroke-width="2"/>
+                    <line x1="10" y1="80" x2="70" y2="80" stroke="#0288D1" stroke-width="2"/>
+                    <line x1="10" y1="100" x2="70" y2="100" stroke="#0288D1" stroke-width="2"/>
+                </g>
+                
+                <g transform="translate(200, 90)">
+                    <!-- 右侧书本 -->
+                    <path d="M0,0 L80,0 L80,120 C60,100 60,20 80,0 L0,120 Z" fill="#66BB6A"/>
+                    <!-- 书页 -->
+                    <path d="M0,0 L-5,5 L-5,125 L0,120 Z" fill="#E8F5E9"/>
+                    <!-- 书本线条 -->
+                    <line x1="10" y1="20" x2="70" y2="20" stroke="#2E7D32" stroke-width="2"/>
+                    <line x1="10" y1="40" x2="70" y2="40" stroke="#2E7D32" stroke-width="2"/>
+                    <line x1="10" y1="60" x2="70" y2="60" stroke="#2E7D32" stroke-width="2"/>
+                    <line x1="10" y1="80" x2="70" y2="80" stroke="#2E7D32" stroke-width="2"/>
+                    <line x1="10" y1="100" x2="70" y2="100" stroke="#2E7D32" stroke-width="2"/>
+                </g>
+                
+                <!-- 小人 - 左侧孩子 -->
+                <g transform="translate(140, 170)">
+                    <!-- 头部 -->
+                    <circle cx="0" cy="0" r="15" fill="#FFCC80"/>
+                    <!-- 眼睛 -->
+                    <circle cx="-5" cy="-2" r="2" fill="#333"/>
+                    <circle cx="5" cy="-2" r="2" fill="#333"/>
+                    <!-- 笑容 -->
+                    <path d="M-5,5 Q0,10 5,5" fill="none" stroke="#333" stroke-width="1.5"/>
+                </g>
+                
+                <!-- 小人 - 右侧孩子 -->
+                <g transform="translate(260, 170)">
+                    <!-- 头部 -->
+                    <circle cx="0" cy="0" r="15" fill="#FFCC80"/>
+                    <!-- 眼睛 -->
+                    <circle cx="-5" cy="-2" r="2" fill="#333"/>
+                    <circle cx="5" cy="-2" r="2" fill="#333"/>
+                    <!-- 笑容 -->
+                    <path d="M-5,5 Q0,10 5,5" fill="none" stroke="#333" stroke-width="1.5"/>
+                </g>
+                
+                <!-- 小星星装饰 -->
+                <g fill="#FFD700">
+                    <path d="M95,110 L100,100 L105,110 L115,112 L107,120 L110,130 L100,125 L90,130 L93,120 L85,112 Z" />
+                    <path d="M305,110 L310,100 L315,110 L325,112 L317,120 L320,130 L310,125 L300,130 L303,120 L295,112 Z" />
+                    <path d="M200,50 L205,40 L210,50 L220,52 L212,60 L215,70 L205,65 L195,70 L198,60 L190,52 Z" />
+                </g>
+            </svg>
+            <h1 class="text-2xl font-bold text-gray-800">小学生读书会</h1>
+            <p class="text-gray-500 mt-1">欢迎回来，请登录您的账号</p>
+        </div>
+
+        <!-- 登录卡片 -->
+        <div class="login-card">
+            <!-- 登录选项切换 -->
+            <div class="login-tabs">
+                <input type="radio" name="loginType" id="parentToggle" class="form-toggle" checked>
+                <label for="parentToggle" class="login-tab active">
+                    <div>家长登录</div>
+                </label>
+                <input type="radio" name="loginType" id="studentToggle" class="form-toggle">
+                <label for="studentToggle" class="login-tab">
+                    <div>学生登录</div>
+                </label>
+            </div>
+
+            <!-- 家长登录表单 -->
+            <div class="parent-form" id="parentForm">
+                <div class="login-form">
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                        <input type="text" class="form-input" placeholder="请输入手机号">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" class="form-input" placeholder="请输入密码">
+                    </div>
+                    
+                    <button class="login-button" onclick="window.location.href='updated-home-page.html'">
+                        家长登录
+                    </button>
+                    
+                    <div class="forgot-password">
+                        <a href="#">忘记密码？</a>
+                    </div>
+                    
+                    <div class="or-divider">其他登录方式</div>
+                    
+                    <div class="social-login">
+                        <a href="#" class="social-button">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="social-button">
+                            <i class="fab fa-qq"></i>
+                        </a>
+                        <a href="#" class="social-button">
+                            <i class="fas fa-comment-dots"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学生登录表单 -->
+            <div class="student-form" id="studentForm">
+                <div class="login-form">
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" class="form-input" placeholder="请输入学号">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" class="form-input" placeholder="请输入密码">
+                    </div>
+                    
+                    <button class="login-button" onclick="window.location.href='updated-home-page.html'">
+                        学生登录
+                    </button>
+                    
+                    <div class="forgot-password">
+                        <a href="#">忘记密码？</a>
+                    </div>
+                    
+                    <div class="flex items-center justify-center mt-4 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <i class="fas fa-info-circle mr-2 text-blue-500"></i>
+                            <span>如忘记密码请联系老师重置</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 注册提示 -->
+        <div class="register-prompt">
+            还没有账号？<a href="#">立即注册</a>
+        </div>
+    </div>
+
+    <script>
+        // 登录类型切换
+        document.getElementById('parentToggle').addEventListener('change', function() {
+            document.querySelector('label[for="parentToggle"]').classList.add('active');
+            document.querySelector('label[for="studentToggle"]').classList.remove('active');
+        });
+        
+        document.getElementById('studentToggle').addEventListener('change', function() {
+            document.querySelector('label[for="studentToggle"]').classList.add('active');
+            document.querySelector('label[for="parentToggle"]').classList.remove('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学生读书会 - 页面导航</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+        }
+        .page-card {
+            transition: all 0.3s ease;
+        }
+        .page-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+            padding: 2rem;
+            border-radius: 0 0 2rem 2rem;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #4ade80, #22c55e);
+            border-radius: 4px;
+        }
+        .nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header flex flex-col items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" class="w-32 h-32 mb-4">
+            <!-- 背景 -->
+            <rect width="400" height="300" fill="#4ade80" opacity="0" />
+            
+            <!-- 圆形背景 -->
+            <circle cx="200" cy="150" r="120" fill="#FF6B6B" />
+            <circle cx="200" cy="150" r="110" fill="#FFF" />
+            
+            <!-- 书本 -->
+            <g transform="translate(120, 90)">
+                <!-- 左侧书本 -->
+                <path d="M0,0 L80,0 L80,120 L0,120 C20,100 20,20 0,0 Z" fill="#4FC3F7" />
+                <!-- 书页 -->
+                <path d="M80,0 L85,5 L85,125 L80,120 Z" fill="#E1F5FE" />
+                <!-- 书本线条 -->
+                <line x1="10" y1="20" x2="70" y2="20" stroke="#0288D1" stroke-width="2" />
+                <line x1="10" y1="40" x2="70" y2="40" stroke="#0288D1" stroke-width="2" />
+                <line x1="10" y1="60" x2="70" y2="60" stroke="#0288D1" stroke-width="2" />
+                <line x1="10" y1="80" x2="70" y2="80" stroke="#0288D1" stroke-width="2" />
+                <line x1="10" y1="100" x2="70" y2="100" stroke="#0288D1" stroke-width="2" />
+            </g>
+            
+            <g transform="translate(200, 90)">
+                <!-- 右侧书本 -->
+                <path d="M0,0 L80,0 L80,120 C60,100 60,20 80,0 L0,120 Z" fill="#66BB6A" />
+                <!-- 书页 -->
+                <path d="M0,0 L-5,5 L-5,125 L0,120 Z" fill="#E8F5E9" />
+                <!-- 书本线条 -->
+                <line x1="10" y1="20" x2="70" y2="20" stroke="#2E7D32" stroke-width="2" />
+                <line x1="10" y1="40" x2="70" y2="40" stroke="#2E7D32" stroke-width="2" />
+                <line x1="10" y1="60" x2="70" y2="60" stroke="#2E7D32" stroke-width="2" />
+                <line x1="10" y1="80" x2="70" y2="80" stroke="#2E7D32" stroke-width="2" />
+                <line x1="10" y1="100" x2="70" y2="100" stroke="#2E7D32" stroke-width="2" />
+            </g>
+            
+            <!-- 小人 - 左侧孩子 -->
+            <g transform="translate(140, 170)">
+                <!-- 头部 -->
+                <circle cx="0" cy="0" r="15" fill="#FFCC80" />
+                <!-- 眼睛 -->
+                <circle cx="-5" cy="-2" r="2" fill="#333" />
+                <circle cx="5" cy="-2" r="2" fill="#333" />
+                <!-- 笑容 -->
+                <path d="M-5,5 Q0,10 5,5" fill="none" stroke="#333" stroke-width="1.5" />
+            </g>
+            
+            <!-- 小人 - 右侧孩子 -->
+            <g transform="translate(260, 170)">
+                <!-- 头部 -->
+                <circle cx="0" cy="0" r="15" fill="#FFCC80" />
+                <!-- 眼睛 -->
+                <circle cx="-5" cy="-2" r="2" fill="#333" />
+                <circle cx="5" cy="-2" r="2" fill="#333" />
+                <!-- 笑容 -->
+                <path d="M-5,5 Q0,10 5,5" fill="none" stroke="#333" stroke-width="1.5" />
+            </g>
+        </svg>
+        <h1 class="text-2xl font-bold">小学生读书会</h1>
+        <p class="text-white text-opacity-80">页面导航索引</p>
+    </div>
+
+    <div class="container mx-auto px-4 pb-20">
+        <h2 class="section-title text-xl">主要页面</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+            <!-- 首页 -->
+            <a href="updated-home-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-blue-500">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">首页</div>
+                        <div class="text-sm text-gray-500">主页面，包含打卡信息和积分排行</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 视频打卡 -->
+            <a href="video-record-page (1).html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-blue-500">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">视频打卡</div>
+                        <div class="text-sm text-gray-500">视频打卡录制功能</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 音频打卡 -->
+            <a href="audio-record-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-green-500">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">语音打卡</div>
+                        <div class="text-sm text-gray-500">语音打卡录制功能</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 打卡记录 -->
+            <a href="simplified-checkin-records.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-purple-500">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">打卡记录</div>
+                        <div class="text-sm text-gray-500">查看历史打卡记录</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 个人中心 -->
+            <a href="profile-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-red-500">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">个人中心</div>
+                        <div class="text-sm text-gray-500">用户个人信息和功能入口</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 积分商城 -->
+            <a href="book-club-shopping-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-yellow-500">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">积分商城</div>
+                        <div class="text-sm text-gray-500">使用积分兑换商品</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 互动页面 -->
+            <a href="interaction-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-pink-500">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">互动页面</div>
+                        <div class="text-sm text-gray-500">社区互动和评论</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 课程页面 -->
+            <a href="courses-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-indigo-500">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">课程管理</div>
+                        <div class="text-sm text-gray-500">课程安排和课时管理</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <h2 class="section-title text-xl">排行榜页面</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+            <!-- 普通排行榜 -->
+            <a href="updated-home-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-blue-500">
+                        <i class="fas fa-list-ol"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">标准排行榜</div>
+                        <div class="text-sm text-gray-500">基础版积分排行榜</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 领奖台风格 -->
+            <a href="podium-leaderboard-homepage.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-yellow-500">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">领奖台风格排行榜</div>
+                        <div class="text-sm text-gray-500">奖牌风格的排行榜展示</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 增强版排行榜 -->
+            <a href="enhanced-rankings-homepage.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-green-500">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">增强版排行榜</div>
+                        <div class="text-sm text-gray-500">带进度条的排行榜</div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- 宇宙版排行榜 -->
+            <a href="cosmic-leaderboard-homepage.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-purple-500">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">宇宙版排行榜</div>
+                        <div class="text-sm text-gray-500">星球主题的排行榜</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <h2 class="section-title text-xl">商城页面</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            
+            <!-- 更新版商城 -->
+            <a href="book-club-shopping-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-red-500">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">升级版积分商城</div>
+                        <div class="text-sm text-gray-500">带SVG图标的积分商城</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+  <br /> 
+        <h2 class="section-title text-xl">登录页面</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            
+            <!-- 更新版商城 -->
+            <a href="login-page.html" class="page-card block bg-white p-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <div class="nav-icon bg-red-500">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">登录</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+ 
+
+
+
+    </div>
+    
+    <footer class="fixed bottom-0 left-0 right-0 py-4 bg-white shadow-lg text-center text-gray-600 text-sm">
+        小学生读书会 © 2025 - 页面导航索引
+    </footer>
+</body>
+</html>
