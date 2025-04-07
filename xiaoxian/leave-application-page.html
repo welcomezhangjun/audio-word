@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请假申请 - 小学生读书会</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+            padding-bottom: 70px;
+        }
+        .status-bar {
+            background-color: #fff;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #000;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        .tab-item.active {
+            color: #ff6b6b;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+        }
+        .calendar-day {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+        .calendar-day.has-course {
+            background-color: #60a5fa;
+            color: white;
+        }
+        .calendar-day.selected {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .calendar-day.today {
+            border: 2px solid #60a5fa;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+        .calendar-day.disabled {
+            color: #d1d5db;
+        }
+        .input-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
+        .segment-control {
+            display: flex;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            padding: 3px;
+            margin: 0 auto;
+        }
+        .segment-item {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .segment-item.active {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .leave-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-pending {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        .status-approved {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+        .status-rejected {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="bg-white py-3 px-4 flex items-center sticky top-0 z-10 shadow-sm">
+        <a href="courses.html" class="text-gray-700 mr-4">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="text-lg font-bold">请假申请</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="p-4">
+        <!-- 请假规则卡片 -->
+        <div class="card p-4 mb-6">
+            <div class="flex items-start">
+                <i class="fas fa-info-circle text-blue-500 mt-0.5 mr-3"></i>
+                <div>
+                    <div class="font-medium text-gray-800">请假规则</div>
+                    <div class="text-sm text-gray-600 mt-1">
+                        1. 半年内最多可请假2次<br>
+                        2. 请至少提前24小时申请<br>
+                        3. 超出次数需联系管理员处理
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 flex justify-between items-center bg-blue-50 rounded-lg p-3">
+                <div class="text-sm text-blue-700">剩余可请假次数</div>
+                <div class="text-xl font-bold text-blue-600">2</div>
+            </div>
+        </div>
+
+        <!-- 分段控制器 -->
+        <div class="mb-6">
+            <div class="segment-control w-full">
+                <div class="segment-item active">申请请假</div>
+                <div class="segment-item">请假记录</div>
+            </div>
+        </div>
+
+        <!-- 请假申请表单 -->
+        <div class="card p-4 mb-6">
+            <div class="mb-4">
+                <div class="input-label">请选择课程日期</div>
+                
+                <!-- 月份选择 -->
+                <div class="flex justify-between items-center mb-3">
+                    <button class="text-gray-500">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="font-medium">2025年4月</div>
+                    <button class="text-gray-500">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- 星期标题 -->
+                <div class="grid grid-cols-7 text-center mb-2">
+                    <div class="text-sm text-gray-500">一</div>
+                    <div class="text-sm text-gray-500">二</div>
+                    <div class="text-sm text-gray-500">三</div>
+                    <div class="text-sm text-gray-500">四</div>
+                    <div class="text-sm text-gray-500">五</div>
+                    <div class="text-sm text-gray-500">六</div>
+                    <div class="text-sm text-gray-500">日</div>
+                </div>
+                
+                <!-- 日期 第一行 -->
+                <div class="grid grid-cols-7 gap-1 mb-2 place-items-center">
+                    <div class="calendar-day text-gray-400">28</div>
+                    <div class="calendar-day text-gray-400">29</div>
+                    <div class="calendar-day text-gray-400">30</div>
+                    <div class="calendar-day text-gray-400">31</div>
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                </div>
+                
+                <!-- 日期 第二行 -->
+                <div class="grid grid-cols-7 gap-1 mb-2 place-items-center">
+                    <div class="calendar-day has-course">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day has-course">8</div>
+                    <div class="calendar-day">9</div>
+                    <div class="calendar-day">10</div>
+                </div>
+                
+                <!-- 日期 第三行 -->
+                <div class="grid grid-cols-7 gap-1 mb-2 place-items-center">
+                    <div class="calendar-day today">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day has-course selected">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day has-course">16</div>
+                    <div class="calendar-day">17</div>
+                </div>
+                
+                <!-- 日期图例 -->
+                <div class="flex justify-start mt-2 text-xs text-gray-500">
+                    <div class="flex items-center mr-3">
+                        <div class="w-3 h-3 rounded-full bg-blue-500 mr-1"></div>
+                        <span>有课</span>
+                    </div>
+                    <div class="flex items-center mr-3">
+                        <div class="w-3 h-3 rounded-full bg-yellow-500 mr-1"></div>
+                        <span>已选</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full border-2 border-blue-500 mr-1"></div>
+                        <span>今天</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 课程信息 -->
+            <div class="bg-blue-50 rounded-lg p-3 mb-4">
+                <div class="font-medium text-blue-800">已选课程信息</div>
+                <div class="mt-2 text-sm text-blue-700">
+                    <div class="flex justify-between">
+                        <span>课程名称:</span>
+                        <span>思辩课程：《狮子和老鼠》寓言探讨</span>
+                    </div>
+                    <div class="flex justify-between mt-1">
+                        <span>上课时间:</span>
+                        <span>2025年4月13日 14:30-16:00</span>
+                    </div>
+                    <div class="flex justify-between mt-1">
+                        <span>课时消耗:</span>
+                        <span>1课时</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 请假原因 -->
+            <div class="mb-4">
+                <div class="input-label">请假原因</div>
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <div class="bg-gray-100 rounded-lg px-3 py-2 text-center text-sm">生病</div>
+                    <div class="bg-gray-100 rounded-lg px-3 py-2 text-center text-sm">学校活动</div>
+                    <div class="bg-gray-100 rounded-lg px-3 py-2 text-center text-sm">其他原因</div>
+                </div>
+                <textarea class="w-full border border-gray-300 rounded-lg p-3 text-sm" rows="3" placeholder="请填写详细请假原因..."></textarea>
+            </div>
+
+        </div>
+
+        <!-- 提交按钮 -->
+        <button class="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold mb-6">
+            提交请假申请
+        </button>
+
+        <!-- 请假记录 -->
+        <div class="card p-4">
+            <div class="font-medium text-gray-800 mb-4">历史请假记录</div
