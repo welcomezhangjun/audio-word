@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思辩课程管理</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f7f8fa;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="bg-white shadow rounded-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">思辩课程管理</h1>
+            <div class="text-gray-500">小娴老师，欢迎您</div>
+        </div>
+
+        <!-- 选项卡 -->
+        <div class="flex border-b mb-6">
+            <button id="overviewBtn" class="px-4 py-2 border-b-2 border-blue-500 text-blue-500 font-semibold" onclick="showTab('overview')">课程总览</button>
+            <button id="courseHourBtn" class="px-4 py-2 text-gray-500" onclick="showTab('courseHour')">课时管理</button>
+            <button id="studentsBtn" class="px-4 py-2 text-gray-500" onclick="showTab('students')">学生管理</button>
+        </div>
+
+        <!-- 课程总览 -->
+        <div id="overviewTab" class="block">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="text-sm text-blue-600 mb-2">总课时</div>
+                    <div class="text-2xl font-bold text-blue-800">128</div>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <div class="text-sm text-green-600 mb-2">在读学生</div>
+                    <div class="text-2xl font-bold text-green-800">86</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-lg font-semibold mb-4">近期课程</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="font-medium">思辨：《狮子和老鼠》寓言探讨</div>
+                            <div class="text-sm text-gray-500">2025-04-13 14:30-16:00</div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="font-medium">逻辑推理：小组辩论训练</div>
+                            <div class="text-sm text-gray-500">2025-04-15 15:00-16:30</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold mb-4">学生动态</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg flex justify-between items-center">
+                            <div>
+                                <div class="font-medium">小明同学</div>
+                                <div class="text-sm text-gray-500">完成《狮子和老鼠》阅读报告</div>
+                            </div>
+                            <span class="text-green-600">+10分</span>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg flex justify-between items-center">
+                            <div>
+                                <div class="font-medium">李小华</div>
+                                <div class="text-sm text-gray-500">参与小组辩论训练</div>
+                            </div>
+                            <span class="text-blue-600">+15分</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 课时管理 -->
+        <div id="courseHourTab" class="hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">课时列表</h2>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openAddCourseHourModal()">
+                    <i class="fas fa-plus mr-2"></i>添加课时
+                </button>
+            </div>
+
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-100 text-left">
+                        <th class="p-3">课程名称</th>
+                        <th class="p-3">授课时间</th>
+                        <th class="p-3">课时数</th>
+                        <th class="p-3">状态</th>
+                        <th class="p-3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="p-3">思辨：《狮子和老鼠》寓言探讨</td>
+                        <td class="p-3">2025-04-13 14:30-16:00</td>
+                        <td class="p-3">2课时</td>
+                        <td class="p-3"><span class="bg-green-100 text-green-600 px-2 py-1 rounded-full">已完成</span></td>
+                        <td class="p-3">
+                            <button class="text-blue-500 mr-2">编辑</button>
+                            <button class="text-red-500">删除</button>
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-3">逻辑推理：小组辩论训练</td>
+                        <td class="p-3">2025-04-15 15:00-16:30</td>
+                        <td class="p-3">2课时</td>
+                        <td class="p-3"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full">即将开始</span></td>
+                        <td class="p-3">
+                            <button class="text-blue-500 mr-2">编辑</button>
+                            <button class="text-red-500">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 学生管理 -->
+        <div id="studentsTab" class="hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">学生列表</h2>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="openAddStudentModal()">
+                    <i class="fas fa-user-plus mr-2"></i>添加学生
+                </button>
+            </div>
+
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-100 text-left">
+                        <th class="p-3">姓名</th>
+                        <th class="p-3">班级</th>
+                        <th class="p-3">已完成课时</th>
+                        <th class="p-3">学习进度</th>
+                        <th class="p-3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="p-3">小明</td>
+                        <td class="p-3">三年级二班</td>
+                        <td class="p-3">12课时</td>
+                        <td class="p-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </td>
+                        <td class="p-3">
+                            <button class="text-blue-500 mr-2">详情</button>
+                            <button class="text-red-500">移除</button>
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="p-3">李小华</td>
+                        <td class="p-3">三年级三班</td>
+                        <td class="p-3">8课时</td>
+                        <td class="p-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </td>
+                        <td class="p-3">
+                            <button class="text-blue-500 mr-2">详情</button>
+                            <button class="text-red-500">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // 隐藏所有选项卡
+            ['overview', 'courseHour', 'students'].forEach(tab => {
+                document.getElementById(tab + 'Tab').classList.add('hidden');
+                document.getElementById(tab + 'Btn').classList.remove('border-b-2', 'border-blue-500', 'text-blue-500');
+                document.getElementById(tab + 'Btn').classList.add('text-gray-500');
+            });
+
+            // 显示当前选项卡
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            document.getElementById(tabName + 'Btn').classList.add('border-b-2', 'border-blue-500', 'text-blue-500');
+            document.getElementById(tabName + 'Btn').classList.remove('text-gray-500');
+        }
+
+        function openAddCourseHourModal() {
+            alert('添加课时功能开发中');
+        }
+
+        function openAddStudentModal() {
+            alert('添加学生功能开发中');
+        }
+    </script>
+</body>
+</html>
