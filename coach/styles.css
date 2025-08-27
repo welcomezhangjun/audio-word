@@ -1,0 +1,55 @@
+/* styles.css */
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.phone-container {
+    margin-bottom: 40px;
+}
+
+.phone-title {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.iphone-frame {
+    width: 393px;
+    height: 852px;
+    border: 12px solid #111;
+    border-radius: 60px;
+    background-color: #fff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.iphone-frame::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 30px;
+    background-color: #111;
+    border-radius: 20px;
+    z-index: 100;
+}
+
+.screen-content {
+    width: 100%;
+    height: 100%;
+    border: none;
+} 

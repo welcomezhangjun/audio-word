@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创业周报模板 - Think Different</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            width: 900px;
+            height: 600px;
+            background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 50%, #1c1c1e 100%);
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .card:hover {
+            transform: rotateY(-5deg) rotateX(2deg) scale(1.02);
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        /* 极简主义边框 */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+        }
+
+        /* 苹果式呼吸灯效果 */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 2px;
+            background: #30d158;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: breathe 4s ease-in-out infinite;
+            box-shadow: 0 0 20px #30d158, 0 0 40px #30d158, 0 0 60px #30d158;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0;
+            padding: 80px;
+            z-index: 2;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 200;
+            color: #f2f2f7;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 2s ease forwards;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #8e8e93;
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 2s ease forwards 0.3s;
+        }
+
+        .left-panel, .right-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .left-panel::after, .right-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.08) 50%, 
+                rgba(255,255,255,0) 100%);
+        }
+
+        .left-panel::after { right: 30px; }
+        .right-panel::before { left: 30px; }
+
+        .section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 1.5s ease forwards;
+        }
+
+        .right-panel .section {
+            transform: translateX(30px);
+        }
+
+        .section:nth-child(1) { animation-delay: 0.5s; }
+        .section:nth-child(2) { animation-delay: 0.7s; }
+        .section:nth-child(3) { animation-delay: 0.9s; }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 500;
+            color: #30d158;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 1px;
+            background: #30d158;
+        }
+
+        .item {
+            margin-bottom: 24px;
+            padding-left: 20px;
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .item:hover {
+            border-left-color: #30d158;
+            transform: translateX(10px);
+        }
+
+        .item-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #f2f2f7;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .item-desc {
+            font-size: 13px;
+            color: #8e8e93;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(48, 209, 88, 0.3);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .dot:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .dot:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .dot:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .dot:nth-child(4) { top: 40%; left: 80%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            50% { transform: translate(20px, -20px) scale(1.5); opacity: 1; }
+        }
+
+        .tips {
+            position: absolute;
+            bottom: 30px;
+            left: 80px;
+            right: 80px;
+            text-align: center;
+            font-size: 12px;
+            color: #636366;
+            letter-spacing: 0.2em;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards 3s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .card {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                padding: 40px;
+                gap: 40px;
+            }
+            
+            .left-panel::after, .right-panel::before {
+                display: none;
+            }
+            
+            .title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="floating-elements">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <div class="content">
+                <div class="header">
+                    <h1 class="title">创业周报</h1>
+                    <p class="subtitle">思考 · 创造 · 迭代</p>
+                </div>
+                
+                <div class="left-panel">
+                    <div class="section">
+                        <h2 class="section-title">回顾反思</h2>
+                        <div class="item">
+                            <div class="item-title">里程碑与目标</div>
+                            <div class="item-desc">上周设定的目标是什么？是否达成？</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">我的收获</div>
+                            <div class="item-desc">上周最主要的收获或发现是什么？</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">遇到的挑战</div>
+                            <div class="item-desc">上周遇到了哪些具体的问题或困难？</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="right-panel">
+                    <div class="section">
+                        <h2 class="section-title">前进动力</h2>
+                        <div class="item">
+                            <div class="item-title">核心目标</div>
+                            <div class="item-desc">本周我最想达成的核心目标是什么？</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">我的行动</div>
+                            <div class="item-desc">我计划采取哪些具体的行动来实现它？</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-title">我的思考</div>
+                            <div class="item-desc">我对当前的进展或方向有什么新的思考或洞察？</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tips">
+                至简，是最高级的复杂
+            </div>
+        </div>
+    </div>
+</body>
+</html>

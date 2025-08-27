@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .tab-active {
+            border-bottom: 2px solid #3B82F6;
+            color: #3B82F6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="flex flex-col h-full">
+        <!-- Main Content -->
+        <main class="flex-grow overflow-y-auto">
+            <!-- Course Image Header -->
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=2671&auto=format&fit=crop" class="w-full h-60 object-cover" alt="Course Image">
+                <div class="absolute top-0 left-0 p-4 pt-8">
+                    <button class="w-10 h-10 rounded-full bg-black bg-opacity-40 text-white flex items-center justify-center">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Course Info -->
+            <div class="p-4 bg-white">
+                <h1 class="text-2xl font-bold text-gray-800">教练式领导者培养</h1>
+                <p class="text-gray-500 mt-2">系统化课程，助您成为卓越领导者，提升您的团队领导力与影响力。</p>
+                <div class="flex items-baseline mt-3">
+                    <span class="text-3xl font-bold text-red-500">¥ 1999</span>
+                    <span class="text-gray-400 line-through ml-2">¥ 2599</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-500 mt-3">
+                    <div class="flex items-center text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-600 ml-2 font-semibold">4.8</span>
+                    </div>
+                    <span class="mx-2">|</span>
+                    <span>357 人已报名</span>
+                </div>
+            </div>
+
+            <!-- Content Tabs -->
+            <div class="bg-white mt-3">
+                <div class="flex border-b">
+                    <button class="flex-1 py-3 text-center font-semibold tab-active">课程大纲</button>
+                    <button class="flex-1 py-3 text-center font-semibold text-gray-500">师资介绍</button>
+                    <button class="flex-1 py-3 text-center font-semibold text-gray-500">学员评价</button>
+                </div>
+                <div class="p-4">
+                    <!-- Tab Content: Course Outline -->
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">第一章：领导力认知与自我评估</h4>
+                                <p class="text-sm">了解教练式领导力的核心理念，评估现有领导风格。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">第二章：GROW 模型深度解析</h4>
+                                <p class="text-sm">学习并实践经典的教练对话模型。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold">第三章：倾听与提问的艺术</h4>
+                                <p class="text-sm">掌握激发团队潜能的关键沟通技巧。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+        
+        <!-- Fixed Bottom Bar -->
+        <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex items-center justify-between p-3" style="width: 393px; margin: 0 auto;">
+            <div class="text-center">
+                 <i class="far fa-heart text-2xl text-gray-600"></i>
+                 <div class="text-xs text-gray-500">收藏</div>
+            </div>
+            <button class="w-2/3 bg-blue-600 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition-colors text-lg">
+                立即报名
+            </button>
+        </footer>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .tab-bar-icon { @apply w-6 h-6; }
+        .tab-bar-label { @apply text-xs; }
+        /* For smooth scrolling on category tabs */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="flex flex-col h-full">
+        <!-- Status Bar -->
+        <div class="flex justify-between items-center px-4 pt-4 pb-2 bg-white">
+            <span class="font-semibold text-lg">9:41</span>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="flex items-center p-4 bg-white shadow-sm sticky top-0 z-10">
+            <button class="text-gray-600">
+                <i class="fas fa-chevron-left text-lg"></i>
+            </button>
+            <h1 class="text-xl font-bold mx-auto">培训中心</h1>
+            <button class="text-gray-600">
+                <i class="fas fa-search text-lg"></i>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow overflow-y-auto pb-20">
+            <!-- Category Tabs -->
+            <div class="px-4 py-3 bg-white border-b">
+                <div class="flex space-x-4 overflow-x-auto no-scrollbar">
+                    <button class="px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded-full flex-shrink-0">全部课程</button>
+                    <button class="px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-100 rounded-full flex-shrink-0">领导力培训</button>
+                    <button class="px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-100 rounded-full flex-shrink-0">软技能提升</button>
+                    <button class="px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-100 rounded-full flex-shrink-0">人力资源</button>
+                </div>
+            </div>
+
+            <!-- Course List -->
+            <div class="p-4 space-y-4">
+                <!-- Course Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2670&auto=format&fit=crop" class="w-1/3 object-cover" alt="Course thumbnail">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">高效沟通技巧</h3>
+                            <p class="text-sm text-gray-500 mt-1">学习职场中的高效沟通与表达艺术。</p>
+                        </div>
+                        <div class="mt-2 flex justify-between items-center">
+                            <span class="font-bold text-blue-600 text-lg">¥ 899</span>
+                            <span class="text-xs text-gray-400">2.1k 人已学习</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2832&auto=format&fit=crop" class="w-1/3 object-cover" alt="Course thumbnail">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">战略性人力资源管理</h3>
+                             <p class="text-sm text-gray-500 mt-1">从战略高度规划企业人力资源。</p>
+                        </div>
+                        <div class="mt-2 flex justify-between items-center">
+                            <span class="font-bold text-blue-600 text-lg">¥ 1299</span>
+                            <span class="text-xs text-gray-400">1.8k 人已学习</span>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Course Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2670&auto=format&fit=crop" class="w-1/3 object-cover" alt="Course thumbnail">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">项目管理实战</h3>
+                             <p class="text-sm text-gray-500 mt-1">掌握从启动到收尾的全过程项目管理。</p>
+                        </div>
+                        <div class="mt-2 flex justify-between items-center">
+                            <span class="font-bold text-blue-600 text-lg">¥ 999</span>
+                            <span class="text-xs text-gray-400">3.2k 人已学习</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        
+        <!-- Tab Bar -->
+        <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20" style="width: 393px; margin: 0 auto;">
+            <a href="#" class="text-center text-blue-500">
+                <i class="fas fa-home tab-bar-icon"></i>
+                <span class="tab-bar-label">首页</span>
+            </a>
+            <a href="#" class="text-center text-gray-400">
+                <i class="fas fa-book-open tab-bar-icon"></i>
+                <span class="tab-bar-label">学习</span>
+            </a>
+            <a href="#" class="text-center text-gray-400">
+                <i class="fas fa-comment-dots tab-bar-icon"></i>
+                <span class="tab-bar-label">消息</span>
+            </a>
+            <a href="#" class="text-center text-gray-400">
+                <i class="fas fa-user tab-bar-icon"></i>
+                <span class="tab-bar-label">我的</span>
+            </a>
+        </footer>
+    </div>
+</body>
+</html> 

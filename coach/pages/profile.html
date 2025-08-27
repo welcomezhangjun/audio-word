@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .tab-bar-icon { @apply w-6 h-6; }
+        .tab-bar-label { @apply text-xs; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col h-full">
+        <!-- Status Bar -->
+        <div class="flex justify-between items-center px-4 pt-4 pb-2">
+            <span class="font-semibold text-lg">9:41</span>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-full"></i>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-grow overflow-y-auto pt-6 pb-20">
+            <!-- User Info Card -->
+            <div class="px-4">
+                <div class="flex items-center space-x-4">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop" class="w-20 h-20 rounded-full border-4 border-white shadow-md" alt="User Avatar">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Jessica Miller</h2>
+                        <p class="text-gray-500">追求卓越，不断前行。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="px-4 mt-6">
+                <div class="bg-white rounded-2xl shadow p-4 flex justify-around text-center">
+                    <div>
+                        <span class="text-2xl font-bold text-blue-600">128</span>
+                        <p class="text-sm text-gray-500">学习小时</p>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-green-600">15</span>
+                        <p class="text-sm text-gray-500">完成课程</p>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-indigo-600">8</span>
+                        <p class="text-sm text-gray-500">获得证书</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu List -->
+            <div class="px-4 mt-6">
+                <div class="bg-white rounded-2xl shadow overflow-hidden">
+                    <ul class="divide-y divide-gray-200">
+                        <li class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-file-invoice-dollar text-xl text-blue-500 w-6 text-center"></i>
+                                <span class="font-medium text-gray-700">我的订单</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </li>
+                        <li class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-bookmark text-xl text-green-500 w-6 text-center"></i>
+                                <span class="font-medium text-gray-700">我的收藏</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </li>
+                        <li class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-history text-xl text-indigo-500 w-6 text-center"></i>
+                                <span class="font-medium text-gray-700">学习历史</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </li>
+                        <li class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-cog text-xl text-gray-500 w-6 text-center"></i>
+                                <span class="font-medium text-gray-700">设置</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </li>
+                         <li class="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-question-circle text-xl text-yellow-500 w-6 text-center"></i>
+                                <span class="font-medium text-gray-700">帮助与反馈</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+        
+        <!-- Tab Bar -->
+        <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20" style="width: 393px; margin: 0 auto;">
+            <a href="#" class="text-center text-gray-400">
+                <i class="fas fa-home tab-bar-icon"></i>
+                <span class="tab-bar-label">首页</span>
+            </a>
+            <a href="#" class="text-center text-gray-400">
+                <i class="fas fa-book-open tab-bar-icon"></i>
+                <span class="tab-bar-label">学习</span>
+            </a>
+            <a href="#" class="text-center text-gray-400">
+                <i class="fas fa-comment-dots tab-bar-icon"></i>
+                <span class="tab-bar-label">消息</span>
+            </a>
+            <a href="#" class="text-center text-blue-500">
+                <i class="fas fa-user tab-bar-icon"></i>
+                <span class="tab-bar-label">我的</span>
+            </a>
+        </footer>
+    </div>
+</body>
+</html> 
