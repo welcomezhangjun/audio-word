@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>创业周报模板 - Think Different</title>
     <style>
         * {
@@ -20,6 +20,11 @@
             justify-content: center;
             padding: 20px;
             overflow: hidden;
+            /* 移动端优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .container {
@@ -239,6 +244,78 @@
             50% { transform: translate(20px, -20px) scale(1.5); opacity: 1; }
         }
 
+        /* 进入系统按钮 */
+        .entry-button-container {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInUp 2s ease forwards 2.5s;
+        }
+
+        .entry-button {
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 16px 32px;
+            color: #000;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(48, 209, 88, 0.3), 
+                        0 3px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            /* 移动端触摸优化 */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+        .entry-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .entry-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(48, 209, 88, 0.4), 
+                        0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .entry-button:hover::before {
+            left: 100%;
+        }
+
+        .entry-button:active {
+            transform: translateY(0) scale(1.02);
+        }
+
+        .entry-text {
+            letter-spacing: -0.01em;
+        }
+
+        .entry-arrow {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .entry-button:hover .entry-arrow {
+            transform: translateX(4px);
+        }
+
         .tips {
             position: absolute;
             bottom: 30px;
@@ -271,19 +348,47 @@
             to { opacity: 1; }
         }
 
-        /* 响应式 */
+        /* 高级移动端优化 */
         @media (max-width: 768px) {
+            body {
+                padding: 0;
+                min-height: 100vh;
+                height: 100vh;
+                overflow: hidden;
+            }
+            
+            .container {
+                padding: 0;
+            }
+            
             .card {
                 width: 100vw;
                 height: 100vh;
                 border-radius: 0;
+                transform: none !important; /* 移动端禁用3D效果 */
+            }
+            
+            .card:hover {
+                transform: none !important;
             }
             
             .content {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
-                padding: 40px;
-                gap: 40px;
+                grid-template-rows: auto 1fr auto;
+                padding: 32px 24px;
+                gap: 24px;
+                height: 100%;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .header {
+                margin-bottom: 32px;
+                text-align: center;
+            }
+            
+            .left-panel, .right-panel {
+                grid-column: 1;
             }
             
             .left-panel::after, .right-panel::before {
@@ -291,7 +396,153 @@
             }
             
             .title {
-                font-size: 32px;
+                font-size: 36px;
+                margin-bottom: 16px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+                letter-spacing: 0.3em;
+            }
+            
+            .section {
+                margin-bottom: 32px;
+                transform: none;
+                opacity: 1;
+                animation: none;
+            }
+            
+            .section-title {
+                font-size: 10px;
+                margin-bottom: 16px;
+            }
+            
+            .item {
+                margin-bottom: 20px;
+                padding-left: 16px;
+                border-left-width: 2px;
+            }
+            
+            .item:hover {
+                transform: none;
+                border-left-color: #30d158;
+            }
+            
+            .item-title {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+            
+            .item-desc {
+                font-size: 12px;
+                line-height: 1.5;
+            }
+            
+            .entry-button-container {
+                position: fixed;
+                bottom: 24px;
+                left: 24px;
+                right: 24px;
+                transform: none;
+                z-index: 100;
+                animation: none;
+                opacity: 1;
+            }
+            
+            .entry-button {
+                width: 100%;
+                justify-content: center;
+                padding: 18px 32px;
+                font-size: 16px;
+                border-radius: 16px;
+                min-height: 56px;
+            }
+            
+            .entry-button:hover {
+                transform: none;
+            }
+            
+            .entry-button:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+            
+            .tips {
+                display: none; /* 移动端隐藏提示文字 */
+            }
+            
+            /* 移动端专属动画优化 */
+            .title, .subtitle {
+                animation: none;
+                opacity: 1;
+            }
+            
+            /* 浮动元素在移动端隐藏 */
+            .floating-elements {
+                display: none;
+            }
+            
+            /* 呼吸灯效果在移动端简化 */
+            .card::after {
+                width: 1px;
+                height: 1px;
+                animation: breatheMobile 3s ease-in-out infinite;
+            }
+        }
+        
+        /* 小屏手机优化 */
+        @media (max-width: 480px) {
+            .content {
+                padding: 24px 16px;
+                gap: 20px;
+            }
+            
+            .title {
+                font-size: 28px;
+            }
+            
+            .entry-button-container {
+                bottom: 16px;
+                left: 16px;
+                right: 16px;
+            }
+            
+            .entry-button {
+                padding: 16px 24px;
+                font-size: 15px;
+                min-height: 52px;
+            }
+            
+            .item {
+                padding-left: 12px;
+                margin-bottom: 16px;
+            }
+            
+            .section-title {
+                margin-bottom: 12px;
+            }
+        }
+        
+        /* 移动端专属呼吸灯动画 */
+        @keyframes breatheMobile {
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        /* 触摸设备专用交互 */
+        @media (hover: none) and (pointer: coarse) {
+            .card:hover {
+                transform: none;
+            }
+            
+            .item:hover {
+                transform: none;
+            }
+            
+            .entry-button:hover {
+                transform: none;
+                box-shadow: 0 8px 25px rgba(48, 209, 88, 0.3), 
+                            0 3px 10px rgba(0, 0, 0, 0.2);
             }
         }
     </style>
@@ -347,6 +598,14 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- 进入系统按钮 -->
+            <div class="entry-button-container">
+                <button class="entry-button" onclick="window.location.href='weekly_pannel.html'">
+                    <span class="entry-text">进入周报系统</span>
+                    <span class="entry-arrow">→</span>
+                </button>
             </div>
             
             <div class="tips">

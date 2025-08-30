@@ -1,0 +1,3539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>创业周报系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1c1c1e 50%, #2c2c2e 100%);
+            min-height: 100vh;
+            color: #f2f2f7;
+            overflow-x: hidden;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            /* 移动端优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px;
+            position: relative;
+        }
+        
+        /* 移动端容器优化 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px 12px;
+                max-width: 100%;
+            }
+        }
+
+        /* 背景装饰元素 */
+        .container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(48, 209, 88, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 159, 10, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 顶部导航 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 48px;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+        
+        /* 移动端头部优化 */
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 0;
+                margin-bottom: 24px;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                background: rgba(0, 0, 0, 0.9);
+            }
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(48, 209, 88, 0.3), transparent);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f2f2f7;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #f2f2f7 0%, #30d158 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        /* 移动端Logo优化 */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 24px;
+            }
+        }
+
+        .logo::before {
+            content: '●';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #30d158;
+            font-size: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 16px;
+            background: rgba(28, 28, 30, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .user-info:hover {
+            background: rgba(28, 28, 30, 0.8);
+            border-color: rgba(48, 209, 88, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            box-shadow: 0 2px 8px rgba(48, 209, 88, 0.3);
+        }
+
+        .username {
+            font-size: 15px;
+            font-weight: 500;
+            color: #f2f2f7;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .username:hover {
+            color: #30d158;
+        }
+
+        /* 主导航 */
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+            background: rgba(28, 28, 30, 0.8);
+            border-radius: 16px;
+            padding: 6px;
+            margin-bottom: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 移动端导航优化 */
+        @media (max-width: 768px) {
+            .nav-tabs {
+                margin-bottom: 24px;
+                border-radius: 12px;
+                padding: 4px;
+                position: sticky;
+                top: 80px;
+                z-index: 99;
+                background: rgba(28, 28, 30, 0.95);
+            }
+        }
+
+        .nav-tabs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.03) 0%, 
+                rgba(255, 255, 255, 0.01) 50%, 
+                rgba(255, 255, 255, 0.03) 100%);
+            pointer-events: none;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 14px 28px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: #8e8e93;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            letter-spacing: -0.01em;
+            /* 移动端触摸优化 */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        /* 移动端导航标签优化 */
+        @media (max-width: 768px) {
+            .nav-tab {
+                padding: 16px 20px;
+                font-size: 16px;
+                font-weight: 600;
+                min-height: 48px;
+                border-radius: 10px;
+            }
+        }
+
+        .nav-tab:hover:not(.active) {
+            color: #f2f2f7;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(48, 209, 88, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        /* 内容区域 */
+        .content {
+            min-height: 500px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        /* 写周报界面 */
+        .write-form {
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.95) 0%, 
+                rgba(44, 44, 46, 0.8) 100%);
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .write-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(48, 209, 88, 0.02) 0%, 
+                transparent 50%, 
+                rgba(255, 159, 10, 0.01) 100%);
+            pointer-events: none;
+        }
+
+        .form-section {
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .form-section:last-of-type {
+            margin-bottom: 32px;
+        }
+
+        .form-section::after {
+            content: '';
+            position: absolute;
+            bottom: -24px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.06), 
+                transparent);
+        }
+
+        .form-section:last-of-type::after {
+            display: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f2f2f7;
+            letter-spacing: -0.02em;
+        }
+        
+        /* 移动端标题优化 */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+        }
+
+        .section-emoji {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #30d158;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+            position: relative;
+        }
+
+        .form-label::before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 16px;
+            background: linear-gradient(135deg, #30d158, #28cd4a);
+            border-radius: 2px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(44, 44, 46, 0.8);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: #f2f2f7;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            line-height: 1.6;
+            resize: vertical;
+            min-height: 100px;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            letter-spacing: -0.01em;
+            /* 移动端输入优化 */
+            -webkit-appearance: none;
+            -webkit-border-radius: 12px;
+        }
+        
+        /* 移动端表单优化 */
+        @media (max-width: 768px) {
+            .form-input {
+                font-size: 16px; /* 防止iOS自动缩放 */
+                padding: 14px 16px;
+                min-height: 120px; /* 移动端更舒适的输入高度 */
+            }
+        }
+
+        /* 富文本编辑器 */
+        .rich-editor {
+            position: relative;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(58, 58, 60, 0.8);
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* 移动端工具栏优化 */
+        @media (max-width: 768px) {
+            .editor-toolbar {
+                padding: 12px 16px;
+                gap: 12px;
+                justify-content: center;
+                border-radius: 12px 12px 0 0;
+            }
+        }
+
+        .toolbar-btn {
+            padding: 6px 10px;
+            background: transparent;
+            border: none;
+            color: #8e8e93;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            /* 移动端触摸优化 */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 32px;
+            min-width: 32px;
+        }
+        
+        /* 移动端工具栏按钮优化 */
+        @media (max-width: 768px) {
+            .toolbar-btn {
+                padding: 12px 14px;
+                font-size: 16px;
+                font-weight: 600;
+                min-height: 44px;
+                min-width: 44px;
+                border-radius: 8px;
+            }
+        }
+
+        .toolbar-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f2f2f7;
+        }
+
+        .toolbar-btn.active {
+            background: #30d158;
+            color: #000;
+        }
+
+        .rich-editor .form-input {
+            border-radius: 0 0 12px 12px;
+            border-top: none;
+        }
+
+        .rich-editor .form-input:focus {
+            outline: none;
+            border-color: #30d158;
+            background: rgba(44, 44, 46, 0.95);
+            box-shadow: 0 0 0 3px rgba(48, 209, 88, 0.1),
+                        0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: none; /* 移除输入框的变换效果 */
+        }
+
+        /* 图片预览 */
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .image-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: background 0.2s ease;
+        }
+
+        .image-remove:hover {
+            background: #ff453a;
+        }
+
+        /* 拖拽上传区域 */
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* 移动端拖拽区域优化 */
+        @media (max-width: 768px) {
+            .drop-zone {
+                padding: 24px 16px;
+                border-radius: 12px;
+                min-height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-width: 3px;
+            }
+            
+            .drop-zone-text {
+                font-size: 15px;
+                line-height: 1.4;
+            }
+        }
+
+        .drop-zone.dragover {
+            border-color: #30d158;
+            background: rgba(48, 209, 88, 0.05);
+        }
+
+        .drop-zone-text {
+            color: #8e8e93;
+            font-size: 14px;
+        }
+
+        .drop-zone-text strong {
+            color: #30d158;
+        }
+
+        .form-input::placeholder {
+            color: #636366;
+            font-weight: 400;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #30d158;
+            background: rgba(44, 44, 46, 0.95);
+            box-shadow: 0 0 0 3px rgba(48, 209, 88, 0.1),
+                        0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .form-input:hover:not(:focus) {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(44, 44, 46, 0.9);
+        }
+
+        /* 隐私设置 */
+        .privacy-settings {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(58, 58, 60, 0.6);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-toggle {
+            display: flex;
+            background: rgba(28, 28, 30, 0.8);
+            border-radius: 8px;
+            padding: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .privacy-option {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: #8e8e93;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .privacy-option.active {
+            background: #30d158;
+            color: #000;
+            box-shadow: 0 2px 4px rgba(48, 209, 88, 0.3);
+        }
+
+        .privacy-icon {
+            margin-right: 6px;
+        }
+
+        .privacy-label {
+            color: #d1d1d6;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 32px;
+        }
+
+        .form-actions-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-actions-right {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+            /* 移动端触摸优化 */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px; /* iOS推荐的最小触摸目标 */
+        }
+        
+        /* 移动端按钮优化 */
+        @media (max-width: 768px) {
+            .btn {
+                padding: 16px 24px;
+                font-size: 16px;
+                min-height: 48px;
+                width: 100%;
+            }
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(48, 209, 88, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #28cd4a 0%, #20c43c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(48, 209, 88, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: rgba(44, 44, 46, 0.8);
+            color: #f2f2f7;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(58, 58, 60, 0.9);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        /* 团队视图 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            margin-top: 8px;
+        }
+
+        .member-card {
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.95) 0%, 
+                rgba(44, 44, 46, 0.8) 100%);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(48, 209, 88, 0.02) 0%, 
+                transparent 50%, 
+                rgba(255, 159, 10, 0.01) 100%);
+            pointer-events: none;
+        }
+
+        .member-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(48, 209, 88, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25),
+                        0 0 0 1px rgba(48, 209, 88, 0.1);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .member-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(48, 209, 88, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .member-avatar::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #30d158, #28cd4a);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .member-card:hover .member-avatar::before {
+            opacity: 0.2;
+        }
+
+        .member-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f2f2f7;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+
+        .member-info p {
+            font-size: 13px;
+            color: #8e8e93;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .report-summary {
+            font-size: 14px;
+            color: #d1d1d6;
+            line-height: 1.7;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 3px solid #30d158;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 32px;
+            color: #8e8e93;
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.5) 0%, 
+                rgba(44, 44, 46, 0.3) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+            opacity: 0.7;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #d1d1d6;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .empty-state p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #8e8e93;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* 数据管理界面 */
+        .data-management {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 8px;
+        }
+
+        .data-card {
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.95) 0%, 
+                rgba(44, 44, 46, 0.8) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(48, 209, 88, 0.02) 0%, 
+                transparent 50%, 
+                rgba(255, 159, 10, 0.01) 100%);
+            pointer-events: none;
+        }
+
+        .data-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(48, 209, 88, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25),
+                        0 0 0 1px rgba(48, 209, 88, 0.1);
+        }
+
+        .data-card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+            position: relative;
+            z-index: 2;
+        }
+
+        .data-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #f2f2f7;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .data-card p {
+            font-size: 15px;
+            color: #a1a1a6;
+            margin-bottom: 28px;
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 状态指示器 */
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 8px currentColor;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .status-completed { 
+            background: #30d158;
+            color: #30d158;
+        }
+        .status-pending { 
+            background: #ff9f0a;
+            color: #ff9f0a;
+        }
+        .status-empty { 
+            background: #8e8e93;
+            color: #8e8e93;
+            animation: none;
+            opacity: 0.6;
+        }
+
+        /* 高级移动端优化 */
+        @media (max-width: 768px) {
+            .write-form {
+                padding: 24px 16px;
+                border-radius: 16px;
+                margin: 0 -4px; /* 扩展到边缘 */
+            }
+            
+            .section-header {
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+            
+            .form-section {
+                margin-bottom: 32px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 24px;
+            }
+            
+            .form-actions-left,
+            .form-actions-right {
+                width: 100%;
+            }
+            
+            .form-actions-right {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            /* 里程碑面板在移动端隐藏 */
+            .milestone-marker {
+                display: none !important;
+            }
+            
+            /* 时间线移动端优化 */
+            .timeline {
+                padding-left: 20px;
+            }
+            
+            .timeline::before {
+                left: 10px;
+            }
+            
+            .timeline-item::before {
+                left: -14px;
+                width: 8px;
+                height: 8px;
+            }
+            
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .timeline-meta {
+                align-self: flex-end;
+                gap: 8px;
+            }
+            
+            .timeline-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .timeline-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            
+            /* 通知移动端优化 */
+            .notification {
+                top: 20px;
+                right: 16px;
+                left: 16px;
+                transform: translateY(-100px);
+                border-radius: 12px;
+                font-size: 14px;
+            }
+            
+            .notification.show {
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .write-form {
+                padding: 20px 12px;
+                margin: 0 -8px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-section {
+                margin-bottom: 28px;
+            }
+            
+            .timeline-item {
+                padding: 16px 12px;
+            }
+            
+            .timeline-user-info h4 {
+                font-size: 14px;
+            }
+            
+            .timeline-summary {
+                font-size: 13px;
+                -webkit-line-clamp: 2;
+            }
+        }
+
+        /* 移动端专属样式 */
+        @media (hover: none) and (pointer: coarse) {
+            /* 触摸设备专用 */
+            .timeline-item:hover {
+                transform: none;
+            }
+            
+            .timeline-item:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+            
+            .btn:hover {
+                transform: none;
+            }
+            
+            .btn:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+            
+            .nav-tab:hover {
+                background: transparent;
+                color: inherit;
+                transform: none;
+            }
+            
+            .nav-tab:active {
+                transform: scale(0.95);
+            }
+            
+            .toolbar-btn:hover {
+                background: transparent;
+                color: inherit;
+            }
+            
+            .toolbar-btn:active {
+                transform: scale(0.9);
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        /* 防止移动端双击缩放 */
+        @media (max-width: 768px) {
+            * {
+                touch-action: manipulation;
+            }
+            
+            input, textarea, select {
+                touch-action: auto;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            color: #000;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            transform: translateX(400px);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(48, 209, 88, 0.3),
+                        0 2px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            letter-spacing: -0.01em;
+        }
+
+        .notification.show {
+            transform: translateX(0) translateY(0);
+        }
+
+        .notification::before {
+            content: '✓';
+            margin-right: 8px;
+            font-weight: 700;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 14px 28px;
+            background: rgba(44, 44, 46, 0.8);
+            color: #f2f2f7;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: -0.01em;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .file-label:hover {
+            background: rgba(58, 58, 60, 0.9);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-label:hover::before {
+            left: 100%;
+        }
+
+        /* 登录界面 */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .login-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .login-card {
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.95) 0%, 
+                rgba(44, 44, 46, 0.9) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            min-width: 360px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .login-overlay.show .login-card {
+            transform: translateY(0);
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f2f2f7;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: #8e8e93;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-form .form-label {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .login-form .form-input {
+            min-height: 48px;
+            padding: 12px 16px;
+        }
+
+        .login-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .login-actions .btn {
+            flex: 1;
+        }
+
+        /* 时间线展示 */
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* 移动端时间线优化 */
+        @media (max-width: 768px) {
+            .timeline-container {
+                max-width: 100%;
+                margin: 0;
+            }
+        }
+
+        .timeline-filters {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            align-items: center;
+        }
+        
+        /* 移动端筛选器优化 */
+        @media (max-width: 768px) {
+            .timeline-filters {
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+        }
+
+        .user-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(44, 44, 46, 0.8);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .user-filter select {
+            background: transparent;
+            border: none;
+            color: #f2f2f7;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                #30d158, 
+                rgba(48, 209, 88, 0.5), 
+                rgba(48, 209, 88, 0.2));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.95) 0%, 
+                rgba(44, 44, 46, 0.8) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* 移动端时间线项目优化 */
+        @media (max-width: 768px) {
+            .timeline-item {
+                padding: 20px 16px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+            
+            .timeline-item:hover {
+                transform: translateX(4px) translateY(-1px);
+            }
+        }
+
+        .timeline-item:hover {
+            transform: translateX(8px) translateY(-2px);
+            border-color: rgba(48, 209, 88, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            background: #30d158;
+            border-radius: 50%;
+            border: 3px solid #1c1c1e;
+            box-shadow: 0 0 0 2px #30d158;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .timeline-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .timeline-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #30d158, #28cd4a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .timeline-user-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f2f2f7;
+            margin-bottom: 2px;
+        }
+
+        .timeline-user-info p {
+            font-size: 12px;
+            color: #8e8e93;
+        }
+
+        .timeline-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #8e8e93;
+        }
+
+        .timeline-privacy {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #8e8e93;
+        }
+
+        .timeline-content {
+            margin-bottom: 16px;
+        }
+
+        .timeline-summary {
+            font-size: 14px;
+            color: #d1d1d6;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .timeline-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timeline-tag {
+            padding: 4px 8px;
+            background: rgba(48, 209, 88, 0.1);
+            color: #30d158;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .timeline-likes {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .like-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: #8e8e93;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .like-btn:hover,
+        .like-btn.liked {
+            background: rgba(255, 69, 58, 0.1);
+            border-color: #ff453a;
+            color: #ff453a;
+        }
+
+        .like-btn.liked {
+            background: rgba(255, 69, 58, 0.2);
+        }
+
+        /* 里程碑标记 */
+        .milestone-marker {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, 
+                rgba(28, 28, 30, 0.95) 0%, 
+                rgba(44, 44, 46, 0.9) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            min-width: 200px;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .milestone-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f2f2f7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .milestone-category {
+            margin-bottom: 20px;
+        }
+
+        .milestone-category-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8e93;
+            margin-bottom: 12px;
+            padding-left: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .milestone-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .milestone-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .milestone-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #8e8e93;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .milestone-checkbox.checked {
+            background: #30d158;
+            border-color: #30d158;
+        }
+
+        /* 不同级别里程碑的颜色 */
+        .milestone-checkbox.small.checked {
+            background: #32d74b;
+            border-color: #32d74b;
+        }
+
+        .milestone-checkbox.medium.checked {
+            background: #ff9f0a;
+            border-color: #ff9f0a;
+        }
+
+        .milestone-checkbox.large.checked {
+            background: #ffd60a;
+            border-color: #ffd60a;
+        }
+
+        .milestone-checkbox.checked::before {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .milestone-label {
+            font-size: 14px;
+            color: #d1d1d6;
+            flex: 1;
+        }
+
+        .milestone-emoji {
+            font-size: 16px;
+        }
+
+        /* 时间线里程碑标志 */
+        .timeline-item.milestone::after {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .timeline-item.milestone-small::after {
+            content: '🥉';
+        }
+
+        .timeline-item.milestone-medium::after {
+            content: '🥈';
+        }
+
+        .timeline-item.milestone-large::after {
+            content: '🥇';
+        }
+
+        .timeline-item.milestone-small::before {
+            background: #32d74b;
+            box-shadow: 0 0 0 2px #32d74b;
+        }
+
+        .timeline-item.milestone-medium::before {
+            background: #ff9f0a;
+            box-shadow: 0 0 0 2px #ff9f0a;
+        }
+
+        .timeline-item.milestone-large::before {
+            background: #ffd60a;
+            box-shadow: 0 0 0 2px #ffd60a;
+        }
+
+        @media (max-width: 1200px) {
+            .milestone-marker {
+                display: none;
+            }
+        }
+
+        /* Apple Style 详情页面 */
+        .detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(30px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .detail-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .detail-container {
+            width: 90vw;
+            max-width: 900px;
+            height: 85vh;
+            background: linear-gradient(135deg, 
+                rgba(242, 242, 247, 0.98) 0%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3),
+                        0 16px 32px rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.8) translateY(40px);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .detail-overlay.show .detail-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .detail-header {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(242, 242, 247, 0.8) 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(20px);
+            padding: 32px 40px 24px;
+        }
+
+        .detail-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .detail-user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .detail-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #30d158 0%, #28cd4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            box-shadow: 0 8px 24px rgba(48, 209, 88, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .detail-user-text {
+            flex: 1;
+        }
+
+        .detail-user-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .detail-meta {
+            font-size: 16px;
+            color: #86868b;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .detail-close-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #86868b;
+        }
+
+        .detail-close-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #1d1d1f;
+            transform: scale(1.1);
+        }
+
+        .detail-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .detail-content {
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.7;
+            color: #1d1d1f;
+        }
+
+        .detail-section {
+            margin-bottom: 48px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .detail-section-emoji {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .detail-item {
+            margin-bottom: 32px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .detail-item-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #30d158;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .detail-item-content {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .detail-milestones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .detail-milestone-tag {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #ffd60a 0%, #ffcc00 100%);
+            color: #000;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(255, 214, 10, 0.3);
+        }
+
+        .detail-footer {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(242, 242, 247, 0.9) 100%);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 24px 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .detail-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .detail-like-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            background: rgba(255, 69, 58, 0.1);
+            border: 2px solid rgba(255, 69, 58, 0.2);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            font-size: 16px;
+            font-weight: 600;
+            color: #ff453a;
+        }
+
+        .detail-like-btn:hover {
+            background: rgba(255, 69, 58, 0.15);
+            border-color: rgba(255, 69, 58, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 69, 58, 0.2);
+        }
+
+        .detail-like-btn.liked {
+            background: linear-gradient(135deg, #ff453a 0%, #ff3b30 100%);
+            border-color: #ff453a;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255, 69, 58, 0.4);
+        }
+
+        .detail-like-btn.liked:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(255, 69, 58, 0.5);
+        }
+
+        .like-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .like-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .detail-like-btn.liked .like-count {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .detail-container {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                max-height: 100vh;
+            }
+            
+            .detail-header {
+                padding: 20px 16px 16px;
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.95) 0%, 
+                    rgba(242, 242, 247, 0.9) 100%);
+            }
+            
+            .detail-user-info {
+                gap: 12px;
+            }
+            
+            .detail-avatar {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+            }
+            
+            .detail-user-name {
+                font-size: 20px;
+            }
+            
+            .detail-meta {
+                font-size: 13px;
+            }
+            
+            .detail-body {
+                padding: 20px 16px;
+                background: rgba(255, 255, 255, 0.95);
+            }
+            
+            .detail-section {
+                margin-bottom: 32px;
+            }
+            
+            .detail-section-title {
+                font-size: 18px;
+                margin-bottom: 16px;
+            }
+            
+            .detail-item {
+                padding: 16px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+            
+            .detail-item-title {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+            
+            .detail-item-content {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            
+            .detail-footer {
+                padding: 16px;
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.98) 0%, 
+                    rgba(242, 242, 247, 0.95) 100%);
+            }
+            
+            .detail-like-btn {
+                padding: 14px 20px;
+                font-size: 15px;
+                min-height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="logo">创业周报</div>
+            <div class="user-info">
+                <div class="avatar" id="userAvatar">🚀</div>
+                <span class="username" id="username">点击设置姓名</span>
+            </div>
+        </header>
+
+        <!-- 主导航 -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('write')">写周报</button>
+            <button class="nav-tab" onclick="switchTab('timeline')">时间线</button>
+        </nav>
+
+        <!-- 内容区域 -->
+        <main class="content">
+            <!-- 写周报界面 -->
+            <div id="write" class="tab-content active">
+                <!-- 里程碑标记 -->
+                <div class="milestone-marker" id="milestoneMarker">
+                    <div class="milestone-title">🏆 里程碑标记</div>
+                    
+                    <div class="milestone-category">
+                        <div class="milestone-category-title">🥉 小里程碑</div>
+                        <div class="milestone-option" onclick="toggleMilestone('small')">
+                            <div class="milestone-checkbox small" id="milestone-small"></div>
+                            <span class="milestone-emoji">🎯</span>
+                            <span class="milestone-label">小目标达成</span>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-category">
+                        <div class="milestone-category-title">🥈 中里程碑</div>
+                        <div class="milestone-option" onclick="toggleMilestone('medium')">
+                            <div class="milestone-checkbox medium" id="milestone-medium"></div>
+                            <span class="milestone-emoji">⚡</span>
+                            <span class="milestone-label">重要突破</span>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-category">
+                        <div class="milestone-category-title">🥇 大里程碑</div>
+                        <div class="milestone-option" onclick="toggleMilestone('large')">
+                            <div class="milestone-checkbox large" id="milestone-large"></div>
+                            <span class="milestone-emoji">🚀</span>
+                            <span class="milestone-label">重大成就</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="write-form" id="reportForm">
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-emoji">🔍</span>
+                            <h2 class="section-title">上周回顾</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">里程碑与目标</label>
+                            <div class="rich-editor">
+                                <div class="editor-toolbar">
+                                    <button type="button" class="toolbar-btn" onclick="formatText('bold', 'milestones')" title="粗体">
+                                        <strong>B</strong>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="formatText('italic', 'milestones')" title="斜体">
+                                        <em>I</em>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="formatText('underline', 'milestones')" title="下划线">
+                                        <u>U</u>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="insertImage('milestones')" title="插入图片">
+                                        📷
+                                    </button>
+                                </div>
+                                <textarea class="form-input" id="milestones" 
+                                    placeholder="上周设定的目标是什么？是否达成？支持粘贴图片或拖拽上传..."></textarea>
+                                <div class="image-preview" id="milestones-images"></div>
+                                <div class="drop-zone" ondrop="handleDrop(event, 'milestones')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                                    <div class="drop-zone-text">
+                                        拖拽图片到此处或 <strong>点击选择文件</strong>
+                                    </div>
+                                    <input type="file" id="milestones-file" accept="image/*" multiple onchange="handleFileSelect(event, 'milestones')" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">我的收获</label>
+                            <div class="rich-editor">
+                                <div class="editor-toolbar">
+                                    <button type="button" class="toolbar-btn" onclick="formatText('bold', 'insights')" title="粗体">
+                                        <strong>B</strong>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="formatText('italic', 'insights')" title="斜体">
+                                        <em>I</em>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="formatText('underline', 'insights')" title="下划线">
+                                        <u>U</u>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="insertImage('insights')" title="插入图片">
+                                        📷
+                                    </button>
+                                </div>
+                                <textarea class="form-input" id="insights" 
+                                    placeholder="上周最主要的收获或发现是什么？支持粘贴图片或拖拽上传..."></textarea>
+                                <div class="image-preview" id="insights-images"></div>
+                                <div class="drop-zone" ondrop="handleDrop(event, 'insights')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                                    <div class="drop-zone-text">
+                                        拖拽图片到此处或 <strong>点击选择文件</strong>
+                                    </div>
+                                    <input type="file" id="insights-file" accept="image/*" multiple onchange="handleFileSelect(event, 'insights')" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">遇到的挑战</label>
+                            <textarea class="form-input" id="challenges" 
+                                placeholder="上周遇到了哪些具体的问题或困难？"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <span class="section-emoji">🎯</span>
+                            <h2 class="section-title">本周行动与思考</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">核心目标</label>
+                            <textarea class="form-input" id="objectives" 
+                                placeholder="本周我最想达成的核心目标是什么？"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">我的行动</label>
+                            <textarea class="form-input" id="actions" 
+                                placeholder="我计划采取哪些具体的行动来实现它？"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">我的思考</label>
+                            <textarea class="form-input" id="thinking" 
+                                placeholder="我对当前的进展或方向有什么新的思考或洞察？"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 隐私设置 -->
+                    <div class="privacy-settings">
+                        <span class="privacy-label">周报可见性:</span>
+                        <div class="privacy-toggle">
+                            <button type="button" class="privacy-option active" data-privacy="public">
+                                <span class="privacy-icon">🌍</span>
+                                公开
+                            </button>
+                            <button type="button" class="privacy-option" data-privacy="private">
+                                <span class="privacy-icon">🔒</span>
+                                私密
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="form-actions-left">
+                            <span id="save-status" style="color: #8e8e93; font-size: 13px;"></span>
+                        </div>
+                        <div class="form-actions-right">
+                            <button type="button" class="btn btn-secondary" onclick="clearForm()">清空</button>
+                            <button type="submit" class="btn btn-primary">保存周报</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 时间线视图 -->
+            <div id="timeline" class="tab-content">
+                <div class="timeline-container">
+                    <div class="timeline-filters">
+                        <div class="user-filter">
+                            <span>👤</span>
+                            <select id="userFilter" onchange="filterTimeline()">
+                                <option value="all">所有成员</option>
+                            </select>
+                        </div>
+                        <div class="user-filter">
+                            <span>📅</span>
+                            <select id="timeFilter" onchange="filterTimeline()">
+                                <option value="all">全部时间</option>
+                                <option value="week">本周</option>
+                                <option value="month">本月</option>
+                                <option value="quarter">本季度</option>
+                            </select>
+                        </div>
+                        <div class="user-filter">
+                            <span>🔍</span>
+                            <select id="privacyFilter" onchange="filterTimeline()">
+                                <option value="all">全部</option>
+                                <option value="public">仅公开</option>
+                                <option value="private">仅私密</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline" id="timelineContent">
+                        <!-- 动态生成时间线内容 -->
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <!-- 通知组件 -->
+    <div class="notification" id="notification"></div>
+
+    <!-- 登录界面 -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <h2 class="login-title">欢迎使用创业周报</h2>
+            <p class="login-subtitle">请登录或注册您的账号</p>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">昵称</label>
+                    <input type="text" class="form-input" id="loginNickname" placeholder="请输入您的昵称" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">密码</label>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="请输入密码" required>
+                </div>
+                
+                <div class="login-actions">
+                    <button type="button" class="btn btn-secondary" onclick="toggleAuthMode()">注册</button>
+                    <button type="submit" class="btn btn-primary">登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 周报详情模态框 - Apple Style -->
+    <div class="detail-overlay" id="detailModal">
+        <div class="detail-container">
+            <!-- 头部 -->
+            <div class="detail-header">
+                <div class="detail-header-content">
+                    <div class="detail-user-info">
+                        <div class="detail-avatar" id="detailAvatar">🚀</div>
+                        <div class="detail-user-text">
+                            <h1 class="detail-user-name" id="detailUserName">用户名</h1>
+                            <p class="detail-meta" id="detailMeta">2024-W01 周报</p>
+                        </div>
+                    </div>
+                    <button class="detail-close-btn" onclick="closeDetailModal()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="detail-body">
+                <div class="detail-content" id="detailContent">
+                    <!-- 动态生成详情内容 -->
+                </div>
+            </div>
+            
+            <!-- 底部操作区 -->
+            <div class="detail-footer">
+                <div class="detail-actions">
+                    <button class="detail-like-btn" id="detailLikeBtn" onclick="toggleLike()">
+                        <div class="like-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="like-text">喜欢</span>
+                        <span class="like-count" id="detailLikeCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 应用状态管理
+        const App = {
+            currentUser: null,
+            isAuthenticated: false,
+            authMode: 'login', // 'login' or 'register'
+            currentWeek: getCurrentWeek(),
+            data: JSON.parse(localStorage.getItem('weeklyReportData') || '{}'),
+            users: JSON.parse(localStorage.getItem('users') || '{}'),
+            images: JSON.parse(localStorage.getItem('reportImages') || '{}'),
+            likes: JSON.parse(localStorage.getItem('reportLikes') || '{}'),
+            currentDetailReport: null
+        };
+
+        // 获取当前周数
+        function getCurrentWeek() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 1);
+            const diff = now - start;
+            const week = Math.ceil(diff / (7 * 24 * 60 * 60 * 1000));
+            return `${now.getFullYear()}-W${week.toString().padStart(2, '0')}`;
+        }
+
+        // 用户认证
+        function checkAuth() {
+            const savedUser = localStorage.getItem('currentUser');
+            const savedToken = localStorage.getItem('authToken');
+            
+            if (savedUser && savedToken && App.users[savedUser]) {
+                App.currentUser = savedUser;
+                App.isAuthenticated = true;
+                initApp();
+            } else {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('loginOverlay').classList.add('show');
+        }
+
+        function hideLogin() {
+            document.getElementById('loginOverlay').classList.remove('show');
+        }
+
+        function toggleAuthMode() {
+            const form = document.getElementById('loginForm');
+            const submitBtn = form.querySelector('.btn-primary');
+            const toggleBtn = form.querySelector('.btn-secondary');
+            
+            if (App.authMode === 'login') {
+                App.authMode = 'register';
+                submitBtn.textContent = '注册';
+                toggleBtn.textContent = '登录';
+                document.querySelector('.login-subtitle').textContent = '创建您的新账号';
+            } else {
+                App.authMode = 'login';
+                submitBtn.textContent = '登录';
+                toggleBtn.textContent = '注册';
+                document.querySelector('.login-subtitle').textContent = '请登录或注册您的账号';
+            }
+        }
+
+        // 处理登录/注册
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const nickname = document.getElementById('loginNickname').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!nickname || !password) {
+                showNotification('请填写完整信息');
+                return;
+            }
+
+            if (App.authMode === 'register') {
+                if (App.users[nickname]) {
+                    showNotification('昵称已存在');
+                    return;
+                }
+                
+                // 注册新用户
+                App.users[nickname] = {
+                    password: password,
+                    createdAt: Date.now(),
+                    profile: {
+                        name: nickname,
+                        avatar: nickname.charAt(0) || '🚀'
+                    }
+                };
+                
+                localStorage.setItem('users', JSON.stringify(App.users));
+                showNotification('注册成功！');
+                
+                // 自动登录
+                loginUser(nickname);
+            } else {
+                // 登录验证
+                if (!App.users[nickname] || App.users[nickname].password !== password) {
+                    showNotification('昵称或密码错误');
+                    return;
+                }
+                
+                loginUser(nickname);
+            }
+        };
+
+        function loginUser(nickname) {
+            App.currentUser = nickname;
+            App.isAuthenticated = true;
+            
+            const token = btoa(nickname + ':' + Date.now());
+            localStorage.setItem('currentUser', nickname);
+            localStorage.setItem('authToken', token);
+            
+            hideLogin();
+            initApp();
+            showNotification('登录成功！');
+        }
+
+        function logout() {
+            App.currentUser = null;
+            App.isAuthenticated = false;
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('authToken');
+            showLogin();
+        }
+
+        // 初始化应用
+        function initApp() {
+            if (!App.isAuthenticated) {
+                showLogin();
+                return;
+            }
+
+            // 更新用户界面
+            document.getElementById('username').textContent = App.currentUser;
+            document.getElementById('userAvatar').textContent = App.users[App.currentUser]?.profile?.avatar || App.currentUser.charAt(0) || '🚀';
+            
+            // 加载当前用户的周报
+            loadCurrentReport();
+            
+            // 刷新时间线
+            refreshTimeline();
+            updateUserFilters();
+
+            // 用户名点击事件
+            document.getElementById('username').onclick = function() {
+                const confirmLogout = confirm('是否要退出登录？');
+                if (confirmLogout) {
+                    logout();
+                }
+            };
+
+            // 初始化隐私设置
+            initPrivacySettings();
+        }
+
+        // 隐私设置初始化
+        function initPrivacySettings() {
+            const privacyButtons = document.querySelectorAll('.privacy-option');
+            privacyButtons.forEach(btn => {
+                btn.onclick = function() {
+                    privacyButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                };
+            });
+        }
+
+        // 富文本编辑器功能
+        function formatText(command, fieldId = null) {
+            // 如果没有指定fieldId，使用当前聚焦的输入框
+            const activeElement = fieldId ? document.getElementById(fieldId) : document.activeElement;
+            
+            if (!activeElement || activeElement.tagName !== 'TEXTAREA') {
+                return;
+            }
+
+            const start = activeElement.selectionStart;
+            const end = activeElement.selectionEnd;
+            const selectedText = activeElement.value.substring(start, end);
+            
+            if (!selectedText) {
+                showNotification('请先选择要格式化的文字');
+                return;
+            }
+
+            let formattedText = '';
+            switch (command) {
+                case 'bold':
+                    formattedText = `**${selectedText}**`;
+                    break;
+                case 'italic':
+                    formattedText = `*${selectedText}*`;
+                    break;
+                case 'underline':
+                    formattedText = `__${selectedText}__`;
+                    break;
+            }
+
+            // 替换选中的文本
+            const newText = activeElement.value.substring(0, start) + formattedText + activeElement.value.substring(end);
+            activeElement.value = newText;
+            
+            // 重新设置光标位置
+            activeElement.focus();
+            activeElement.setSelectionRange(start + formattedText.length, start + formattedText.length);
+            
+            showNotification(`已应用${command === 'bold' ? '粗体' : command === 'italic' ? '斜体' : '下划线'}格式`);
+        }
+
+        function insertImage(fieldId = null) {
+            const activeElement = fieldId ? document.getElementById(fieldId) : document.activeElement;
+            
+            if (!activeElement || activeElement.tagName !== 'TEXTAREA') {
+                showNotification('请先点击输入框');
+                return;
+            }
+
+            // 触发文件选择
+            const fileInput = document.getElementById(`${activeElement.id}-file`);
+            if (fileInput) {
+                fileInput.click();
+            }
+        }
+
+        // 里程碑功能
+        let selectedMilestones = [];
+
+        function toggleMilestone(type) {
+            const checkbox = document.getElementById(`milestone-${type}`);
+            const index = selectedMilestones.indexOf(type);
+            
+            if (index > -1) {
+                selectedMilestones.splice(index, 1);
+                checkbox.classList.remove('checked');
+            } else {
+                selectedMilestones.push(type);
+                checkbox.classList.add('checked');
+            }
+        }
+
+        function loadMilestones(milestones) {
+            selectedMilestones = milestones || [];
+            selectedMilestones.forEach(type => {
+                const checkbox = document.getElementById(`milestone-${type}`);
+                if (checkbox) {
+                    checkbox.classList.add('checked');
+                }
+            });
+        }
+
+        function clearMilestones() {
+            selectedMilestones = [];
+            document.querySelectorAll('.milestone-checkbox').forEach(checkbox => {
+                checkbox.classList.remove('checked');
+            });
+        }
+
+        // 图片处理功能
+        function handleFileSelect(event, fieldId) {
+            const files = event.target.files;
+            handleFiles(files, fieldId);
+        }
+
+        function handleDrop(event, fieldId) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const dt = event.dataTransfer;
+            const files = dt.files;
+            
+            handleFiles(files, fieldId);
+            event.target.classList.remove('dragover');
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.target.classList.add('dragover');
+        }
+
+        function handleDragLeave(event) {
+            event.target.classList.remove('dragover');
+        }
+
+        function handleFiles(files, fieldId) {
+            const previewContainer = document.getElementById(`${fieldId}-images`);
+            
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageId = `${fieldId}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                        
+                        // 保存图片数据
+                        if (!App.images[App.currentUser]) {
+                            App.images[App.currentUser] = {};
+                        }
+                        if (!App.images[App.currentUser][App.currentWeek]) {
+                            App.images[App.currentUser][App.currentWeek] = {};
+                        }
+                        if (!App.images[App.currentUser][App.currentWeek][fieldId]) {
+                            App.images[App.currentUser][App.currentWeek][fieldId] = [];
+                        }
+                        
+                        App.images[App.currentUser][App.currentWeek][fieldId].push({
+                            id: imageId,
+                            data: e.target.result,
+                            name: file.name
+                        });
+                        
+                        localStorage.setItem('reportImages', JSON.stringify(App.images));
+                        
+                        // 显示预览
+                        const imageItem = document.createElement('div');
+                        imageItem.className = 'image-item';
+                        imageItem.innerHTML = `
+                            <img src="${e.target.result}" alt="${file.name}">
+                            <button class="image-remove" onclick="removeImage('${imageId}', '${fieldId}', this)">✕</button>
+                        `;
+                        
+                        previewContainer.appendChild(imageItem);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function removeImage(imageId, fieldId, button) {
+            // 从数据中移除
+            if (App.images[App.currentUser] && 
+                App.images[App.currentUser][App.currentWeek] && 
+                App.images[App.currentUser][App.currentWeek][fieldId]) {
+                
+                App.images[App.currentUser][App.currentWeek][fieldId] = 
+                    App.images[App.currentUser][App.currentWeek][fieldId].filter(img => img.id !== imageId);
+                
+                localStorage.setItem('reportImages', JSON.stringify(App.images));
+            }
+            
+            // 从界面中移除
+            button.parentElement.remove();
+        }
+
+        // 拖拽区域点击
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.drop-zone')) {
+                const dropZone = e.target.closest('.drop-zone');
+                const fileInput = dropZone.querySelector('input[type="file"]');
+                if (fileInput) {
+                    fileInput.click();
+                }
+            }
+        });
+
+        // 切换标签页
+        function switchTab(tabName) {
+            // 隐藏所有标签内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有标签激活状态
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示当前标签
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // 根据标签刷新对应内容
+            if (tabName === 'timeline') {
+                refreshTimeline();
+            }
+        }
+
+        // 加载当前周报
+        function loadCurrentReport() {
+            if (!App.data[App.currentUser]) return;
+            
+            const reports = App.data[App.currentUser].reports || [];
+            const currentReport = reports.find(r => r.week === App.currentWeek);
+            
+            if (currentReport) {
+                document.getElementById('milestones').value = currentReport.retrospective.milestones || '';
+                document.getElementById('insights').value = currentReport.retrospective.insights || '';
+                document.getElementById('challenges').value = currentReport.retrospective.challenges || '';
+                document.getElementById('objectives').value = currentReport.forward.objectives || '';
+                document.getElementById('actions').value = currentReport.forward.actions || '';
+                document.getElementById('thinking').value = currentReport.forward.thinking || '';
+                
+                // 加载隐私设置
+                if (currentReport.privacy) {
+                    document.querySelectorAll('.privacy-option').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.dataset.privacy === currentReport.privacy) {
+                            btn.classList.add('active');
+                        }
+                    });
+                }
+                
+                // 加载里程碑
+                loadMilestones(currentReport.milestones);
+                
+                // 加载图片
+                loadReportImages();
+            } else {
+                // 清空里程碑
+                clearMilestones();
+                // 清空图片
+                clearReportImages();
+            }
+        }
+
+        function loadReportImages() {
+            const fields = ['milestones', 'insights'];
+            fields.forEach(fieldId => {
+                const previewContainer = document.getElementById(`${fieldId}-images`);
+                previewContainer.innerHTML = '';
+                
+                if (App.images[App.currentUser] && 
+                    App.images[App.currentUser][App.currentWeek] && 
+                    App.images[App.currentUser][App.currentWeek][fieldId]) {
+                    
+                    App.images[App.currentUser][App.currentWeek][fieldId].forEach(img => {
+                        const imageItem = document.createElement('div');
+                        imageItem.className = 'image-item';
+                        imageItem.innerHTML = `
+                            <img src="${img.data}" alt="${img.name}">
+                            <button class="image-remove" onclick="removeImage('${img.id}', '${fieldId}', this)">✕</button>
+                        `;
+                        previewContainer.appendChild(imageItem);
+                    });
+                }
+            });
+        }
+
+        function clearReportImages() {
+            const fields = ['milestones', 'insights'];
+            fields.forEach(fieldId => {
+                const previewContainer = document.getElementById(`${fieldId}-images`);
+                previewContainer.innerHTML = '';
+            });
+        }
+
+        // 保存周报
+        document.getElementById('reportForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            // 确保用户数据结构存在
+            if (!App.data[App.currentUser]) {
+                App.data[App.currentUser] = {
+                    profile: {
+                        name: App.currentUser,
+                        avatar: App.users[App.currentUser]?.profile?.avatar || App.currentUser.charAt(0) || '🚀'
+                    },
+                    reports: []
+                };
+            }
+
+            // 获取隐私设置
+            const privacySetting = document.querySelector('.privacy-option.active').dataset.privacy;
+
+            const reportData = {
+                id: App.currentWeek,
+                week: App.currentWeek,
+                retrospective: {
+                    milestones: document.getElementById('milestones').value,
+                    insights: document.getElementById('insights').value,
+                    challenges: document.getElementById('challenges').value
+                },
+                forward: {
+                    objectives: document.getElementById('objectives').value,
+                    actions: document.getElementById('actions').value,
+                    thinking: document.getElementById('thinking').value
+                },
+                privacy: privacySetting,
+                milestones: [...selectedMilestones], // 保存里程碑信息
+                timestamp: Date.now(),
+                status: 'completed',
+                likes: 0
+            };
+
+            // 更新或添加报告
+            const reports = App.data[App.currentUser].reports;
+            const existingIndex = reports.findIndex(r => r.week === App.currentWeek);
+            
+            if (existingIndex >= 0) {
+                // 保留原有的点赞数
+                reportData.likes = reports[existingIndex].likes || 0;
+                reports[existingIndex] = reportData;
+            } else {
+                reports.push(reportData);
+            }
+
+            // 保存到localStorage
+            localStorage.setItem('weeklyReportData', JSON.stringify(App.data));
+            
+            // 刷新时间线
+            refreshTimeline();
+            
+            showNotification('周报保存成功！');
+            
+            // 更新保存状态
+            document.getElementById('save-status').textContent = '已保存 ' + new Date().toLocaleTimeString();
+            
+            // 保存后跳转到详情页
+            setTimeout(() => {
+                showReportDetail(App.currentUser, App.currentWeek);
+            }, 500);
+        };
+
+        // 清空表单
+        function clearForm() {
+            document.getElementById('reportForm').reset();
+            showNotification('表单已清空');
+        }
+
+        // 刷新团队视图
+        function refreshTeamView() {
+            const teamContent = document.getElementById('teamContent');
+            const members = Object.keys(App.data);
+            
+            if (members.length === 0) {
+                teamContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">👥</div>
+                        <h3>还没有团队数据</h3>
+                        <p>开始写周报或导入团队成员的数据</p>
+                    </div>
+                `;
+                return;
+            }
+
+            teamContent.innerHTML = members.map(memberName => {
+                const memberData = App.data[memberName];
+                const currentReport = memberData.reports?.find(r => r.week === App.currentWeek);
+                
+                let status = 'empty';
+                let statusText = '未提交';
+                let summary = '本周还未提交周报';
+                
+                if (currentReport) {
+                    status = 'completed';
+                    statusText = '已完成';
+                    summary = currentReport.forward.objectives || '已提交本周周报';
+                }
+                
+                return `
+                    <div class="member-card">
+                        <div class="member-header">
+                            <div class="member-avatar">${memberData.profile.avatar}</div>
+                            <div class="member-info">
+                                <h3>${memberName}</h3>
+                                <p>
+                                    <span class="status-dot status-${status}"></span>
+                                    ${statusText} · ${App.currentWeek}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="report-summary">${summary}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 导出数据
+        function exportData() {
+            const exportData = {
+                user: App.currentUser,
+                exportTime: new Date().toISOString(),
+                data: App.data[App.currentUser] || {}
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                type: 'application/json'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${App.currentUser}_周报数据_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showNotification('数据导出成功！');
+        }
+
+        // 导入数据
+        function importData() {
+            const file = document.getElementById('importFile').files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    if (importedData.user && importedData.data) {
+                        // 合并数据
+                        App.data[importedData.user] = importedData.data;
+                        localStorage.setItem('weeklyReportData', JSON.stringify(App.data));
+                        
+                        showNotification(`成功导入 ${importedData.user} 的数据！`);
+                        refreshTeamView();
+                    } else {
+                        throw new Error('数据格式不正确');
+                    }
+                } catch (error) {
+                    showNotification('导入失败：文件格式不正确');
+                }
+            };
+            reader.readAsText(file);
+            
+            // 清空文件输入
+            document.getElementById('importFile').value = '';
+        }
+
+        // 显示设置
+        function showSettings() {
+            const teamName = prompt('请输入团队名称:', localStorage.getItem('teamName') || '');
+            if (teamName) {
+                localStorage.setItem('teamName', teamName);
+                showNotification('设置已保存！');
+            }
+        }
+
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // 时间线功能
+        function refreshTimeline() {
+            const timelineContent = document.getElementById('timelineContent');
+            const allReports = [];
+            
+            // 收集所有用户的周报
+            Object.keys(App.data).forEach(username => {
+                const userData = App.data[username];
+                if (userData.reports) {
+                    userData.reports.forEach(report => {
+                        // 根据当前用户和隐私设置决定是否显示
+                        if (report.privacy === 'public' || username === App.currentUser) {
+                            allReports.push({
+                                ...report,
+                                author: username,
+                                authorProfile: userData.profile
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // 按时间排序
+            allReports.sort((a, b) => b.timestamp - a.timestamp);
+            
+            if (allReports.length === 0) {
+                timelineContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📝</div>
+                        <h3>还没有周报</h3>
+                        <p>开始写第一份周报，分享您的进展和思考</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            timelineContent.innerHTML = allReports.map(report => {
+                const date = new Date(report.timestamp);
+                const isCurrentUser = report.author === App.currentUser;
+                const summary = report.forward.objectives || report.retrospective.milestones || '暂无内容';
+                const hasMilestones = report.milestones && report.milestones.length > 0;
+                
+                // 确定里程碑级别和样式
+                let milestoneClass = '';
+                if (hasMilestones) {
+                    if (report.milestones.includes('large')) {
+                        milestoneClass = ' milestone-large';
+                    } else if (report.milestones.includes('medium')) {
+                        milestoneClass = ' milestone-medium';
+                    } else if (report.milestones.includes('small')) {
+                        milestoneClass = ' milestone-small';
+                    }
+                }
+                
+                return `
+                    <div class="timeline-item${milestoneClass}" onclick="showReportDetail('${report.author}', '${report.week}')">
+                        <div class="timeline-header">
+                            <div class="timeline-user">
+                                <div class="timeline-avatar">${report.authorProfile?.avatar || report.author.charAt(0)}</div>
+                                <div class="timeline-user-info">
+                                    <h4>${report.author}${isCurrentUser ? ' (我)' : ''}</h4>
+                                    <p>${report.week} 周报${hasMilestones ? ' · 里程碑达成' : ''}</p>
+                                </div>
+                            </div>
+                            <div class="timeline-meta">
+                                <span class="timeline-date">${date.toLocaleDateString()}</span>
+                                <div class="timeline-privacy">
+                                    <span>${report.privacy === 'public' ? '🌍' : '🔒'}</span>
+                                    <span>${report.privacy === 'public' ? '公开' : '私密'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-summary">${summary}</div>
+                            ${hasMilestones ? `
+                                <div class="timeline-milestones" style="margin-top: 12px;">
+                                    ${report.milestones.map(m => {
+                                        const milestoneMap = {
+                                            'small': '🥉 小里程碑',
+                                            'medium': '🥈 中里程碑',
+                                            'large': '🥇 大里程碑'
+                                        };
+                                        const colorMap = {
+                                            'small': 'background: rgba(50, 215, 75, 0.2); color: #32d74b;',
+                                            'medium': 'background: rgba(255, 159, 10, 0.2); color: #ff9f0a;',
+                                            'large': 'background: rgba(255, 214, 10, 0.2); color: #ffd60a;'
+                                        };
+                                        return `<span class="timeline-tag" style="${colorMap[m] || colorMap['small']}">${milestoneMap[m] || m}</span>`;
+                                    }).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="timeline-actions">
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">第${report.week.split('-W')[1]}周</span>
+                                ${isCurrentUser ? `<button class="timeline-tag" style="background: rgba(48, 209, 88, 0.2); color: #30d158; border: none; cursor: pointer;" onclick="event.stopPropagation(); editReport('${report.week}')">编辑</button>` : ''}
+                            </div>
+                            <div class="timeline-likes">
+                                <button class="like-btn ${isLiked(report.author, report.week) ? 'liked' : ''}" 
+                                        onclick="event.stopPropagation(); toggleLikeInTimeline('${report.author}', '${report.week}', this)">
+                                    <span>❤️</span>
+                                    <span>${report.likes || 0}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateUserFilters() {
+            const userFilter = document.getElementById('userFilter');
+            const users = Object.keys(App.data);
+            
+            userFilter.innerHTML = '<option value="all">所有成员</option>' +
+                users.map(user => `<option value="${user}">${user}</option>`).join('');
+        }
+
+        function filterTimeline() {
+            const userFilter = document.getElementById('userFilter').value;
+            const timeFilter = document.getElementById('timeFilter').value;
+            const privacyFilter = document.getElementById('privacyFilter').value;
+            
+            const timelineContent = document.getElementById('timelineContent');
+            const allReports = [];
+            
+            // 收集所有用户的周报
+            Object.keys(App.data).forEach(username => {
+                const userData = App.data[username];
+                if (userData.reports) {
+                    userData.reports.forEach(report => {
+                        // 根据当前用户和隐私设置决定是否显示
+                        if (report.privacy === 'public' || username === App.currentUser) {
+                            allReports.push({
+                                ...report,
+                                author: username,
+                                authorProfile: userData.profile
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // 应用筛选
+            let filteredReports = allReports;
+            
+            // 用户筛选
+            if (userFilter !== 'all') {
+                filteredReports = filteredReports.filter(report => report.author === userFilter);
+            }
+            
+            // 时间筛选
+            if (timeFilter !== 'all') {
+                const now = new Date();
+                filteredReports = filteredReports.filter(report => {
+                    const reportDate = new Date(report.timestamp);
+                    switch(timeFilter) {
+                        case 'week':
+                            const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                            return reportDate >= weekAgo;
+                        case 'month':
+                            const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                            return reportDate >= monthAgo;
+                        case 'quarter':
+                            const quarterAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+                            return reportDate >= quarterAgo;
+                        default:
+                            return true;
+                    }
+                });
+            }
+            
+            // 隐私筛选
+            if (privacyFilter !== 'all') {
+                filteredReports = filteredReports.filter(report => report.privacy === privacyFilter);
+            }
+            
+            // 按时间排序
+            filteredReports.sort((a, b) => b.timestamp - a.timestamp);
+            
+            // 渲染筛选后的结果
+            renderFilteredTimeline(filteredReports);
+        }
+
+        function renderFilteredTimeline(reports) {
+            const timelineContent = document.getElementById('timelineContent');
+            
+            if (reports.length === 0) {
+                timelineContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>没有符合条件的周报</h3>
+                        <p>尝试调整筛选条件查看更多内容</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            timelineContent.innerHTML = reports.map(report => {
+                const date = new Date(report.timestamp);
+                const isCurrentUser = report.author === App.currentUser;
+                const summary = report.forward.objectives || report.retrospective.milestones || '暂无内容';
+                const hasMilestones = report.milestones && report.milestones.length > 0;
+                const milestoneClass = hasMilestones ? ' milestone' : '';
+                
+                return `
+                    <div class="timeline-item${milestoneClass}" onclick="showReportDetail('${report.author}', '${report.week}')">
+                        <div class="timeline-header">
+                            <div class="timeline-user">
+                                <div class="timeline-avatar">${report.authorProfile?.avatar || report.author.charAt(0)}</div>
+                                <div class="timeline-user-info">
+                                    <h4>${report.author}${isCurrentUser ? ' (我)' : ''}</h4>
+                                    <p>${report.week} 周报${hasMilestones ? ' · 里程碑达成' : ''}</p>
+                                </div>
+                            </div>
+                            <div class="timeline-meta">
+                                <span class="timeline-date">${date.toLocaleDateString()}</span>
+                                <div class="timeline-privacy">
+                                    <span>${report.privacy === 'public' ? '🌍' : '🔒'}</span>
+                                    <span>${report.privacy === 'public' ? '公开' : '私密'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-summary">${summary}</div>
+                            ${hasMilestones ? `
+                                <div class="timeline-milestones" style="margin-top: 12px;">
+                                    ${report.milestones.map(m => {
+                                        const milestoneMap = {
+                                            'small': '🥉 小里程碑',
+                                            'medium': '🥈 中里程碑',
+                                            'large': '🥇 大里程碑'
+                                        };
+                                        const colorMap = {
+                                            'small': 'background: rgba(50, 215, 75, 0.2); color: #32d74b;',
+                                            'medium': 'background: rgba(255, 159, 10, 0.2); color: #ff9f0a;',
+                                            'large': 'background: rgba(255, 214, 10, 0.2); color: #ffd60a;'
+                                        };
+                                        return `<span class="timeline-tag" style="${colorMap[m] || colorMap['small']}">${milestoneMap[m] || m}</span>`;
+                                    }).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="timeline-actions">
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">第${report.week.split('-W')[1]}周</span>
+                                ${isCurrentUser ? `<button class="timeline-tag" style="background: rgba(48, 209, 88, 0.2); color: #30d158; border: none; cursor: pointer;" onclick="event.stopPropagation(); editReport('${report.week}')">编辑</button>` : ''}
+                            </div>
+                            <div class="timeline-likes">
+                                <button class="like-btn ${isLiked(report.author, report.week) ? 'liked' : ''}" 
+                                        onclick="event.stopPropagation(); toggleLikeInTimeline('${report.author}', '${report.week}', this)">
+                                    <span>❤️</span>
+                                    <span>${report.likes || 0}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 点赞功能
+        function isLiked(author, week) {
+            const likeKey = `${author}_${week}`;
+            return App.likes[App.currentUser]?.includes(likeKey) || false;
+        }
+
+        function toggleLikeInTimeline(author, week, button) {
+            toggleLikeReport(author, week);
+            
+            // 更新按钮状态
+            const isLikedNow = isLiked(author, week);
+            button.classList.toggle('liked', isLikedNow);
+            
+            // 更新点赞数显示
+            const likeCount = button.querySelector('span:last-child');
+            const report = App.data[author]?.reports?.find(r => r.week === week);
+            likeCount.textContent = report?.likes || 0;
+        }
+
+        function toggleLikeReport(author, week) {
+            if (!App.likes[App.currentUser]) {
+                App.likes[App.currentUser] = [];
+            }
+            
+            const likeKey = `${author}_${week}`;
+            const likeIndex = App.likes[App.currentUser].indexOf(likeKey);
+            
+            if (likeIndex > -1) {
+                // 取消点赞
+                App.likes[App.currentUser].splice(likeIndex, 1);
+                App.data[author].reports.find(r => r.week === week).likes--;
+            } else {
+                // 点赞
+                App.likes[App.currentUser].push(likeKey);
+                const report = App.data[author].reports.find(r => r.week === week);
+                report.likes = (report.likes || 0) + 1;
+            }
+            
+            // 保存数据
+            localStorage.setItem('reportLikes', JSON.stringify(App.likes));
+            localStorage.setItem('weeklyReportData', JSON.stringify(App.data));
+        }
+
+        // 详情模态框 - Apple Style
+        function showReportDetail(author, week) {
+            const report = App.data[author]?.reports?.find(r => r.week === week);
+            if (!report) return;
+            
+            App.currentDetailReport = {author, week};
+            
+            // 更新头部信息
+            const detailAvatar = document.getElementById('detailAvatar');
+            const detailUserName = document.getElementById('detailUserName');
+            const detailMeta = document.getElementById('detailMeta');
+            const date = new Date(report.timestamp);
+            
+            detailAvatar.textContent = App.data[author].profile?.avatar || author.charAt(0);
+            detailUserName.textContent = author;
+            detailMeta.innerHTML = `
+                ${week} 周报 · ${date.toLocaleDateString()} 
+                <span style="margin-left: 12px; color: #30d158;">
+                    ${report.privacy === 'public' ? '🌍 公开' : '🔒 私密'}
+                </span>
+            `;
+            
+            // 更新内容
+            const detailContent = document.getElementById('detailContent');
+            
+            // 里程碑标签
+            const milestonesHtml = report.milestones && report.milestones.length > 0 ? `
+                <div class="detail-milestones">
+                    ${report.milestones.map(m => {
+                        const milestoneMap = {
+                            'small': '🥉 小里程碑',
+                            'medium': '🥈 中里程碑',
+                            'large': '🥇 大里程碑'
+                        };
+                        return `<span class="detail-milestone-tag">${milestoneMap[m] || m}</span>`;
+                    }).join('')}
+                </div>
+            ` : '';
+            
+            detailContent.innerHTML = `
+                ${milestonesHtml}
+                
+                <div class="detail-section">
+                    <h2 class="detail-section-title">
+                        <span class="detail-section-emoji">🔍</span>
+                        上周回顾
+                    </h2>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item-title">里程碑与目标</div>
+                        <div class="detail-item-content">${report.retrospective.milestones || '暂无内容'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item-title">我的收获</div>
+                        <div class="detail-item-content">${report.retrospective.insights || '暂无内容'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item-title">遇到的挑战</div>
+                        <div class="detail-item-content">${report.retrospective.challenges || '暂无内容'}</div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h2 class="detail-section-title">
+                        <span class="detail-section-emoji">🎯</span>
+                        本周行动与思考
+                    </h2>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item-title">核心目标</div>
+                        <div class="detail-item-content">${report.forward.objectives || '暂无内容'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item-title">我的行动</div>
+                        <div class="detail-item-content">${report.forward.actions || '暂无内容'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-item-title">我的思考</div>
+                        <div class="detail-item-content">${report.forward.thinking || '暂无内容'}</div>
+                    </div>
+                </div>
+            `;
+            
+            // 更新点赞按钮
+            const detailLikeBtn = document.getElementById('detailLikeBtn');
+            const detailLikeCount = document.getElementById('detailLikeCount');
+            
+            detailLikeBtn.classList.toggle('liked', isLiked(author, week));
+            detailLikeCount.textContent = report.likes || 0;
+            
+            document.getElementById('detailModal').classList.add('show');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.remove('show');
+            App.currentDetailReport = null;
+        }
+
+        function toggleLike() {
+            if (!App.currentDetailReport) return;
+            
+            const {author, week} = App.currentDetailReport;
+            toggleLikeReport(author, week);
+            
+            // 更新详情页面的点赞状态
+            const detailLikeBtn = document.getElementById('detailLikeBtn');
+            const detailLikeCount = document.getElementById('detailLikeCount');
+            const report = App.data[author].reports.find(r => r.week === week);
+            
+            detailLikeBtn.classList.toggle('liked', isLiked(author, week));
+            detailLikeCount.textContent = report?.likes || 0;
+            
+            // 刷新时间线以更新点赞数
+            refreshTimeline();
+        }
+
+        // 编辑周报功能
+        function editReport(week) {
+            // 切换到写周报标签
+            switchTab('write');
+            
+            // 更新当前周数为要编辑的周报
+            App.currentWeek = week;
+            
+            // 重新加载周报数据
+            loadCurrentReport();
+            
+            showNotification(`正在编辑 ${week} 周报`);
+        }
+
+        // 修复周报数据初始化问题
+        function getCurrentWeek() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 1);
+            const diff = now - start;
+            const week = Math.ceil(diff / (7 * 24 * 60 * 60 * 1000));
+            return `${now.getFullYear()}-W${week.toString().padStart(2, '0')}`;
+        }
+
+        // 修复多份周报显示问题 - 确保能显示不同周的周报
+        function refreshTeamView() {
+            const teamContent = document.getElementById('teamContent');
+            const members = Object.keys(App.data);
+            
+            if (members.length === 0) {
+                teamContent.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">👥</div>
+                        <h3>还没有团队数据</h3>
+                        <p>开始写周报或导入团队成员的数据</p>
+                    </div>
+                `;
+                return;
+            }
+
+            teamContent.innerHTML = members.map(memberName => {
+                const memberData = App.data[memberName];
+                const allReports = memberData.reports || [];
+                const currentReport = allReports.find(r => r.week === App.currentWeek);
+                const totalReports = allReports.length;
+                
+                let status = 'empty';
+                let statusText = '未提交';
+                let summary = '本周还未提交周报';
+                
+                if (currentReport) {
+                    status = 'completed';
+                    statusText = '已完成';
+                    summary = currentReport.forward.objectives || '已提交本周周报';
+                }
+                
+                return `
+                    <div class="member-card">
+                        <div class="member-header">
+                            <div class="member-avatar">${memberData.profile.avatar}</div>
+                            <div class="member-info">
+                                <h3>${memberName}</h3>
+                                <p>
+                                    <span class="status-dot status-${status}"></span>
+                                    ${statusText} · ${App.currentWeek} · 共${totalReports}份周报
+                                </p>
+                            </div>
+                        </div>
+                        <div class="report-summary">${summary}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 清空表单时也要清空里程碑和图片
+        function clearForm() {
+            document.getElementById('reportForm').reset();
+            clearMilestones();
+            clearReportImages();
+            showNotification('表单已清空');
+        }
+
+        // 添加粘贴图片支持
+        document.addEventListener('paste', function(e) {
+            const activeElement = document.activeElement;
+            if (activeElement && activeElement.tagName === 'TEXTAREA') {
+                const items = e.clipboardData.items;
+                
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf('image') !== -1) {
+                        e.preventDefault();
+                        const blob = items[i].getAsFile();
+                        handleFiles([blob], activeElement.id);
+                        showNotification('已粘贴图片');
+                        break;
+                    }
+                }
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', checkAuth);
+    </script>
+</body>
+</html>
