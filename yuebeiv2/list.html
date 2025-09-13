@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>培训中心 - 课程列表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F5F5F7;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .category-tabs {
+            background: white;
+            position: sticky;
+            top: 92px;
+            z-index: 98;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            padding: 8px 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium">9:41</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left text-gray-600 mr-4"></i>
+            <h1 class="flex-1 text-center font-medium text-base">培训中心</h1>
+            <i class="fas fa-search text-gray-600"></i>
+        </div>
+
+        <!-- 分类标签 -->
+        <div class="category-tabs">
+            <div class="flex gap-1 px-4 py-2 overflow-x-auto">
+                <span class="px-4 py-1.5 bg-blue-600 text-white text-sm rounded-full whitespace-nowrap">全部</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">职场技能</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">领导力发展</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">HR专业技能</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">职业转型</span>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 排序筛选栏 -->
+            <div class="bg-white px-4 py-3 flex items-center justify-between">
+                <span class="text-sm text-gray-500">共 24 个课程</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">最新上线</span>
+                    <i class="fas fa-sort text-xs text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- 课程列表 -->
+            <div class="px-4 py-3 space-y-3">
+                <!-- 课程卡片1 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop"
+                         alt="课程" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded">热门</span>
+                            <span class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">线上课程</span>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">高效能人士的七个习惯</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            基于史蒂芬·柯维经典理论，帮助职场人士建立高效工作习惯，提升个人效能和团队协作能力。
+                        </p>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                     alt="讲师" class="w-8 h-8 rounded-full">
+                                <div>
+                                    <p class="text-xs font-medium">王明教练</p>
+                                    <p class="text-xs text-gray-500">资深职业发展顾问</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-400">更新时间</p>
+                                <p class="text-xs text-gray-600">2天前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程卡片2 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop"
+                         alt="课程" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded">新上架</span>
+                            <span class="text-xs bg-purple-100 text-purple-600 px-2 py-0.5 rounded">工作坊</span>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">项目管理实战工作坊</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            通过实际案例演练，掌握敏捷项目管理方法，学习如何有效规划、执行和交付项目。
+                        </p>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
+                                     alt="讲师" class="w-8 h-8 rounded-full">
+                                <div>
+                                    <p class="text-xs font-medium">李娜</p>
+                                    <p class="text-xs text-gray-500">PMP认证讲师</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-400">更新时间</p>
+                                <p class="text-xs text-gray-600">5天前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程卡片3 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop"
+                         alt="课程" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded">公益</span>
+                            <span class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">线上课程</span>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">职场沟通技巧基础课</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            免费公益课程，教授基础职场沟通技巧，包括倾听、表达、反馈等核心能力培养。
+                        </p>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+                                     alt="讲师" class="w-8 h-8 rounded-full">
+                                <div>
+                                    <p class="text-xs font-medium">张伟</p>
+                                    <p class="text-xs text-gray-500">企业培训师</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-400">更新时间</p>
+                                <p class="text-xs text-gray-600">1周前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程卡片4 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=400&fit=crop"
+                         alt="课程" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">线上课程</span>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">数据分析与决策支持</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            学习使用数据分析工具，培养数据思维，提升基于数据的决策能力。
+                        </p>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
+                                     alt="讲师" class="w-8 h-8 rounded-full">
+                                <div>
+                                    <p class="text-xs font-medium">陈晓东</p>
+                                    <p class="text-xs text-gray-500">数据分析专家</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-400">更新时间</p>
+                                <p class="text-xs text-gray-600">2周前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 加载更多 -->
+                <div class="py-4 text-center">
+                    <span class="text-sm text-gray-500">下拉加载更多</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-th-large text-blue-600 text-lg mb-1"></i>
+                    <span class="text-xs text-blue-600">分类</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-heart text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">公益</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

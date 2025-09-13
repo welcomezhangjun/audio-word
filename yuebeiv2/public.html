@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公益课程 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F5F5F7;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .mission-gradient {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium">9:41</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left text-gray-600 mr-4"></i>
+            <h1 class="flex-1 text-center font-medium text-base">公益课程</h1>
+            <i class="fas fa-info-circle text-gray-600"></i>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 公益宣言 -->
+            <div class="mission-gradient relative overflow-hidden">
+                <div class="px-4 py-8 text-white">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-heart text-4xl mb-3 opacity-90"></i>
+                        <h2 class="text-xl font-bold mb-2">悦倍公益计划</h2>
+                        <p class="text-sm opacity-90">让优质教育资源惠及更多人</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+                        <p class="text-sm leading-relaxed">
+                            悦倍国际始终秉承"教育改变人生"的理念，通过公益课程计划，免费开放部分精品课程，帮助更多人获得成长机会。我们相信，每个人都值得拥有更好的未来。
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mt-4">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold">50+</p>
+                                <p class="text-xs opacity-90">公益课程</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold">10k+</p>
+                                <p class="text-xs opacity-90">受益学员</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold">100%</p>
+                                <p class="text-xs opacity-90">免费开放</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分类筛选 -->
+            <div class="bg-white px-4 py-3 flex gap-2 overflow-x-auto">
+                <span class="px-4 py-1.5 bg-orange-600 text-white text-sm rounded-full whitespace-nowrap">全部</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">培训课程</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">教练服务</span>
+                <span class="px-4 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full whitespace-nowrap">正念体验</span>
+            </div>
+
+            <!-- 公益课程列表 -->
+            <div class="px-4 py-3 space-y-3">
+                <!-- 公益课程1 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop"
+                             alt="公益课程" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 left-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                            <i class="fas fa-heart mr-1"></i>公益免费
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-base mb-2">职场沟通技巧基础课</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            为初入职场的年轻人提供免费的沟通技巧培训，帮助他们更好地适应职场环境，提升职业竞争力。
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded">培训中心</span>
+                                <span class="text-xs text-gray-500">已有2.1k人学习</span>
+                            </div>
+                            <span class="text-sm text-orange-600 font-medium">立即学习</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 公益课程2 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=400&fit=crop"
+                             alt="公益课程" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 left-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                            <i class="fas fa-heart mr-1"></i>公益免费
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-base mb-2">正念冥想入门体验</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            通过简单易学的正念练习，帮助都市人群缓解压力，改善睡眠，提升生活质量。完全免费，随时开始。
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded">正念中心</span>
+                                <span class="text-xs text-gray-500">已有3.5k人体验</span>
+                            </div>
+                            <span class="text-sm text-orange-600 font-medium">立即体验</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 公益课程3 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=800&h=400&fit=crop"
+                             alt="公益课程" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 left-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                            <i class="fas fa-heart mr-1"></i>公益免费
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-base mb-2">生涯规划公益工作坊</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            为应届毕业生和职业转型人群提供免费的生涯规划指导，帮助他们找到适合的发展方向。
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs bg-purple-50 text-purple-600 px-2 py-0.5 rounded">教练中心</span>
+                                <span class="text-xs text-gray-500">已有1.8k人参与</span>
+                            </div>
+                            <span class="text-sm text-orange-600 font-medium">了解详情</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 公益课程4 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=400&fit=crop"
+                             alt="公益课程" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 left-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                            <i class="fas fa-heart mr-1"></i>公益免费
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-base mb-2">失业心理援助计划</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            为失业人群提供免费的心理支持和职业指导，帮助他们重建信心，顺利度过职业转型期。
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs bg-purple-50 text-purple-600 px-2 py-0.5 rounded">教练中心</span>
+                                <span class="text-xs text-gray-500">已有956人受益</span>
+                            </div>
+                            <span class="text-sm text-orange-600 font-medium">申请参加</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 公益课程5 -->
+                <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop"
+                             alt="公益课程" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 left-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                            <i class="fas fa-heart mr-1"></i>公益免费
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-base mb-2">时间管理入门课</h3>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                            帮助学生和职场新人掌握基础的时间管理技巧，提高学习和工作效率，完全免费开放。
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded">培训中心</span>
+                                <span class="text-xs text-gray-500">已有4.2k人学习</span>
+                            </div>
+                            <span class="text-sm text-orange-600 font-medium">开始学习</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 加入公益 -->
+            <div class="bg-white mx-4 my-4 p-4 rounded-lg">
+                <h3 class="font-bold text-base mb-2">加入公益行动</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    如果您也想为社会公益贡献一份力量，欢迎联系我们，一起让更多人受益于优质的教育资源。
+                </p>
+                <button class="w-full bg-orange-500 text-white py-2 rounded-full text-sm font-medium">
+                    <i class="fas fa-envelope mr-2"></i>联系我们
+                </button>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-th-large text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">分类</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-heart text-orange-600 text-lg mb-1"></i>
+                    <span class="text-xs text-orange-600">公益</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

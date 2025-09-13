@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悦倍国际 - 首页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F5F5F7;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .banner-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            padding: 8px 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium">9:41</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- Banner -->
+            <div class="banner-gradient h-48 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop"
+                     alt="Banner" class="w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <h1 class="text-2xl font-bold mb-2">悦倍国际</h1>
+                        <p class="text-sm opacity-90">专业培训 · 教练服务 · 正念生活</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 悦倍精选 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-lg font-bold flex items-center">
+                        <i class="fas fa-star text-yellow-500 mr-2 text-sm"></i>
+                        悦倍精选
+                    </h2>
+                    <span class="text-sm text-gray-500">更多 <i class="fas fa-chevron-right text-xs"></i></span>
+                </div>
+
+                <!-- 横向滚动卡片 -->
+                <div class="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
+                    <!-- 精选卡片1 -->
+                    <div class="flex-shrink-0 w-72 bg-white rounded-lg card-shadow overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop"
+                             alt="课程" class="w-full h-32 object-cover">
+                        <div class="p-3">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded">热门</span>
+                                <span class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">培训中心</span>
+                            </div>
+                            <h3 class="font-medium text-sm mb-1 line-clamp-1">领导力发展工作坊</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2">提升团队领导力，打造高效协作的组织文化</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-400">2天前更新</span>
+                                <span class="text-xs text-blue-600">了解详情</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 精选卡片2 -->
+                    <div class="flex-shrink-0 w-72 bg-white rounded-lg card-shadow overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=400&h=200&fit=crop"
+                             alt="教练" class="w-full h-32 object-cover">
+                        <div class="p-3">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded">新上架</span>
+                                <span class="text-xs bg-purple-100 text-purple-600 px-2 py-0.5 rounded">教练中心</span>
+                            </div>
+                            <h3 class="font-medium text-sm mb-1 line-clamp-1">ACC认证教练课程</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2">国际认证教练培训，开启专业教练之路</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-400">刚刚更新</span>
+                                <span class="text-xs text-blue-600">了解详情</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 精选卡片3 -->
+                    <div class="flex-shrink-0 w-72 bg-white rounded-lg card-shadow overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&h=200&fit=crop"
+                             alt="正念" class="w-full h-32 object-cover">
+                        <div class="p-3">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded">公益</span>
+                                <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded">正念中心</span>
+                            </div>
+                            <h3 class="font-medium text-sm mb-1 line-clamp-1">正念冥想入门体验</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2">免费体验正念冥想，开启内心平静之旅</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-400">1周前更新</span>
+                                <span class="text-xs text-blue-600">了解详情</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 四大中心入口 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="text-lg font-bold mb-4">探索中心</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <!-- 培训中心 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 flex flex-col items-center justify-center h-28">
+                        <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-blue-900">培训中心</span>
+                        <span class="text-xs text-blue-600 mt-1">职场技能提升</span>
+                    </div>
+
+                    <!-- 教练中心 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 flex flex-col items-center justify-center h-28">
+                        <div class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-users text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-purple-900">教练中心</span>
+                        <span class="text-xs text-purple-600 mt-1">专业教练服务</span>
+                    </div>
+
+                    <!-- 正念中心 -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 flex flex-col items-center justify-center h-28">
+                        <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-spa text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-green-900">正念中心</span>
+                        <span class="text-xs text-green-600 mt-1">身心平衡之道</span>
+                    </div>
+
+                    <!-- 公益课程 -->
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 flex flex-col items-center justify-center h-28">
+                        <div class="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                            <i class="fas fa-heart text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-orange-900">公益课程</span>
+                        <span class="text-xs text-orange-600 mt-1">免费开放学习</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推荐内容 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="text-lg font-bold mb-3">推荐内容</h2>
+                <div class="space-y-3">
+                    <!-- 内容卡片1 -->
+                    <div class="flex gap-3 pb-3 border-b border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&h=150&fit=crop"
+                             alt="内容" class="w-24 h-20 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1">HR专业技能培训系列</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mb-2">系统学习人力资源管理，提升专业能力</p>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded">培训</span>
+                                <span class="text-xs text-gray-400">3天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片2 -->
+                    <div class="flex gap-3 pb-3 border-b border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&h=150&fit=crop"
+                             alt="内容" class="w-24 h-20 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1">团队教练服务介绍</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mb-2">提升团队协作效率，激发团队潜能</p>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs bg-purple-50 text-purple-600 px-2 py-0.5 rounded">教练</span>
+                                <span class="text-xs text-gray-400">5天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片3 -->
+                    <div class="flex gap-3">
+                        <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4a7?w=200&h=150&fit=crop"
+                             alt="内容" class="w-24 h-20 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1">正念生活方式指南</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mb-2">将正念融入日常，改善生活品质</p>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded">正念</span>
+                                <span class="text-xs bg-orange-50 text-orange-600 px-2 py-0.5 rounded">公益</span>
+                                <span class="text-xs text-gray-400">1周前</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-blue-600 text-lg mb-1"></i>
+                    <span class="text-xs text-blue-600">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-th-large text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">分类</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-heart text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">公益</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

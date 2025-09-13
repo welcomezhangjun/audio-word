@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正念中心 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F5F5F7;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .zen-gradient {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        .meditation-card {
+            background: linear-gradient(135deg, rgba(67, 233, 123, 0.1) 0%, rgba(56, 249, 215, 0.1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium">9:41</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left text-gray-600 mr-4"></i>
+            <h1 class="flex-1 text-center font-medium text-base">正念中心</h1>
+            <i class="fas fa-info-circle text-gray-600"></i>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 头部Banner -->
+            <div class="zen-gradient relative h-48">
+                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=400&fit=crop"
+                     alt="正念" class="w-full h-full object-cover opacity-60">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-spa text-4xl mb-3 opacity-90"></i>
+                        <h2 class="text-xl font-bold mb-2">正念生活，内心平和</h2>
+                        <p class="text-sm opacity-90 px-8">通过正念练习，找回内心的宁静与力量</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快速入口 -->
+            <div class="bg-white px-4 py-4">
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-brain text-green-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-gray-700">正念冥想</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-leaf text-teal-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-gray-700">正念生活</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-book-open text-cyan-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-gray-700">正念课程</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-users text-emerald-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-gray-700">工作坊</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-calendar-check text-lime-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-gray-700">习惯养成</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-headphones text-green-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-gray-700">音频引导</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 正念冥想 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-bold text-base">正念冥想练习</h2>
+                    <span class="text-sm text-green-600">查看全部</span>
+                </div>
+                <div class="space-y-3">
+                    <!-- 冥想卡片1 -->
+                    <div class="flex gap-3 items-center bg-gray-50 rounded-lg p-3">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-teal-400 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cloud text-white text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1">呼吸冥想</h3>
+                            <p class="text-xs text-gray-500 mb-1">适合初学者的基础练习</p>
+                            <div class="flex items-center gap-3 text-xs text-gray-400">
+                                <span><i class="fas fa-clock mr-1"></i>10分钟</span>
+                                <span><i class="fas fa-headphones mr-1"></i>音频引导</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-play-circle text-green-500 text-2xl"></i>
+                    </div>
+
+                    <!-- 冥想卡片2 -->
+                    <div class="flex gap-3 items-center bg-gray-50 rounded-lg p-3">
+                        <div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-water text-white text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1">身体扫描</h3>
+                            <p class="text-xs text-gray-500 mb-1">释放身体紧张，深度放松</p>
+                            <div class="flex items-center gap-3 text-xs text-gray-400">
+                                <span><i class="fas fa-clock mr-1"></i>15分钟</span>
+                                <span><i class="fas fa-headphones mr-1"></i>音频引导</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-play-circle text-green-500 text-2xl"></i>
+                    </div>
+
+                    <!-- 冥想卡片3 -->
+                    <div class="flex gap-3 items-center bg-gray-50 rounded-lg p-3">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1">慈心冥想</h3>
+                            <p class="text-xs text-gray-500 mb-1">培养慈悲心，改善人际关系</p>
+                            <div class="flex items-center gap-3 text-xs text-gray-400">
+                                <span><i class="fas fa-clock mr-1"></i>20分钟</span>
+                                <span><i class="fas fa-headphones mr-1"></i>音频引导</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-play-circle text-green-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 正念课程 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-bold text-base">系统课程</h2>
+                    <span class="text-sm text-green-600">查看全部</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4a7?w=400&h=300&fit=crop"
+                             alt="课程" class="w-full h-24 object-cover">
+                        <div class="p-3">
+                            <h3 class="font-medium text-sm mb-1">8周正念减压</h3>
+                            <p class="text-xs text-gray-500 mb-2">MBSR标准课程</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded">系统课</span>
+                                <span class="text-xs text-gray-400">8周</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg card-shadow overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop"
+                             alt="课程" class="w-full h-24 object-cover">
+                        <div class="p-3">
+                            <h3 class="font-medium text-sm mb-1">正念认知疗法</h3>
+                            <p class="text-xs text-gray-500 mb-2">MBCT情绪管理</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded">进阶课</span>
+                                <span class="text-xs text-gray-400">6周</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 大卡习惯养成 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="font-bold text-base mb-3">大卡习惯养成计划</h2>
+                <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-lg p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-trophy text-yellow-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-sm">21天正念习惯养成</h3>
+                            <p class="text-xs text-gray-500">科学方法，轻松坚持</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 mb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                            <span class="text-xs text-gray-700">每日5分钟，轻松开始</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                            <span class="text-xs text-gray-700">科学的习惯养成方法</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                            <span class="text-xs text-gray-700">专业导师陪伴指导</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-green-500 text-white py-2 rounded-full text-sm font-medium">
+                        了解详情
+                    </button>
+                </div>
+            </div>
+
+            <!-- 工作坊活动 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-bold text-base">近期工作坊</h2>
+                    <span class="text-sm text-green-600">查看全部</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="border border-gray-200 rounded-lg p-3">
+                        <div class="flex items-start justify-between mb-2">
+                            <h3 class="font-medium text-sm">正念父母工作坊</h3>
+                            <span class="text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded">即将开始</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-2">用正念方式陪伴孩子成长</p>
+                        <div class="flex items-center gap-3 text-xs text-gray-500">
+                            <span><i class="fas fa-calendar mr-1"></i>12月15日</span>
+                            <span><i class="fas fa-map-marker-alt mr-1"></i>线下·上海</span>
+                            <span><i class="fas fa-users mr-1"></i>限20人</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-th-large text-blue-600 text-lg mb-1"></i>
+                    <span class="text-xs text-blue-600">分类</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-heart text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">公益</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

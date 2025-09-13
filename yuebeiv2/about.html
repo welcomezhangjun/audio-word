@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于悦倍 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F5F5F7;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium">9:41</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left text-gray-600 mr-4"></i>
+            <h1 class="flex-1 text-center font-medium text-base">关于悦倍</h1>
+            <i class="fas fa-share-alt text-gray-600"></i>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 品牌头图 -->
+            <div class="brand-gradient relative h-56">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop"
+                     alt="悦倍品牌" class="w-full h-full object-cover opacity-70">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center text-white px-6">
+                        <h1 class="text-2xl font-bold mb-3">悦倍国际</h1>
+                        <p class="text-sm opacity-90">专业培训 · 教练服务 · 正念生活</p>
+                        <p class="text-xs opacity-80 mt-2">让每个人都能成为更好的自己</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 品牌故事 -->
+            <div class="bg-white px-4 py-5">
+                <h2 class="font-bold text-base mb-3 flex items-center">
+                    <i class="fas fa-book-open text-purple-600 mr-2"></i>
+                    品牌故事
+                </h2>
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                    悦倍国际成立于2015年，源于创始团队对"让教育改变人生"这一理念的坚守。我们相信，每个人都拥有无限潜能，只需要正确的引导和支持。
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                    从最初的职业培训起步，到如今涵盖培训、教练、正念三大领域，悦倍始终致力于为个人和组织提供全方位的成长解决方案。
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    八年来，我们已服务超过10万学员，帮助500多家企业实现组织升级，成为行业内备受信赖的专业服务品牌。
+                </p>
+            </div>
+
+            <!-- 使命愿景 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-4 flex items-center">
+                    <i class="fas fa-flag text-purple-600 mr-2"></i>
+                    使命与愿景
+                </h2>
+                <div class="space-y-4">
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <h3 class="font-medium text-sm mb-2 text-purple-900">我们的使命</h3>
+                        <p class="text-sm text-gray-700">
+                            通过专业的培训、教练和正念服务，帮助个人实现职业发展，助力组织提升效能，让更多人享受成长的喜悦。
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <h3 class="font-medium text-sm mb-2 text-blue-900">我们的愿景</h3>
+                        <p class="text-sm text-gray-700">
+                            成为亚太地区最受尊敬的人才发展服务机构，让"终身学习、持续成长"成为每个人的生活方式。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心价值观 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-4 flex items-center">
+                    <i class="fas fa-gem text-purple-600 mr-2"></i>
+                    核心价值观
+                </h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="text-center p-3 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg">
+                        <i class="fas fa-heart text-purple-600 text-2xl mb-2"></i>
+                        <h3 class="font-medium text-sm mb-1">以人为本</h3>
+                        <p class="text-xs text-gray-600">关注每个人的独特需求</p>
+                    </div>
+                    <div class="text-center p-3 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg">
+                        <i class="fas fa-award text-blue-600 text-2xl mb-2"></i>
+                        <h3 class="font-medium text-sm mb-1">专业卓越</h3>
+                        <p class="text-xs text-gray-600">追求最高的专业标准</p>
+                    </div>
+                    <div class="text-center p-3 bg-gradient-to-br from-green-50 to-teal-50 rounded-lg">
+                        <i class="fas fa-handshake text-green-600 text-2xl mb-2"></i>
+                        <h3 class="font-medium text-sm mb-1">诚信正直</h3>
+                        <p class="text-xs text-gray-600">言行一致，值得信赖</p>
+                    </div>
+                    <div class="text-center p-3 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg">
+                        <i class="fas fa-lightbulb text-orange-600 text-2xl mb-2"></i>
+                        <h3 class="font-medium text-sm mb-1">创新进取</h3>
+                        <p class="text-xs text-gray-600">持续创新，与时俱进</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心团队 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-4 flex items-center">
+                    <i class="fas fa-users text-purple-600 mr-2"></i>
+                    核心团队
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop"
+                             alt="创始人" class="w-16 h-16 rounded-full">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm">张明远</h3>
+                            <p class="text-xs text-purple-600 mb-1">创始人 & CEO</p>
+                            <p class="text-xs text-gray-600">20年企业管理经验，ICF认证MCC教练</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop"
+                             alt="联合创始人" class="w-16 h-16 rounded-full">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm">李晓雯</h3>
+                            <p class="text-xs text-purple-600 mb-1">联合创始人 & COO</p>
+                            <p class="text-xs text-gray-600">前世界500强HRD，资深组织发展专家</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop"
+                             alt="教学总监" class="w-16 h-16 rounded-full">
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm">王建华</h3>
+                            <p class="text-xs text-purple-600 mb-1">教学总监</p>
+                            <p class="text-xs text-gray-600">国际培训师认证，15年培训经验</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 资质认证 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-4 flex items-center">
+                    <i class="fas fa-certificate text-purple-600 mr-2"></i>
+                    资质认证
+                </h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xs font-bold text-purple-600">ICF</span>
+                        </div>
+                        <p class="text-xs text-gray-600">国际教练联盟认证</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xs font-bold text-blue-600">ISO</span>
+                        </div>
+                        <p class="text-xs text-gray-600">ISO9001质量认证</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xs font-bold text-green-600">MBSR</span>
+                        </div>
+                        <p class="text-xs text-gray-600">正念减压认证</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 媒体报道 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-4 flex items-center">
+                    <i class="fas fa-newspaper text-purple-600 mr-2"></i>
+                    媒体报道
+                </h2>
+                <div class="space-y-3">
+                    <div class="border-l-3 border-purple-600 pl-3">
+                        <h3 class="font-medium text-sm mb-1">《财经周刊》专访</h3>
+                        <p class="text-xs text-gray-600 mb-1">悦倍国际：打造企业人才发展新生态</p>
+                        <p class="text-xs text-gray-400">2024年11月</p>
+                    </div>
+                    <div class="border-l-3 border-purple-600 pl-3">
+                        <h3 class="font-medium text-sm mb-1">《人力资源》杂志</h3>
+                        <p class="text-xs text-gray-600 mb-1">年度最佳培训服务机构评选</p>
+                        <p class="text-xs text-gray-400">2024年10月</p>
+                    </div>
+                    <div class="border-l-3 border-purple-600 pl-3">
+                        <h3 class="font-medium text-sm mb-1">央视财经频道</h3>
+                        <p class="text-xs text-gray-600 mb-1">职场新趋势：教练式管理的兴起</p>
+                        <p class="text-xs text-gray-400">2024年9月</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 联系我们 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-4 flex items-center">
+                    <i class="fas fa-phone text-purple-600 mr-2"></i>
+                    联系我们
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-map-marker-alt text-purple-600 w-5"></i>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-700">上海市静安区南京西路1266号恒隆广场</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-phone text-purple-600 w-5"></i>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-700">400-888-9999</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-purple-600 w-5"></i>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-700">info@yuebei.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fab fa-weixin text-purple-600 w-5"></i>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-700">微信公众号：悦倍国际</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 合规信息 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="font-bold text-base mb-3 flex items-center">
+                    <i class="fas fa-shield-alt text-purple-600 mr-2"></i>
+                    合规信息
+                </h2>
+                <div class="space-y-2">
+                    <a href="#" class="flex items-center justify-between py-2 border-b border-gray-100">
+                        <span class="text-sm text-gray-700">营业执照</span>
+                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between py-2 border-b border-gray-100">
+                        <span class="text-sm text-gray-700">隐私政策</span>
+                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between py-2 border-b border-gray-100">
+                        <span class="text-sm text-gray-700">用户协议</span>
+                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between py-2">
+                        <span class="text-sm text-gray-700">ICP备案：沪ICP备2024888888号</span>
+                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 版权信息 -->
+            <div class="text-center py-4">
+                <p class="text-xs text-gray-500">© 2024 悦倍国际 版权所有</p>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-th-large text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">分类</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-heart text-gray-400 text-lg mb-1"></i>
+                    <span class="text-xs text-gray-400">公益</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-blue-600 text-lg mb-1"></i>
+                    <span class="text-xs text-blue-600">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

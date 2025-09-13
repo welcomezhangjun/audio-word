@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悦倍国际小程序 - 高保真原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .prototype-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .page-frame {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: #000;
+            padding: 10px;
+            position: relative;
+        }
+        .iphone-frame::before {
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #000;
+            border-radius: 0 0 15px 15px;
+            z-index: 10;
+        }
+        .iphone-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            background: white;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .page-title {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+        .header-info {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 60px 40px;
+            justify-items: center;
+        }
+        .page-wrapper {
+            position: relative;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="prototype-container">
+        <!-- 头部信息 -->
+        <div class="header-info">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold text-gray-800 mb-3">
+                    <i class="fas fa-mobile-alt text-purple-600 mr-3"></i>
+                    悦倍国际小程序 - 高保真原型
+                </h1>
+                <p class="text-gray-600 mb-4">
+                    专业培训 · 教练服务 · 正念生活
+                </p>
+                <div class="flex justify-center gap-6 text-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span>iPhone 15 Pro 视图</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span>10个核心页面</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                        <span>高保真设计</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面网格布局 -->
+        <div class="grid-container">
+            <!-- 首页 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="home.html" title="首页"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-home text-purple-600 mr-2"></i>首页
+                </div>
+            </div>
+
+            <!-- 列表页 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="list.html" title="课程列表"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-list text-blue-600 mr-2"></i>课程列表
+                </div>
+            </div>
+
+            <!-- 详情页 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="detail.html" title="课程详情"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-info-circle text-indigo-600 mr-2"></i>课程详情
+                </div>
+            </div>
+
+            <!-- 公益课程 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="public.html" title="公益课程"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-heart text-orange-600 mr-2"></i>公益课程
+                </div>
+            </div>
+
+            <!-- 教练服务 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="coach-service.html" title="教练服务"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-users text-purple-600 mr-2"></i>教练服务
+                </div>
+            </div>
+
+            <!-- 正念中心 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="mindfulness.html" title="正念中心"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-spa text-green-600 mr-2"></i>正念中心
+                </div>
+            </div>
+
+            <!-- 关于悦倍 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="about.html" title="关于悦倍"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-building text-gray-600 mr-2"></i>关于悦倍
+                </div>
+            </div>
+
+            <!-- 个人中心 -->
+            <div class="page-wrapper">
+                <div class="iphone-frame">
+                    <div class="iphone-content">
+                        <iframe src="profile.html" title="个人中心"></iframe>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <i class="fas fa-user text-blue-600 mr-2"></i>个人中心
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部说明 -->
+        <div class="mt-16 text-center text-white">
+            <p class="text-sm opacity-90 mb-2">
+                <i class="fas fa-info-circle mr-2"></i>
+                本原型为悦倍国际小程序MVP版本设计，包含核心功能页面
+            </p>
+            <p class="text-xs opacity-70">
+                © 2024 悦倍国际 - 高保真原型设计
+            </p>
+        </div>
+    </div>
+</body>
+</html>
