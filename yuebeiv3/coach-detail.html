@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教练详情 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 70px;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">教练详情</h1>
+            <div class="w-6"></div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container">
+            <!-- 教练头部信息 -->
+            <div class="bg-white px-4 py-6">
+                <div class="text-center mb-4">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+                         alt="教练" class="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-purple-100">
+                    <h2 class="text-xl font-semibold mb-1" style="color: #1A1A1A;">王明教练</h2>
+                    <p class="text-sm mb-3" style="color: #666666;">PCC 资深认证教练</p>
+                    <div class="flex gap-2 justify-center flex-wrap">
+                        <span class="text-xs px-3 py-1 rounded-full" style="background: #E8F0FF; color: #2F6BFF;">领导力</span>
+                        <span class="text-xs px-3 py-1 rounded-full" style="background: #E8F0FF; color: #2F6BFF;">高管教练</span>
+                        <span class="text-xs px-3 py-1 rounded-full" style="background: #E8F0FF; color: #2F6BFF;">职业发展</span>
+                    </div>
+                </div>
+                
+                <!-- 数据统计 -->
+                <div class="grid grid-cols-3 gap-4 pt-4" style="border-top: 1px solid #E5E5E5;">
+                    <div class="text-center">
+                        <p class="text-xl font-semibold" style="color: #2F6BFF;">15+</p>
+                        <p class="text-xs" style="color: #666666;">从业年限</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xl font-semibold" style="color: #2F6BFF;">500+</p>
+                        <p class="text-xs" style="color: #666666;">服务客户</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xl font-semibold" style="color: #2F6BFF;">4.9</p>
+                        <p class="text-xs" style="color: #666666;">客户评分</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 个人简介 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h3 class="font-semibold text-base mb-3" style="color: #1A1A1A;">个人简介</h3>
+                <p class="text-sm leading-relaxed" style="color: #666666;">
+                    拥有15年企业管理和培训经验，专注于领导力发展和组织效能提升。曾担任多家500强企业高管，深谙企业管理与领导力培养之道。通过教练技术，已帮助超过500位企业高管和管理者实现职业突破与个人成长。
+                </p>
+            </div>
+
+            <!-- 专业资质 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h3 class="font-semibold text-base mb-3" style="color: #1A1A1A;">专业资质</h3>
+                <div class="space-y-2">
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-certificate text-sm mt-0.5" style="color: #2F6BFF;"></i>
+                        <span class="text-sm" style="color: #666666;">ICF（国际教练联盟）PCC 认证教练</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-certificate text-sm mt-0.5" style="color: #2F6BFF;"></i>
+                        <span class="text-sm" style="color: #666666;">EMCC（欧洲教练与督导协会）高级教练</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-certificate text-sm mt-0.5" style="color: #2F6BFF;"></i>
+                        <span class="text-sm" style="color: #666666;">埃里克森教练学院认证教练</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-certificate text-sm mt-0.5" style="color: #2F6BFF;"></i>
+                        <span class="text-sm" style="color: #666666;">MBTI 性格类型认证咨询师</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 擅长领域 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h3 class="font-semibold text-base mb-3" style="color: #1A1A1A;">擅长领域</h3>
+                <div class="space-y-3">
+                    <div class="p-3 rounded-lg" style="background: #F8F9FA;">
+                        <h4 class="font-medium text-sm mb-1" style="color: #1A1A1A;">
+                            <i class="fas fa-star mr-2" style="color: #F59E0B;"></i>领导力发展
+                        </h4>
+                        <p class="text-xs" style="color: #666666;">帮助管理者提升领导力，建立高效团队，实现组织目标</p>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: #F8F9FA;">
+                        <h4 class="font-medium text-sm mb-1" style="color: #1A1A1A;">
+                            <i class="fas fa-star mr-2" style="color: #F59E0B;"></i>高管教练
+                        </h4>
+                        <p class="text-xs" style="color: #666666;">为企业高管提供一对一教练服务，突破领导力瓶颈</p>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: #F8F9FA;">
+                        <h4 class="font-medium text-sm mb-1" style="color: #1A1A1A;">
+                            <i class="fas fa-star mr-2" style="color: #F59E0B;"></i>职业发展
+                        </h4>
+                        <p class="text-xs" style="color: #666666;">协助职场人士规划职业发展路径，实现职业转型</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 服务案例 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h3 class="font-semibold text-base mb-3" style="color: #1A1A1A;">服务案例</h3>
+                <div class="space-y-3">
+                    <div class="p-3 rounded-lg" style="border: 1px solid #E5E5E5;">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">互联网</span>
+                            <span class="text-xs" style="color: #999999;">某上市公司 CTO</span>
+                        </div>
+                        <p class="text-sm" style="color: #666666;">
+                            通过6次教练辅导，帮助该技术高管突破管理瓶颈，成功转型为战略性领导者，团队效能提升40%。
+                        </p>
+                    </div>
+                    <div class="p-3 rounded-lg" style="border: 1px solid #E5E5E5;">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">金融</span>
+                            <span class="text-xs" style="color: #999999;">某银行分行长</span>
+                        </div>
+                        <p class="text-sm" style="color: #666666;">
+                            协助建立团队协作机制，提升领导力影响力，分行业绩提升25%，团队凝聚力显著增强。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-star text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">精选</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-rocket text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">赋能</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悦倍国际 - 首页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .banner-bg {
+            background: #2F6BFF;
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- Banner 4图轮播 -->
+            <div class="relative h-96 overflow-hidden">
+                <div class="flex transition-transform duration-500 h-full" id="bannerSlider">
+                    <!-- Banner 1 -->
+                    <div class="min-w-full h-full relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+                             alt="悦倍精选" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+                        
+                        <!-- Logo区域 -->
+                        <div class="absolute top-6 left-6">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: rgba(255,255,255,0.9);">
+                                <i class="fas fa-gem text-2xl" style="color: #2F6BFF;"></i>
+                            </div>
+                            <div class="text-white text-xs font-medium opacity-90">悦倍国际</div>
+                        </div>
+                        
+                        <!-- 主标题 -->
+                        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 text-right">
+                            <h2 class="text-4xl font-bold text-white mb-2 tracking-wider" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                                悦倍<br/>精选
+                            </h2>
+                            <p class="text-sm text-white opacity-90">专业培训 · 教练服务</p>
+                        </div>
+                        
+                        <!-- 底部信息 -->
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs opacity-80">YUEBEI INTERNATIONAL</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs opacity-80">赋能成长 · 卓越人生</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner 2 -->
+                    <div class="min-w-full h-full relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+                             alt="领导力培训" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+                        
+                        <div class="absolute top-6 left-6">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: rgba(255,255,255,0.9);">
+                                <i class="fas fa-graduation-cap text-2xl" style="color: #2F6BFF;"></i>
+                            </div>
+                            <div class="text-white text-xs font-medium opacity-90">培训中心</div>
+                        </div>
+                        
+                        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 text-right">
+                            <h2 class="text-4xl font-bold text-white mb-2 tracking-wider" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                                领导力<br/>发展
+                            </h2>
+                            <p class="text-sm text-white opacity-90">提升团队协作能力</p>
+                        </div>
+                        
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs opacity-80">LEADERSHIP DEVELOPMENT</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs opacity-80">工作坊 · 企业内训</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner 3 -->
+                    <div class="min-w-full h-full relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=800&h=600&fit=crop"
+                             alt="教练认证" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+                        
+                        <div class="absolute top-6 left-6">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: rgba(255,255,255,0.9);">
+                                <i class="fas fa-certificate text-2xl" style="color: #2F6BFF;"></i>
+                            </div>
+                            <div class="text-white text-xs font-medium opacity-90">教练中心</div>
+                        </div>
+                        
+                        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 text-right">
+                            <h2 class="text-4xl font-bold text-white mb-2 tracking-wider" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                                ACC<br/>认证
+                            </h2>
+                            <p class="text-sm text-white opacity-90">国际认证教练培训</p>
+                        </div>
+                        
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs opacity-80">ACC CERTIFICATION</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs opacity-80">专业认证 · 开启教练之路</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner 4 -->
+                    <div class="min-w-full h-full relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1540206395-68808572332f?w=800&h=600&fit=crop"
+                             alt="公益课程" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+                        
+                        <div class="absolute top-6 left-6">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: rgba(255,255,255,0.9);">
+                                <i class="fas fa-heart text-2xl" style="color: #FF6B6B;"></i>
+                            </div>
+                            <div class="text-white text-xs font-medium opacity-90">公益开放</div>
+                        </div>
+                        
+                        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 text-right">
+                            <h2 class="text-4xl font-bold text-white mb-2 tracking-wider" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                                公益<br/>课程
+                            </h2>
+                            <p class="text-sm text-white opacity-90">免费开放 · 助力成长</p>
+                        </div>
+                        
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs opacity-80">PUBLIC WELFARE</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs opacity-80">免费学习 · 赋能社会</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 指示器 -->
+                <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2">
+                    <div class="w-2 h-2 rounded-full bg-white" id="dot0"></div>
+                    <div class="w-2 h-2 rounded-full bg-white/50" id="dot1"></div>
+                    <div class="w-2 h-2 rounded-full bg-white/50" id="dot2"></div>
+                    <div class="w-2 h-2 rounded-full bg-white/50" id="dot3"></div>
+                </div>
+            </div>
+
+            <!-- 悦倍精选 -->
+            <div class="bg-white px-4 py-5 mt-2">
+                <h2 class="text-lg font-semibold mb-4 text-center" style="color: #1A1A1A;">悦倍精选</h2>
+                
+                <!-- 横向图标排列 -->
+                <div class="flex justify-around items-center">
+                    <!-- 领导力工作坊 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-2 card-shadow" 
+                             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-user-tie text-white text-xl"></i>
+                        </div>
+                        <span class="text-xs text-center" style="color: #1A1A1A; max-width: 60px;">领导力<br/>工作坊</span>
+                    </div>
+
+                    <!-- ACC认证 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-2 card-shadow" 
+                             style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-certificate text-white text-xl"></i>
+                        </div>
+                        <span class="text-xs text-center" style="color: #1A1A1A; max-width: 60px;">ACC<br/>认证</span>
+                    </div>
+
+                    <!-- 教练式父母 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-2 card-shadow" 
+                             style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-users text-white text-xl"></i>
+                        </div>
+                        <span class="text-xs text-center" style="color: #1A1A1A; max-width: 60px;">教练式<br/>父母</span>
+                    </div>
+
+                    <!-- 核心课程 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-2 card-shadow" 
+                             style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            <i class="fas fa-book-open text-white text-xl"></i>
+                        </div>
+                        <span class="text-xs text-center" style="color: #1A1A1A; max-width: 60px;">核心<br/>课程</span>
+                    </div>
+
+                    <!-- 公益开放 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-2 card-shadow" 
+                             style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fas fa-heart text-white text-xl"></i>
+                        </div>
+                        <span class="text-xs text-center" style="color: #1A1A1A; max-width: 60px;">公益<br/>开放</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 悦空间 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="text-lg font-semibold mb-4" style="color: #1A1A1A;">悦空间</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <!-- 培训中心 -->
+                    <div class="rounded-xl p-4 flex flex-col items-center justify-center h-28" style="background: #E8F0FF;">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: #2F6BFF;">
+                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium" style="color: #1A1A1A;">培训中心</span>
+                        <span class="text-xs mt-1" style="color: #666666;">职场技能</span>
+                    </div>
+
+                    <!-- 教练中心 -->
+                    <div class="rounded-xl p-4 flex flex-col items-center justify-center h-28" style="background: #E8F0FF;">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: #2F6BFF;">
+                            <i class="fas fa-users text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium" style="color: #1A1A1A;">教练中心</span>
+                        <span class="text-xs mt-1" style="color: #666666;">专业服务</span>
+                    </div>
+
+                    <!-- 公益课程 -->
+                    <div class="rounded-xl p-4 flex flex-col items-center justify-center h-28" style="background: #FEE2E2;">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background: #FF6B6B;">
+                            <i class="fas fa-heart text-white text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium" style="color: #1A1A1A;">公益课程</span>
+                        <span class="text-xs mt-1" style="color: #666666;">免费开放</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推荐内容 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="text-lg font-semibold mb-3" style="color: #1A1A1A;">推荐内容</h2>
+                <div class="space-y-3">
+                    <!-- 内容卡片1 -->
+                    <div class="flex gap-3 pb-3" style="border-bottom: 1px solid #F0F2F5;">
+                        <div class="w-24 h-20 rounded-lg overflow-hidden relative flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=150&fit=crop"
+                                 alt="领导力培训" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent"></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">领导力发展工作坊</h3>
+                            <p class="text-xs line-clamp-2 mb-2" style="color: #666666;">提升团队领导力，打造高效协作的组织文化</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">培训</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片2 -->
+                    <div class="flex gap-3 pb-3" style="border-bottom: 1px solid #F0F2F5;">
+                        <div class="w-24 h-20 rounded-lg overflow-hidden relative flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=200&h=150&fit=crop"
+                                 alt="教练认证" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent"></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">ACC认证教练课程</h3>
+                            <p class="text-xs line-clamp-2 mb-2" style="color: #666666;">国际认证教练培训，开启专业教练之路</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">教练</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片3 -->
+                    <div class="flex gap-3 pb-3" style="border-bottom: 1px solid #F0F2F5;">
+                        <div class="w-24 h-20 rounded-lg overflow-hidden relative flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&h=150&fit=crop"
+                                 alt="HR专业培训" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-transparent"></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">HR专业技能培训系列</h3>
+                            <p class="text-xs line-clamp-2 mb-2" style="color: #666666;">系统学习人力资源管理，提升专业能力</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">培训</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片4 -->
+                    <div class="flex gap-3 pb-3" style="border-bottom: 1px solid #F0F2F5;">
+                        <div class="w-24 h-20 rounded-lg overflow-hidden relative flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&h=150&fit=crop"
+                                 alt="教练式父母" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-transparent"></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">教练式父母工作坊</h3>
+                            <p class="text-xs line-clamp-2 mb-2" style="color: #666666;">运用教练技术，促进亲子关系和谐发展</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">教练</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片5 -->
+                    <div class="flex gap-3">
+                        <div class="w-24 h-20 rounded-lg overflow-hidden relative flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1540206395-68808572332f?w=200&h=150&fit=crop"
+                                 alt="公益课程" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-pink-600/20 to-transparent"></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">公益课程免费开放</h3>
+                            <p class="text-xs line-clamp-2 mb-2" style="color: #666666;">多种培训与教练课程，免费开放学习</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs px-2 py-0.5 rounded" style="background: #FEE2E2; color: #FF6B6B;">公益</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-lg mb-1" style="color: #2F6BFF;"></i>
+                    <span class="text-xs" style="color: #2F6BFF;">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-star text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">精选</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-rocket text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">赋能</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Banner轮播功能
+        let currentSlide = 0;
+        const totalSlides = 4;
+        const slider = document.getElementById('bannerSlider');
+        const dots = [
+            document.getElementById('dot0'),
+            document.getElementById('dot1'),
+            document.getElementById('dot2'),
+            document.getElementById('dot3')
+        ];
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.style.backgroundColor = 'white';
+                } else {
+                    dot.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            updateDots();
+        }
+
+        // 自动轮播，每3秒切换一次
+        setInterval(nextSlide, 3000);
+
+        // 支持触摸滑动
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // 向左滑动
+                currentSlide = (currentSlide + 1) % totalSlides;
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                updateDots();
+            }
+            if (touchEndX > touchStartX + 50) {
+                // 向右滑动
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                updateDots();
+            }
+        }
+    </script>
+</body>
+</html>

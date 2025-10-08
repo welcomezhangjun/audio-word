@@ -1,0 +1,84 @@
+{
+  "colors": {
+    "brand": {
+      "primary": "#2F6BFF",
+      "primary-light": "#E8F0FF",
+      "primary-dark": "#1A4FCC",
+      "secondary": "#FF6B6B"
+    },
+    "background": {
+      "base": "#FFFFFF",
+      "secondary": "#F8F9FA",
+      "tertiary": "#F0F2F5"
+    },
+    "surface": {
+      "base": "#FFFFFF",
+      "elevated": "#FFFFFF"
+    },
+    "text": {
+      "primary": "#1A1A1A",
+      "secondary": "#666666",
+      "tertiary": "#999999",
+      "disabled": "#CCCCCC",
+      "inverse": "#FFFFFF"
+    },
+    "border": {
+      "default": "#E5E5E5",
+      "light": "#F0F0F0",
+      "focus": "#2F6BFF"
+    },
+    "status": {
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#2F6BFF"
+    }
+  },
+  "radius": {
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "full": "9999px"
+  },
+  "shadow": {
+    "sm": "0 1px 3px rgba(0, 0, 0, 0.08)",
+    "md": "0 2px 8px rgba(0, 0, 0, 0.10)"
+  },
+  "spacing": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "7": "28px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px"
+  },
+  "typography": {
+    "fontFamily": {
+      "base": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"
+    },
+    "fontSize": {
+      "xs": "12px",
+      "sm": "14px",
+      "base": "16px",
+      "lg": "18px",
+      "xl": "20px",
+      "2xl": "24px"
+    },
+    "fontWeight": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "lineHeight": {
+      "tight": "1.25",
+      "normal": "1.5",
+      "relaxed": "1.75"
+    }
+  }
+}
+

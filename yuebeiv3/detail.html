@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程详情 - 高效能人士的七个习惯</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 70px;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2F6BFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            width: 393px;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 12px;
+            z-index: 100;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">课程详情</h1>
+            <i class="fas fa-share-alt" style="color: #666666;"></i>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container">
+            <!-- 封面区域 -->
+            <div class="video-container">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=450&fit=crop"
+                     alt="课程封面" class="absolute inset-0 w-full h-full object-cover">
+            </div>
+
+            <!-- 课程基本信息 -->
+            <div class="px-4 py-4 bg-white">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs px-2 py-0.5 rounded" style="background: #FEE2E2; color: #DC2626;">热门</span>
+                    <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">线上课程</span>
+                    <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">培训中心</span>
+                </div>
+                <h1 class="text-xl font-semibold mb-3" style="color: #1A1A1A;">高效能人士的七个习惯</h1>
+                <p class="text-sm leading-relaxed" style="color: #666666;">
+                    基于史蒂芬·柯维经典理论，帮助职场人士建立高效工作习惯，提升个人效能和团队协作能力。本课程通过理论讲解、案例分析和实践练习，让学员深入理解并掌握七个习惯的核心理念。
+                </p>
+            </div>
+
+            <!-- 讲师信息 -->
+            <div class="px-4 py-4 bg-white mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">授课讲师</h2>
+                <div class="flex gap-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+                         alt="讲师" class="w-16 h-16 rounded-full">
+                    <div class="flex-1">
+                        <h3 class="font-medium mb-1" style="color: #1A1A1A;">王明教练</h3>
+                        <p class="text-xs mb-2" style="color: #666666;">资深职业发展顾问 | ICF认证PCC教练</p>
+                        <p class="text-xs leading-relaxed" style="color: #666666;">
+                            拥有15年企业管理和培训经验，专注于领导力发展和组织效能提升。曾为超过100家企业提供培训和咨询服务。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 适合人群 -->
+            <div class="px-4 py-4 bg-white mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">适合人群</h2>
+                <div class="space-y-2">
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-sm mt-0.5" style="color: #10B981;"></i>
+                        <span class="text-sm" style="color: #666666;">希望提升工作效率的职场人士</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-sm mt-0.5" style="color: #10B981;"></i>
+                        <span class="text-sm" style="color: #666666;">团队管理者和项目负责人</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-sm mt-0.5" style="color: #10B981;"></i>
+                        <span class="text-sm" style="color: #666666;">追求个人成长的学习者</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-sm mt-0.5" style="color: #10B981;"></i>
+                        <span class="text-sm" style="color: #666666;">希望改善工作生活平衡的人群</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 学习收获 -->
+            <div class="px-4 py-4 bg-white mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">学习收获</h2>
+                <div class="space-y-2">
+                    <div class="flex items-start gap-2">
+                        <span class="font-semibold text-sm" style="color: #2F6BFF;">01</span>
+                        <span class="text-sm" style="color: #666666;">掌握个人效能提升的核心方法论</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="font-semibold text-sm" style="color: #2F6BFF;">02</span>
+                        <span class="text-sm" style="color: #666666;">学会设定目标和优先级管理技巧</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="font-semibold text-sm" style="color: #2F6BFF;">03</span>
+                        <span class="text-sm" style="color: #666666;">提升团队协作和沟通能力</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="font-semibold text-sm" style="color: #2F6BFF;">04</span>
+                        <span class="text-sm" style="color: #666666;">建立持续改进的思维模式</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 课程特色 -->
+            <div class="px-4 py-4 bg-white mt-2">
+                <h2 class="font-semibold text-base mb-4" style="color: #1A1A1A;">课程特色</h2>
+                
+                <!-- 特色1 -->
+                <div class="mb-4">
+                    <div class="relative rounded-xl overflow-hidden mb-3">
+                        <img src="https://images.unsplash.com/photo-1540206395-68808572332f?w=800&h=400&fit=crop"
+                             alt="身心养护" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
+                    <h3 class="font-medium text-base mb-2" style="color: #1A1A1A;">以身养心，顺时而食</h3>
+                    <p class="text-sm leading-relaxed" style="color: #666666;">
+                        意膳坊季节饮食，由主厨与营养师强强联手，精心设计烹饪一日三餐
+                    </p>
+                </div>
+
+                <!-- 特色2 -->
+                <div class="mb-4">
+                    <div class="relative rounded-xl overflow-hidden mb-3">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=400&fit=crop"
+                             alt="生活习惯" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
+                    <h3 class="font-medium text-base mb-2" style="color: #1A1A1A;">音昱八大生活习惯练习课</h3>
+                    <p class="text-sm leading-relaxed" style="color: #666666;">
+                        音昱的生活哲学浓缩，体验八大生活习惯（呼吸、饮食、运动、睡眠、静定、明理、致中和、庆祝生命）及丰富习练课程。
+                    </p>
+                    <p class="text-xs mt-2" style="color: #999999;">*根据每日LHC课程安排</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 底部操作栏 -->
+        <div class="action-bar">
+            <div class="flex items-center gap-1.5">
+                <!-- 收藏按钮 -->
+                <button class="flex flex-col items-center justify-center" style="width: 52px;">
+                    <i class="fas fa-heart text-lg" style="color: #999999;"></i>
+                    <span class="text-xs mt-0.5" style="color: #666666;">收藏</span>
+                </button>
+                
+                <!-- 购物车按钮 -->
+                <button class="flex flex-col items-center justify-center" style="width: 52px;">
+                    <i class="fas fa-shopping-bag text-lg" style="color: #1A1A1A;"></i>
+                    <span class="text-xs mt-0.5" style="color: #666666;">购物车</span>
+                </button>
+                
+                <!-- 加入购物车按钮 -->
+                <button class="flex-1 py-2.5 rounded-full font-medium text-sm" style="background: #E8D5B7; color: #8B7355; min-width: 0;">
+                    加入购物车
+                </button>
+                
+                <!-- 立即购买按钮 -->
+                <button class="flex-1 py-2.5 rounded-full font-medium text-sm text-white" style="background: #D4A574; min-width: 0;">
+                    立即购买
+                </button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
