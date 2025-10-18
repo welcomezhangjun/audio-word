@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>确认订单 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 80px;
+        }
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .payment-method {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .payment-method.selected {
+            border-color: #2F6BFF;
+            background: #F0F5FF;
+        }
+        .radio-custom {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #D1D5DB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .radio-custom.selected {
+            border-color: #2F6BFF;
+        }
+        .radio-custom.selected::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #2F6BFF;
+            border-radius: 50%;
+        }
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            width: 393px;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 12px 16px;
+            z-index: 100;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">确认订单</h1>
+            <div style="width: 20px;"></div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container">
+            <div class="px-4 py-3">
+                <!-- 联系信息 -->
+                <div class="section-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-semibold text-base" style="color: #1A1A1A;">
+                            <i class="fas fa-user mr-2" style="color: #2F6BFF;"></i>
+                            联系信息
+                        </h2>
+                        <i class="fas fa-chevron-right text-xs" style="color: #999999;"></i>
+                    </div>
+                    <div class="pl-7">
+                        <div class="text-sm mb-1" style="color: #1A1A1A;">张先生</div>
+                        <div class="text-sm" style="color: #666666;">手机号：138****8888</div>
+                    </div>
+                </div>
+
+                <!-- 订单商品 -->
+                <div class="section-card">
+                    <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">
+                        <i class="fas fa-shopping-bag mr-2" style="color: #2F6BFF;"></i>
+                        订单商品
+                    </h2>
+
+                    <!-- 商品项1 -->
+                    <div class="flex gap-3 mb-3 pb-3 border-b border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop"
+                             alt="课程" class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium mb-1 line-clamp-2" style="color: #1A1A1A;">
+                                高效能人士的七个习惯
+                            </h3>
+                            <p class="text-xs mb-2" style="color: #999999;">线上课程 · 培训中心</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm" style="color: #D4A574;">¥3,999</span>
+                                <span class="text-xs" style="color: #666666;">x1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品项2 -->
+                    <div class="flex gap-3 mb-3 pb-3 border-b border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=200&h=200&fit=crop"
+                             alt="课程" class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium mb-1 line-clamp-2" style="color: #1A1A1A;">
+                                正念领导力：VUCA时代的领导之道
+                            </h3>
+                            <p class="text-xs mb-2" style="color: #999999;">线上课程 · 培训中心</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm" style="color: #D4A574;">¥4,999</span>
+                                <span class="text-xs" style="color: #666666;">x1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品项3 -->
+                    <div class="flex gap-3 mb-3 pb-3 border-b border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&h=200&fit=crop"
+                             alt="教练服务" class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium mb-1 line-clamp-2" style="color: #1A1A1A;">
+                                一对一高管教练 - 王明教练
+                            </h3>
+                            <p class="text-xs mb-2" style="color: #999999;">教练服务 · 3个月套餐</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm" style="color: #D4A574;">¥18,000</span>
+                                <span class="text-xs" style="color: #666666;">x1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品项4 - PCC教练服务 -->
+                    <div class="flex gap-3 mb-3 pb-3 border-b border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+                             alt="PCC教练" class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium mb-1 line-clamp-2" style="color: #1A1A1A;">
+                                PCC资深教练服务（60分钟）
+                            </h3>
+                            <p class="text-xs mb-2" style="color: #999999;">教练中心 · 单次服务</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm" style="color: #D4A574;">¥1,200</span>
+                                <span class="text-xs" style="color: #666666;">x1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品项5 - ACC教练服务 -->
+                    <div class="flex gap-3">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop"
+                             alt="ACC教练" class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium mb-1 line-clamp-2" style="color: #1A1A1A;">
+                                ACC专业教练服务（60分钟）
+                            </h3>
+                            <p class="text-xs mb-2" style="color: #999999;">教练中心 · 单次服务</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm" style="color: #D4A574;">¥800</span>
+                                <span class="text-xs" style="color: #666666;">x1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 支付方式 -->
+                <div class="section-card">
+                    <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">
+                        <i class="fas fa-credit-card mr-2" style="color: #2F6BFF;"></i>
+                        支付方式
+                    </h2>
+
+                    <!-- 微信支付 -->
+                    <div class="payment-method selected">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: #07C160;">
+                                <i class="fab fa-weixin text-white text-lg"></i>
+                            </div>
+                            <span class="font-medium text-sm" style="color: #1A1A1A;">微信支付</span>
+                        </div>
+                        <div class="radio-custom selected"></div>
+                    </div>
+                </div>
+
+                <!-- 费用明细 -->
+                <div class="section-card">
+                    <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">
+                        <i class="fas fa-file-invoice-dollar mr-2" style="color: #2F6BFF;"></i>
+                        费用明细
+                    </h2>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium" style="color: #1A1A1A;">应付金额</span>
+                            <span class="font-bold text-lg" style="color: #D4A574;">¥28,998</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 服务协议 -->
+                <div class="px-2 py-3">
+                    <div class="flex items-start gap-2">
+                        <div class="w-4 h-4 border-2 rounded border-gray-300 mt-0.5" style="border-color: #2F6BFF; background: #2F6BFF;">
+                            <i class="fas fa-check text-white" style="font-size: 10px;"></i>
+                        </div>
+                        <p class="text-xs" style="color: #666666;">
+                            我已阅读并同意
+                            <span style="color: #2F6BFF;">《用户服务协议》</span>
+                            和
+                            <span style="color: #2F6BFF;">《隐私政策》</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部支付栏 -->
+        <div class="action-bar">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-xs mb-0.5" style="color: #666666;">应付金额</div>
+                    <div class="font-bold text-xl" style="color: #D4A574;">¥28,998</div>
+                </div>
+                <button class="px-8 py-3 rounded-full font-medium text-white" style="background: #D4A574;">
+                    立即支付
+                </button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

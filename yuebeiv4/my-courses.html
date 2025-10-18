@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的课程 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">我的课程</h1>
+            <div class="w-6"></div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 课程列表 -->
+            <div class="px-4 py-3 space-y-3">
+                <!-- 课程1 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden">
+                    <div class="flex gap-3 p-4">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #E8F0FF; color: #2F6BFF;">付费课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">领导力发展工作坊</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">提升团队领导力，打造高效协作</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs" style="color: #999999;">2024-01-15 购买</span>
+                                <button class="text-xs px-3 py-1 rounded-full" style="background: #2F6BFF; color: white;">
+                                    继续学习
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程2 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden">
+                    <div class="flex gap-3 p-4">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #FEE2E2; color: #FF6B6B;">公益课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">职场沟通技巧基础课</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">免费学习职场沟通技巧</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs" style="color: #999999;">2024-01-18 添加</span>
+                                <button class="text-xs px-3 py-1 rounded-full" style="background: #FF6B6B; color: white;">
+                                    继续学习
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程3 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden">
+                    <div class="flex gap-3 p-4">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #E8F0FF; color: #2F6BFF;">付费课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">ACC认证教练课程</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">国际认证教练培训</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs" style="color: #999999;">2024-01-10 购买</span>
+                                <button class="text-xs px-3 py-1 rounded-full" style="background: #2F6BFF; color: white;">
+                                    继续学习
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程4 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden">
+                    <div class="flex gap-3 p-4">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #E8F0FF; color: #2F6BFF;">付费课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">教练式父母工作坊</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">运用教练技术促进亲子关系</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs" style="color: #999999;">2024-01-08 购买</span>
+                                <button class="text-xs px-3 py-1 rounded-full" style="background: #2F6BFF; color: white;">
+                                    继续学习
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程5 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden">
+                    <div class="flex gap-3 p-4">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #FEE2E2; color: #FF6B6B;">公益课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">时间管理入门课</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">掌握时间管理基础技巧</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs" style="color: #999999;">2024-01-05 添加</span>
+                                <button class="text-xs px-3 py-1 rounded-full" style="background: #FF6B6B; color: white;">
+                                    继续学习
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课程6 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden">
+                    <div class="flex gap-3 p-4">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #E8F0FF; color: #2F6BFF;">付费课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">HR专业技能培训系列</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">系统学习人力资源管理</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs" style="color: #999999;">2024-01-01 购买</span>
+                                <button class="text-xs px-3 py-1 rounded-full" style="background: #2F6BFF; color: white;">
+                                    继续学习
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-star text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">精选</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-rocket text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">赋能</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-lg mb-1" style="color: #2F6BFF;"></i>
+                    <span class="text-xs" style="color: #2F6BFF;">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

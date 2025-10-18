@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教练中心 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .banner-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">教练中心</h1>
+            <div class="w-6"></div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 核心课程 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">核心课程</h2>
+                <div class="space-y-3">
+                    <!-- 课程1 -->
+                    <div class="flex gap-3">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=200&h=200&fit=crop"
+                                 alt="ACC认证课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">ACC认证教练课程</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">国际教练联盟认证课程，开启专业教练之路</p>
+                            <span class="text-xs font-bold" style="color: #D4A574;">了解详情 →</span>
+                        </div>
+                    </div>
+
+                    <!-- 课程2 -->
+                    <div class="flex gap-3">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&h=200&fit=crop"
+                                 alt="教练式父母" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">教练式父母工作坊</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">运用教练技术，促进亲子关系和谐发展</p>
+                            <span class="text-xs font-bold" style="color: #D4A574;">了解详情 →</span>
+                        </div>
+                    </div>
+
+                    <!-- 课程3 -->
+                    <div class="flex gap-3">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop"
+                                 alt="CCE学时课" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">CCE学时课程</h3>
+                            <p class="text-xs mb-2" style="color: #666666;">持续教育学时，提升专业教练能力</p>
+                            <span class="text-xs font-bold" style="color: #D4A574;">了解详情 →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 顶部 Banner -->
+            <div class="banner-gradient px-4 py-8 text-white text-center mt-2">
+                <h2 class="text-2xl font-bold mb-2">遇见你的专属教练</h2>
+                <p class="text-sm opacity-90 mb-4">唤醒 · 转化 · 成长</p>
+                <button class="bg-white text-purple-600 px-6 py-2.5 rounded-full text-sm font-medium">
+                    立即预约免费体验
+                </button>
+            </div>
+
+            <!-- 教练团队展示区 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">▷ PCC 资深教练</h2>
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <!-- 教练1 -->
+                    <div class="border rounded-xl p-3" style="border-color: #E5E5E5;">
+                        <div class="text-center mb-2">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                 alt="教练" class="w-16 h-16 rounded-full mx-auto mb-2">
+                            <h3 class="font-medium text-sm" style="color: #1A1A1A;">王明教练</h3>
+                            <p class="text-xs" style="color: #999999;">PCC认证</p>
+                        </div>
+                        <div class="flex gap-1 mb-2 flex-wrap justify-center">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">领导力</span>
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">高管教练</span>
+                        </div>
+                        <p class="text-xs text-center mb-2" style="color: #666666;">15年企业管理经验</p>
+                        <button class="w-full text-xs py-1.5 rounded-full" style="border: 1px solid #2F6BFF; color: #2F6BFF;">
+                            了解更多
+                        </button>
+                    </div>
+
+                    <!-- 教练2 -->
+                    <div class="border rounded-xl p-3" style="border-color: #E5E5E5;">
+                        <div class="text-center mb-2">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
+                                 alt="教练" class="w-16 h-16 rounded-full mx-auto mb-2">
+                            <h3 class="font-medium text-sm" style="color: #1A1A1A;">李娜教练</h3>
+                            <p class="text-xs" style="color: #999999;">PCC认证</p>
+                        </div>
+                        <div class="flex gap-1 mb-2 flex-wrap justify-center">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">职业发展</span>
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #E8F0FF; color: #2F6BFF;">女性教练</span>
+                        </div>
+                        <p class="text-xs text-center mb-2" style="color: #666666;">擅长职业转型指导</p>
+                        <button class="w-full text-xs py-1.5 rounded-full" style="border: 1px solid #2F6BFF; color: #2F6BFF;">
+                            了解更多
+                        </button>
+                    </div>
+                </div>
+
+                <h2 class="font-semibold text-base mb-3 mt-4" style="color: #1A1A1A;">▷ ACC 专业教练</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <!-- 教练3 -->
+                    <div class="border rounded-xl p-3" style="border-color: #E5E5E5;">
+                        <div class="text-center mb-2">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+                                 alt="教练" class="w-16 h-16 rounded-full mx-auto mb-2">
+                            <h3 class="font-medium text-sm" style="color: #1A1A1A;">张伟教练</h3>
+                            <p class="text-xs" style="color: #999999;">ACC认证</p>
+                        </div>
+                        <div class="flex gap-1 mb-2 flex-wrap justify-center">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #FEF3C7; color: #F59E0B;">亲子关系</span>
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #FEF3C7; color: #F59E0B;">家庭教练</span>
+                        </div>
+                        <p class="text-xs text-center mb-2" style="color: #666666;">陪伴家庭成长</p>
+                        <button class="w-full text-xs py-1.5 rounded-full" style="border: 1px solid #F59E0B; color: #F59E0B;">
+                            了解更多
+                        </button>
+                    </div>
+
+                    <!-- 教练4 -->
+                    <div class="border rounded-xl p-3" style="border-color: #E5E5E5;">
+                        <div class="text-center mb-2">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
+                                 alt="教练" class="w-16 h-16 rounded-full mx-auto mb-2">
+                            <h3 class="font-medium text-sm" style="color: #1A1A1A;">陈晓东教练</h3>
+                            <p class="text-xs" style="color: #999999;">ACC认证</p>
+                        </div>
+                        <div class="flex gap-1 mb-2 flex-wrap justify-center">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #FEF3C7; color: #F59E0B;">职业规划</span>
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #FEF3C7; color: #F59E0B;">青年成长</span>
+                        </div>
+                        <p class="text-xs text-center mb-2" style="color: #666666;">助力年轻人成长</p>
+                        <button class="w-full text-xs py-1.5 rounded-full" style="border: 1px solid #F59E0B; color: #F59E0B;">
+                            了解更多
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教练服务选择/购买 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">教练服务选择</h2>
+                
+                <!-- PCC服务 -->
+                <div class="mb-4">
+                    <h3 class="font-medium text-sm mb-2" style="color: #1A1A1A;">▷ PCC 资深教练服务</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-3 rounded-lg" style="background: #F8F9FA;">
+                            <div>
+                                <p class="text-sm font-medium" style="color: #1A1A1A;">单次教练（60分钟）</p>
+                                <p class="text-xs" style="color: #999999;">下单时选择PCC教练</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold" style="color: #D4A574;">¥1200</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button class="text-xs px-3 py-1 rounded-full" style="background: #D4A574; color: white;">
+                                        购买
+                                    </button>
+                                    <button class="w-7 h-7 rounded-full flex items-center justify-center" style="background: #F8F9FA; color: #D4A574;">
+                                        <i class="fas fa-shopping-cart text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg" style="background: #F8F9FA;">
+                            <div>
+                                <p class="text-sm font-medium" style="color: #1A1A1A;">教练套餐</p>
+                                <p class="text-xs" style="color: #999999;">3次/6次/10次</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold" style="color: #D4A574;">¥3000起</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button class="text-xs px-3 py-1 rounded-full" style="background: #D4A574; color: white;">
+                                        购买
+                                    </button>
+                                    <button class="w-7 h-7 rounded-full flex items-center justify-center" style="background: #F8F9FA; color: #D4A574;">
+                                        <i class="fas fa-shopping-cart text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACC服务 -->
+                <div class="mb-4">
+                    <h3 class="font-medium text-sm mb-2" style="color: #1A1A1A;">▷ ACC 专业教练服务</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-3 rounded-lg" style="background: #F8F9FA;">
+                            <div>
+                                <p class="text-sm font-medium" style="color: #1A1A1A;">单次教练（60分钟）</p>
+                                <p class="text-xs" style="color: #999999;">下单时选择ACC教练</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold" style="color: #D4A574;">¥800</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button class="text-xs px-3 py-1 rounded-full" style="background: #D4A574; color: white;">
+                                        购买
+                                    </button>
+                                    <button class="w-7 h-7 rounded-full flex items-center justify-center" style="background: #F8F9FA; color: #D4A574;">
+                                        <i class="fas fa-shopping-cart text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-lg" style="background: #F8F9FA;">
+                            <div>
+                                <p class="text-sm font-medium" style="color: #1A1A1A;">教练套餐</p>
+                                <p class="text-xs" style="color: #999999;">3次/6次/10次</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold" style="color: #D4A574;">¥2100起</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <button class="text-xs px-3 py-1 rounded-full" style="background: #D4A574; color: white;">
+                                        购买
+                                    </button>
+                                    <button class="w-7 h-7 rounded-full flex items-center justify-center" style="background: #F8F9FA; color: #D4A574;">
+                                        <i class="fas fa-shopping-cart text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 企业定制 -->
+                <div class="flex items-center justify-between p-3 rounded-lg" style="background: #E8F0FF;">
+                    <div>
+                        <p class="text-sm font-medium" style="color: #1A1A1A;">企业团队教练（定制）</p>
+                        <p class="text-xs" style="color: #666666;">专属方案设计</p>
+                    </div>
+                    <button class="text-sm px-4 py-1.5 rounded-full" style="background: #2F6BFF; color: white;">
+                        咨询
+                    </button>
+                </div>
+            </div>
+
+            <!-- 公益体验专区 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="text-center p-4 rounded-xl" style="background: linear-gradient(135deg, #FEE2E2 0%, #FFEBEB 100%);">
+                    <div class="text-3xl mb-2">🎁</div>
+                    <h3 class="font-semibold text-base mb-1" style="color: #1A1A1A;">先体验，再决定</h3>
+                    <p class="text-sm mb-3" style="color: #666666;">免费公益教练体验 25 分钟</p>
+                    <button class="px-6 py-2.5 rounded-full text-sm font-medium" style="background: #FF6B6B; color: white;">
+                        预约公益体验
+                    </button>
+                </div>
+            </div>
+
+            <!-- 用户见证 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">用户见证</h2>
+                <div class="space-y-3">
+                    <div class="p-3 rounded-lg" style="background: #F8F9FA;">
+                        <p class="text-sm mb-2" style="color: #1A1A1A;">"第一次感受到教练的力量，帮助我看清了职业发展的方向..."</p>
+                        <p class="text-xs" style="color: #999999;">- 学员A</p>
+                    </div>
+                    <div class="p-3 rounded-lg" style="background: #F8F9FA;">
+                        <p class="text-sm mb-2" style="color: #1A1A1A;">"帮助我突破职业瓶颈，找到了新的可能性..."</p>
+                        <p class="text-xs" style="color: #999999;">- 学员B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-star text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">精选</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-rocket text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">赋能</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

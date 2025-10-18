@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>培训中心 - 课程列表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .category-tabs {
+            background: white;
+            position: sticky;
+            top: 92px;
+            z-index: 98;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">培训中心</h1>
+            <div class="w-6"></div>
+        </div>
+
+        <!-- 分类标签 -->
+        <div class="category-tabs">
+            <div class="flex gap-1 px-4 py-2 overflow-x-auto">
+                <span class="px-4 py-1.5 text-white text-sm rounded-full whitespace-nowrap" style="background: #2F6BFF;">全部</span>
+                <span class="px-4 py-1.5 text-sm rounded-full whitespace-nowrap" style="background: #F0F2F5; color: #666666;">职场技能</span>
+                <span class="px-4 py-1.5 text-sm rounded-full whitespace-nowrap" style="background: #F0F2F5; color: #666666;">职业转型</span>
+                <span class="px-4 py-1.5 text-sm rounded-full whitespace-nowrap" style="background: #F0F2F5; color: #666666;">领导力发展</span>
+                <span class="px-4 py-1.5 text-sm rounded-full whitespace-nowrap" style="background: #F0F2F5; color: #666666;">HR专业技能</span>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 课程列表 -->
+            <div class="px-4 py-3 space-y-3">
+                <!-- 课程卡片1 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden flex">
+                    <div class="w-32 h-32 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop"
+                             alt="课程" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 p-4 flex flex-col justify-center">
+                        <h3 class="font-medium text-base mb-2 line-clamp-2" style="color: #1A1A1A;">家庭能量焕活之旅（2天1晚/3天2晚）</h3>
+                        <span class="text-sm font-bold" style="color: #D4A574;">王明教练</span>
+                    </div>
+                </div>
+
+                <!-- 课程卡片2 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden flex">
+                    <div class="w-32 h-32 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop"
+                             alt="课程" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 p-4 flex flex-col justify-center">
+                        <h3 class="font-medium text-base mb-2 line-clamp-2" style="color: #1A1A1A;">深度睡眠再生之旅（3天2晚/4天3晚）</h3>
+                        <span class="text-sm font-bold" style="color: #D4A574;">李娜</span>
+                    </div>
+                </div>
+
+                <!-- 课程卡片3 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden flex">
+                    <div class="w-32 h-32 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=400&fit=crop"
+                             alt="课程" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-teal-600/10 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 p-4 flex flex-col justify-center">
+                        <h3 class="font-medium text-base mb-2 line-clamp-2" style="color: #1A1A1A;">从容悦己 美美与共（2天1晚）</h3>
+                        <span class="text-sm font-bold" style="color: #D4A574;">张伟</span>
+                    </div>
+                </div>
+
+                <!-- 课程卡片4 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden flex">
+                    <div class="w-32 h-32 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=400&fit=crop"
+                             alt="课程" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-600/10 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 p-4 flex flex-col justify-center">
+                        <h3 class="font-medium text-base mb-2 line-clamp-2" style="color: #1A1A1A;">数据分析与决策支持</h3>
+                        <span class="text-sm font-bold" style="color: #D4A574;">陈晓东</span>
+                    </div>
+                </div>
+
+                <!-- 课程卡片5 -->
+                <div class="bg-white rounded-xl card-shadow overflow-hidden flex">
+                    <div class="w-32 h-32 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=400&fit=crop"
+                             alt="课程" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-br from-pink-600/10 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 p-4 flex flex-col justify-center">
+                        <h3 class="font-medium text-base mb-2 line-clamp-2" style="color: #1A1A1A;">团队协作效能提升工作坊</h3>
+                        <span class="text-sm font-bold" style="color: #D4A574;">刘芳</span>
+                    </div>
+                </div>
+
+                <!-- 加载更多 -->
+                <div class="py-4 text-center">
+                    <span class="text-sm" style="color: #666666;">下拉加载更多</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-star text-lg mb-1" style="color: #2F6BFF;"></i>
+                    <span class="text-xs" style="color: #2F6BFF;">精选</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-rocket text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">赋能</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

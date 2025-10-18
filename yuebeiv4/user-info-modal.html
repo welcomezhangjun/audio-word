@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户信息填写弹窗 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .nav-header {
+            background: white;
+            height: 44px;
+            position: sticky;
+            top: 48px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        /* 弹窗遮罩层 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 弹窗容器 */
+        .modal-container {
+            background: white;
+            border-radius: 16px;
+            width: 345px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+
+        /* 输入框样式 */
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #2F6BFF;
+            background: #F0F5FF;
+        }
+
+        .input-field::placeholder {
+            color: #CCCCCC;
+        }
+
+        .input-field.error {
+            border-color: #EF4444;
+            background: #FEF2F2;
+        }
+
+        /* 错误提示 */
+        .error-message {
+            color: #EF4444;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* 按钮样式 */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-submit {
+            background: #D4A574;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #C59463;
+        }
+
+        .btn-submit:disabled {
+            background: #E5E5E5;
+            color: #999999;
+            cursor: not-allowed;
+        }
+
+        .btn-cancel {
+            background: #F3F4F6;
+            color: #666666;
+            margin-top: 8px;
+        }
+
+        .btn-cancel:hover {
+            background: #E5E7EB;
+        }
+
+        /* 关闭按钮 */
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #E5E7EB;
+        }
+
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 导航头 -->
+        <div class="nav-header">
+            <i class="fas fa-chevron-left mr-4" style="color: #666666;"></i>
+            <h1 class="flex-1 text-center font-medium text-base" style="color: #1A1A1A;">立即预约</h1>
+            <div style="width: 20px;"></div>
+        </div>
+
+        <!-- 页面内容 -->
+        <div class="p-4 pb-20" style="background: #F8F9FA;">
+            <!-- 上部分：已填写的个人信息 -->
+            <div class="bg-white rounded-xl p-4 mb-4 card-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-base font-semibold" style="color: #1A1A1A;">
+                        <i class="fas fa-user-circle mr-2" style="color: #2F6BFF;"></i>
+                        个人信息
+                    </h2>
+                    <button id="editInfoBtn" class="text-xs px-3 py-1 rounded-full" style="background: #E8F0FF; color: #2F6BFF;">
+                        <i class="fas fa-edit mr-1"></i>编辑
+                    </button>
+                </div>
+
+                <!-- 已填写信息显示 -->
+                <div id="filledInfo" style="display: none;">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 rounded-lg" style="background: #F8F9FA;">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: #E8F0FF;">
+                                <i class="fas fa-user" style="color: #2F6BFF;"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-xs mb-1" style="color: #999999;">姓名</div>
+                                <div class="text-sm font-medium" style="color: #1A1A1A;" id="displayName">-</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg" style="background: #F8F9FA;">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: #E8F0FF;">
+                                <i class="fas fa-mobile-alt" style="color: #2F6BFF;"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-xs mb-1" style="color: #999999;">手机号</div>
+                                <div class="text-sm font-medium" style="color: #1A1A1A;" id="displayPhone">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="confirmBookingBtn" class="w-full mt-4 py-3 rounded-full font-medium text-white" style="background: #2F6BFF;">
+                        <i class="fas fa-check-circle mr-2"></i>确认预约
+                    </button>
+                </div>
+
+                <!-- 未填写提示 -->
+                <div id="emptyInfo">
+                    <div class="text-center py-6">
+                        <div class="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: #FEF3E2;">
+                            <i class="fas fa-exclamation-circle text-2xl" style="color: #F59E0B;"></i>
+                        </div>
+                        <p class="text-sm mb-1" style="color: #666666;">您还未填写个人信息</p>
+                        <p class="text-xs" style="color: #999999;">请先完善信息后再进行预约</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下部分：快捷添加入口 -->
+            <div class="bg-white rounded-xl p-4 card-shadow">
+                <h3 class="text-sm font-semibold mb-3" style="color: #1A1A1A;">
+                    <i class="fas fa-info-circle mr-2" style="color: #2F6BFF;"></i>
+                    快捷操作
+                </h3>
+                <button id="addInfoBtn" class="w-full py-3 rounded-lg font-medium text-sm flex items-center justify-center gap-2" style="background: #F0F5FF; color: #2F6BFF; border: 1px dashed #2F6BFF;">
+                    <i class="fas fa-plus-circle"></i>
+                    添加个人信息
+                </button>
+            </div>
+        </div>
+
+        <!-- 用户信息填写弹窗 -->
+        <div id="userInfoModal" class="modal-overlay" style="display: none;">
+            <div class="modal-container">
+                <!-- 关闭按钮 -->
+                <div class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times" style="color: #666666;"></i>
+                </div>
+
+                <!-- 弹窗内容 -->
+                <div class="p-6">
+                    <!-- 标题 -->
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: #FEF3E2;">
+                            <i class="fas fa-user-edit text-2xl" style="color: #D4A574;"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2" style="color: #1A1A1A;">完善个人信息</h3>
+                        <p class="text-sm" style="color: #666666;">为了更好地为您服务，请填写以下信息</p>
+                    </div>
+
+                    <!-- 表单 -->
+                    <form id="userInfoForm" class="space-y-4">
+                        <!-- 姓名输入 -->
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: #1A1A1A;">
+                                姓名 <span style="color: #EF4444;">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="userName"
+                                name="userName"
+                                class="input-field"
+                                placeholder="请输入您的姓名"
+                                maxlength="20"
+                            >
+                            <div class="error-message" id="nameError">
+                                <i class="fas fa-exclamation-circle mr-1"></i>请输入您的姓名
+                            </div>
+                        </div>
+
+                        <!-- 手机号输入 -->
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: #1A1A1A;">
+                                手机号 <span style="color: #EF4444;">*</span>
+                            </label>
+                            <input
+                                type="tel"
+                                id="userPhone"
+                                name="userPhone"
+                                class="input-field"
+                                placeholder="请输入11位手机号码"
+                                maxlength="11"
+                            >
+                            <div class="error-message" id="phoneError">
+                                <i class="fas fa-exclamation-circle mr-1"></i>请输入正确的手机号码
+                            </div>
+                        </div>
+
+                        <!-- 备注（可选） -->
+                        <div>
+                            <label class="block text-sm font-medium mb-2" style="color: #1A1A1A;">
+                                备注 <span class="text-xs" style="color: #999999;">(可选)</span>
+                            </label>
+                            <textarea
+                                id="userNote"
+                                name="userNote"
+                                class="input-field resize-none"
+                                rows="3"
+                                placeholder="如有特殊需求，请在此说明"
+                                maxlength="200"
+                            ></textarea>
+                        </div>
+
+                        <!-- 提交按钮 -->
+                        <div class="pt-2">
+                            <button type="submit" class="btn-primary btn-submit">
+                                确认提交
+                            </button>
+                            <button type="button" class="btn-primary btn-cancel" onclick="closeModal()">
+                                取消
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成功提示弹窗 -->
+        <div id="successModal" class="modal-overlay" style="display: none;">
+            <div class="modal-container">
+                <div class="p-6 text-center">
+                    <div class="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center" style="background: #ECFDF5;">
+                        <i class="fas fa-check-circle text-4xl" style="color: #10B981;"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2" style="color: #1A1A1A;">预约成功</h3>
+                    <p class="text-sm mb-6" style="color: #666666;">我们将尽快与您联系，请保持手机畅通</p>
+                    <button onclick="closeSuccessModal()" class="btn-primary btn-submit">
+                        知道了
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 存储用户信息
+        let userInfo = {
+            name: '',
+            phone: '',
+            note: ''
+        };
+
+        // 检查并显示用户信息
+        function checkUserInfo() {
+            if (userInfo.name && userInfo.phone) {
+                // 显示已填写信息
+                document.getElementById('filledInfo').style.display = 'block';
+                document.getElementById('emptyInfo').style.display = 'none';
+                document.getElementById('displayName').textContent = userInfo.name;
+                document.getElementById('displayPhone').textContent = userInfo.phone;
+                document.getElementById('editInfoBtn').style.display = 'block';
+            } else {
+                // 显示未填写提示
+                document.getElementById('filledInfo').style.display = 'none';
+                document.getElementById('emptyInfo').style.display = 'block';
+                document.getElementById('editInfoBtn').style.display = 'none';
+            }
+        }
+
+        // 初始化页面
+        checkUserInfo();
+
+        // 打开添加信息弹窗
+        document.getElementById('addInfoBtn').addEventListener('click', function() {
+            document.getElementById('userInfoModal').style.display = 'flex';
+        });
+
+        // 打开编辑信息弹窗
+        document.getElementById('editInfoBtn').addEventListener('click', function() {
+            // 填充现有信息
+            document.getElementById('userName').value = userInfo.name;
+            document.getElementById('userPhone').value = userInfo.phone;
+            document.getElementById('userNote').value = userInfo.note;
+            document.getElementById('userInfoModal').style.display = 'flex';
+        });
+
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('userInfoModal').style.display = 'none';
+            // 清空表单
+            document.getElementById('userInfoForm').reset();
+            // 清除错误提示
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.input-field').forEach(el => el.classList.remove('error'));
+        }
+
+        // 关闭成功提示
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // 表单验证
+        document.getElementById('userInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const userName = document.getElementById('userName').value.trim();
+            const userPhone = document.getElementById('userPhone').value.trim();
+
+            let isValid = true;
+
+            // 验证姓名
+            if (!userName) {
+                document.getElementById('userName').classList.add('error');
+                document.getElementById('nameError').classList.add('show');
+                isValid = false;
+            } else {
+                document.getElementById('userName').classList.remove('error');
+                document.getElementById('nameError').classList.remove('show');
+            }
+
+            // 验证手机号
+            const phoneRegex = /^1[3-9]\d{9}$/;
+            if (!userPhone || !phoneRegex.test(userPhone)) {
+                document.getElementById('userPhone').classList.add('error');
+                document.getElementById('phoneError').classList.add('show');
+                isValid = false;
+            } else {
+                document.getElementById('userPhone').classList.remove('error');
+                document.getElementById('phoneError').classList.remove('show');
+            }
+
+            // 如果验证通过
+            if (isValid) {
+                // 保存用户信息
+                userInfo.name = userName;
+                userInfo.phone = userPhone;
+                userInfo.note = document.getElementById('userNote').value.trim();
+
+                // 关闭填写弹窗
+                closeModal();
+
+                // 更新页面显示
+                checkUserInfo();
+
+                // 这里可以添加提交数据到后端的逻辑
+                console.log('保存的信息：', userInfo);
+            }
+        });
+
+        // 确认预约
+        document.getElementById('confirmBookingBtn').addEventListener('click', function() {
+            // 显示成功提示
+            document.getElementById('successModal').style.display = 'flex';
+
+            // 这里可以添加提交预约到后端的逻辑
+            console.log('提交预约信息：', userInfo);
+        });
+
+        // 实时清除错误提示
+        document.getElementById('userName').addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.classList.remove('error');
+                document.getElementById('nameError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('userPhone').addEventListener('input', function() {
+            const phoneRegex = /^1[3-9]\d{9}$/;
+            if (phoneRegex.test(this.value.trim())) {
+                this.classList.remove('error');
+                document.getElementById('phoneError').classList.remove('show');
+            }
+        });
+
+        // 点击遮罩层关闭弹窗
+        document.getElementById('userInfoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+    </script>
+</body>
+</html>

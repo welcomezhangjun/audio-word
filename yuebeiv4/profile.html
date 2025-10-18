@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的 - 悦倍国际</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        }
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #F8F9FA;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .status-bar {
+            background: white;
+            height: 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        .scroll-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="phone-frame">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <div class="flex items-center gap-1">
+                <span class="text-sm font-medium" style="color: #1A1A1A;">9:41</span>
+            </div>
+            <div class="flex items-center gap-1" style="color: #1A1A1A;">
+                <i class="fas fa-signal text-xs"></i>
+                <i class="fas fa-wifi text-xs"></i>
+                <i class="fas fa-battery-full text-xs"></i>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="scroll-container pb-20">
+            <!-- 个人信息头部 -->
+            <div class="profile-header px-4 py-8">
+                <div class="flex items-center gap-4">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+                         alt="头像" class="w-20 h-20 rounded-full border-4 border-white">
+                    <div class="flex-1 text-white">
+                        <h2 class="text-xl font-semibold mb-1">悦倍用户</h2>
+                        <p class="text-sm opacity-90">ID: YB202401</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-white text-lg"></i>
+                </div>
+            </div>
+
+            <!-- 我的课程 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-semibold text-base" style="color: #1A1A1A;">我的课程</h2>
+                    <span class="text-sm" style="color: #666666;">全部 <i class="fas fa-chevron-right text-xs"></i></span>
+                </div>
+                
+                <!-- 课程卡片列表 -->
+                <div class="space-y-3">
+                    <!-- 付费课程 -->
+                    <div class="flex gap-3 p-3 rounded-lg" style="background: #F8F9FA;">
+                        <div class="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #E8F0FF; color: #2F6BFF;">付费课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">领导力发展工作坊</h3>
+                            <p class="text-xs" style="color: #999999;">继续学习</p>
+                        </div>
+                    </div>
+
+                    <!-- 公益课程 -->
+                    <div class="flex gap-3 p-3 rounded-lg" style="background: #F8F9FA;">
+                        <div class="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&h=200&fit=crop"
+                                 alt="课程" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs px-2 py-0.5 rounded mb-2 inline-block" style="background: #FEE2E2; color: #FF6B6B;">公益课程</span>
+                            <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">职场沟通技巧基础课</h3>
+                            <p class="text-xs" style="color: #999999;">继续学习</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 我的收藏 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-semibold text-base" style="color: #1A1A1A;">我的收藏</h2>
+                    <span class="text-sm" style="color: #666666;">全部 <i class="fas fa-chevron-right text-xs"></i></span>
+                </div>
+                
+                <!-- 收藏卡片列表 -->
+                <div class="grid grid-cols-2 gap-3">
+                    <!-- 收藏1 -->
+                    <div class="rounded-lg overflow-hidden card-shadow">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?w=300&h=200&fit=crop"
+                                 alt="课程" class="w-full h-24 object-cover">
+                            <div class="absolute top-2 right-2 bg-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-heart text-xs" style="color: #FF6B6B;"></i>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <h3 class="font-medium text-xs mb-1 line-clamp-1" style="color: #1A1A1A;">ACC认证教练课程</h3>
+                            <p class="text-xs" style="color: #999999;">教练中心</p>
+                        </div>
+                    </div>
+
+                    <!-- 收藏2 -->
+                    <div class="rounded-lg overflow-hidden card-shadow">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&h=200&fit=crop"
+                                 alt="课程" class="w-full h-24 object-cover">
+                            <div class="absolute top-2 right-2 bg-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-heart text-xs" style="color: #FF6B6B;"></i>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <h3 class="font-medium text-xs mb-1 line-clamp-1" style="color: #1A1A1A;">时间管理入门课</h3>
+                            <p class="text-xs" style="color: #999999;">培训中心</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 我的订单 -->
+            <div class="bg-white px-4 py-4 mt-2">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-semibold text-base" style="color: #1A1A1A;">我的订单</h2>
+                    <span class="text-sm" style="color: #666666;">全部 <i class="fas fa-chevron-right text-xs"></i></span>
+                </div>
+                
+                <!-- 订单列表 -->
+                <div class="space-y-3">
+                    <!-- 订单1 -->
+                    <div class="border rounded-lg p-3" style="border-color: #E5E5E5;">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #D1FAE5; color: #059669;">已支付</span>
+                            <span class="text-xs" style="color: #999999;">2024-01-15</span>
+                        </div>
+                        <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">领导力发展工作坊</h3>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs" style="color: #666666;">订单号：YB202401150001</p>
+                            <p class="text-sm font-bold" style="color: #1A1A1A;">¥2980</p>
+                        </div>
+                    </div>
+
+                    <!-- 订单2 -->
+                    <div class="border rounded-lg p-3" style="border-color: #E5E5E5;">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #FEE2E2; color: #DC2626;">待支付</span>
+                            <span class="text-xs" style="color: #999999;">2024-01-20</span>
+                        </div>
+                        <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">ACC教练套餐（3次）</h3>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs" style="color: #666666;">订单号：YB202401200002</p>
+                            <p class="text-sm font-bold" style="color: #1A1A1A;">¥2100</p>
+                        </div>
+                        <button class="w-full mt-2 py-2 rounded-full text-sm font-medium" style="background: #2F6BFF; color: white;">
+                            立即支付
+                        </button>
+                    </div>
+
+                    <!-- 订单3 -->
+                    <div class="border rounded-lg p-3" style="border-color: #E5E5E5;">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs px-2 py-0.5 rounded" style="background: #D1FAE5; color: #059669;">已支付</span>
+                            <span class="text-xs" style="color: #999999;">2024-01-10</span>
+                        </div>
+                        <h3 class="font-medium text-sm mb-1" style="color: #1A1A1A;">PCC单次教练服务</h3>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs" style="color: #666666;">订单号：YB202401100003</p>
+                            <p class="text-sm font-bold" style="color: #1A1A1A;">¥1200</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设置 & 帮助 -->
+            <div class="bg-white px-4 py-4 mt-2 mb-2">
+                <h2 class="font-semibold text-base mb-3" style="color: #1A1A1A;">设置 & 帮助</h2>
+                
+                <!-- 设置菜单列表 -->
+                <div class="space-y-0.5">
+                    <!-- 个人资料 -->
+                    <div class="flex items-center justify-between py-3" style="border-bottom: 1px solid #F0F2F5;">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-user-circle text-lg" style="color: #666666;"></i>
+                            <span class="text-sm" style="color: #1A1A1A;">个人资料</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-sm" style="color: #999999;"></i>
+                    </div>
+
+                    <!-- 客服/联系我们 -->
+                    <div class="flex items-center justify-between py-3" style="border-bottom: 1px solid #F0F2F5;">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-headset text-lg" style="color: #666666;"></i>
+                            <span class="text-sm" style="color: #1A1A1A;">客服/联系我们</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-sm" style="color: #999999;"></i>
+                    </div>
+
+                    <!-- 隐私政策 -->
+                    <div class="flex items-center justify-between py-3">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-shield-alt text-lg" style="color: #666666;"></i>
+                            <span class="text-sm" style="color: #1A1A1A;">隐私政策</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-sm" style="color: #999999;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <div class="tab-bar">
+            <div class="flex justify-around">
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-home text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">首页</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-star text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">精选</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-rocket text-lg mb-1" style="color: #999999;"></i>
+                    <span class="text-xs" style="color: #999999;">赋能</span>
+                </div>
+                <div class="flex flex-col items-center py-1">
+                    <i class="fas fa-user text-lg mb-1" style="color: #2F6BFF;"></i>
+                    <span class="text-xs" style="color: #2F6BFF;">我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

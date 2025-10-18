@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx:*)",
+      "Bash(nvm use:*)",
+      "Bash(nvm alias:*)",
+      "Bash(nvm:*)",
+      "Bash(source:*)",
+      "Bash(claude mcp:*)",
+      "mcp__playwright-automation__playwright_navigate",
+      "Bash(open:*)",
+      "Bash(curl:*)",
+      "Read(//Users/zhangjun/Desktop/funy/yuebeiv2/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
